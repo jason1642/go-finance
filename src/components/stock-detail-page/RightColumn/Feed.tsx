@@ -9,11 +9,11 @@ interface ComponentProps {
   symbol: string;
 }
 
-const Feed: React.FunctionComponent<ComponentProps> = ({symbol}) => {
-
   const Container = styled.div`
     
   `;
+
+const Feed: React.FunctionComponent<ComponentProps> = ({symbol}) => {
 
   const [newsApiData, setNewsApiData] = useState([])
 

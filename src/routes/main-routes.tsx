@@ -1,4 +1,4 @@
-import { useRoutes, Navigate, } from "react-router-dom";
+import { useRoutes, } from "react-router-dom";
 import * as React from 'react';
 import StockDetailPage from '../views/StockDetailPage'
 import HomePage from "../views/HomePage";

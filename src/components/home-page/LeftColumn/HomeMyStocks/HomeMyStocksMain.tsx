@@ -70,7 +70,7 @@ const HomeMyStocksMain = () => {
 
         const response = await axios.get(`https://cloud.iexapis.com/stable/stock/${ele}/quote?token=${IEX_API_KEY}`)
         setUsersStocksData(oldArr => [...oldArr, response.data])
-        // console.log(response.data)
+        console.log(response.data)
       }
       // setUsersStocksData(marketDataArray)
       fetchStockData()

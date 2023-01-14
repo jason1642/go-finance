@@ -4,10 +4,9 @@ import MarketPriceTable from './MarketPriceTable'
 
 interface ComponentProps {
   
-}
+}  
 
-const MarketOverview: React.FunctionComponent<ComponentProps> = () => {
-  const Container = styled.div`
+const Container = styled.div`
       padding : 2rem 3rem;
       border-radius: 20px;
       background-color: #4d505f;
@@ -21,6 +20,9 @@ const MarketOverview: React.FunctionComponent<ComponentProps> = () => {
       margin: 0 0 1rem 0;
       color: #8f94ab;
   `;
+
+const MarketOverview: React.FunctionComponent<ComponentProps> = () => {
+
 
   return (
     <Container>

@@ -1,10 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
-const HomeMyStocksMainHeader = () => {
-
-
   // Header
   const Header = styled.div`
     height: 56px;
@@ -30,6 +26,10 @@ const HomeMyStocksMainHeader = () => {
     border-bottom: 1px solid grey;
 
 `;
+
+
+
+const HomeMyStocksMainHeader = () => {
 
 
 

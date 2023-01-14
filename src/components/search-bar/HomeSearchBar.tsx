@@ -8,6 +8,7 @@ import {Tooltip }from 'react-tooltip';
     display: flex;
     align-items: center;
     border-radius: 20px;
+    padding: 1em;
     padding-left: 3rem;
     background-color: #393945; 
     margin-bottom: 1.5rem;

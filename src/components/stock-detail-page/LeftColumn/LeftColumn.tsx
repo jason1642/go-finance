@@ -7,9 +7,6 @@ interface ComponentProps{
   stockData: any;
   symbol: string;
 }
-
-const LeftColumn: React.FunctionComponent<ComponentProps> = ({stockData, symbol}) => {
-
   const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -23,6 +20,9 @@ const LeftColumn: React.FunctionComponent<ComponentProps> = ({stockData, symbol}
     margin-bottom: 1rem;
   }
   `;
+const LeftColumn: React.FunctionComponent<ComponentProps> = ({stockData, symbol}) => {
+
+
 
   // console.log(props)
   return (

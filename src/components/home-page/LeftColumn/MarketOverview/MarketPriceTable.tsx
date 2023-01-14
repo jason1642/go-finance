@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import axios from 'axios'
-import isMarketOpenFunction from '../../../../resources/isMarketOpenFunction'
+// import isMarketOpenFunction from '../../../../resources/isMarketOpenFunction'
 
 const Container = styled.div`
 display: flex;
@@ -53,7 +53,7 @@ margin: 0 20px 10px 0;
 justify-content: space-between;
 `;
 
-const IEX_API_KEY = 'pk_3256652724eb490abdfd234401050f50';
+// const IEX_API_KEY = 'pk_3256652724eb490abdfd234401050f50';
 
 interface ComponentProps {
 
@@ -72,8 +72,8 @@ const fourMarketsNames = [
 
 const MarketPriceTable: React.FunctionComponent<ComponentProps> = () => {
 
-  console.log(isMarketOpenFunction.isItPremarket())
-  console.log(isMarketOpenFunction.isItAfterHours())
+  // console.log(isMarketOpenFunction.isItPremarket())
+  // console.log(isMarketOpenFunction.isItAfterHours())
 
 
   const [marketOverviewData, setMarketOverviewData] = useState<Array<any>>([])
@@ -87,15 +87,15 @@ const MarketPriceTable: React.FunctionComponent<ComponentProps> = () => {
 
 
 
-    fourMarkets.map(async ele => {
-      const fetchStockData = async () => {
-        const response = await axios.get(`https://cloud.iexapis.com/stable/stock/${ele}/quote?token=${IEX_API_KEY}`)
-        setMarketOverviewData(oldArr => [...oldArr, response.data])
-        // console.log(response.data)
-      }
-      setMarketOverviewData(marketDataArray)
-      fetchStockData()
-    })
+    // fourMarkets.map(async ele => {
+    //   const fetchStockData = async () => {
+    //     const response = await axios.get(`https://cloud.iexapis.com/stable/stock/${ele}/quote?token=${IEX_API_KEY}`)
+    //     setMarketOverviewData(oldArr => [...oldArr, response.data])
+    //     // console.log(response.data)
+    //   }
+    //   setMarketOverviewData(marketDataArray)
+    //   fetchStockData()
+    // })
   }, [])
 
 
@@ -119,7 +119,7 @@ const MarketPriceTable: React.FunctionComponent<ComponentProps> = () => {
           <MarketTileRow style={{ fontSize: '12px', marginTop: '4px' }}>
 
             <div style={{ color: "#b4b8cd", fontWeight: 300, fontSize: '12px' }}>
-              {isMarketOpenFunction.isItPremarket() ? 'Pre Market' : isMarketOpenFunction.isItAfterHours() ? 'After Hours' : ''}
+              {/* {isMarketOpenFunction.isItPremarket() ? 'Pre Market' : isMarketOpenFunction.isItAfterHours() ? 'After Hours' : ''} */}
             </div>
           </MarketTileRow>
 

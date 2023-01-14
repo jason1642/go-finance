@@ -11,10 +11,13 @@ function App () {
   return (
     <div className="App">
        <Header />
-        <HomeSearchBar />
+       <main>
+            <HomeSearchBar />
     
         <MainRoutes />
 
+       </main>
+    
 
       <Footer />
     </div>

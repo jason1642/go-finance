@@ -58,7 +58,8 @@ import styled from 'styled-components'
       cursor: pointer;
     }
   `;
-
+  
+  
 const HomeMyStocksHeader = () => {
 
 

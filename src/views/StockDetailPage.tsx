@@ -2,14 +2,18 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import LeftColumn from '../components/stock-detail-page/LeftColumn/LeftColumn'
 import RightColumn from '../components/stock-detail-page/RightColumn/RightColumn'
-import axios from 'axios'
+import { fetchStockData } from '../api-requests/iexcloud-requests'
+import {useParams} from 'react-router-dom'
+import StockLineGraph from '../components/graphs/StockLineGraph'
 
 interface ComponentProps {
 
 }
 
-const Container: React.FunctionComponent<ComponentProps> = (props: any) => {
 
+
+const StockDetailPage: React.FunctionComponent<ComponentProps> = ({}) => {
+  const {symbol} = useParams()
 
   const Container = styled.div`
     display: flex;
@@ -23,27 +27,22 @@ const Container: React.FunctionComponent<ComponentProps> = (props: any) => {
   useEffect(() => {
 
 
-    const IEX_API_KEY = 'pk_3256652724eb490abdfd234401050f50';
 
-
-    const fetchStockData = async () => {
-      const response = await axios.get(`https://cloud.iexapis.com/stable/stock/${props.match.params.symbol}/quote?token=${IEX_API_KEY}`)
-      setStockData(response.data)
-      console.log(props.match.params.symbol)
-    }
-    console.log(stockData)
-
-
-    fetchStockData()
-  }, [])
+       symbol && fetchStockData(symbol).then(res=>{
+      console.log(res)
+    })
+  }, [symbol])
   console.log(stockData)
 
   return (
     <Container>
-      <LeftColumn stockData={stockData} symbol={props.match.params.symbol} />
-      <RightColumn symbol={props.match.params.symbol} />
+     {symbol && <> <LeftColumn stockData={stockData} symbol={symbol} />
+
+      <StockLineGraph />
+
+      <RightColumn symbol={symbol} /></>}
     </Container>
   );
 }
 
-export default Container;
+export default StockDetailPage;
