@@ -1,4 +1,13 @@
-export const stockTimeData = {
+
+interface StockOptionsTypes {
+  ['Meta Data']: any;
+  ['Time Series (Daily)']: {
+    [key: string]: any;
+  }
+}
+
+
+export const stockTimeData: StockOptionsTypes = {
   "Meta Data": {
     "1. Information": "Daily Time Series with Splits and Dividend Events",
     "2. Symbol": "MSFT",

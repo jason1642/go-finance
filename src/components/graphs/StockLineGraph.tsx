@@ -2,47 +2,72 @@ import * as React from 'react';
 import styled from 'styled-components';
 import Chart from 'react-apexcharts'
 import {stockTimeData} from './testOptions'
-
+import './apexChart.css'
+import { ApexOptions } from "apexcharts";
 
 interface IStockLineGraphProps {
 }
 
 
-const dates = Object.keys(stockTimeData['Time Series (Daily)']).slice(0, 8).reverse()
-// const relativeLowestPrice = dates
+const dates = Object.keys(stockTimeData['Time Series (Daily)']).slice(0, 12).reverse()
 
 
 console.log(dates)
 const Container = styled.div`
   display: flex;
-  background-color: #515151;
-  /* color: white; */
+  width: 100%;
   * > {
-    /* color: white; */
   }
 `;
 
-var options = {
+const options: ApexOptions = {
    chart: {
     id: 'stockLineGraph',
+    animations: {
+        enabled: true,
+        easing: 'easeinout',
+        speed: 500,
+        animateGradually: {
+            enabled: true,
+            delay: 100
+        },
+        dynamicAnimation: {
+            enabled: true,
+            speed: 300
+        }
+    },
 
-    // background: 'slategray',
-    // theme: {
-    //     mode: 'dark'
-    //    },
-  
    },
-   
-   
-   xaxis: {
+
+
+   tooltip: {
+    followCursor: true,
+    theme: 'dark',
+
+
+},
+stroke: {
+    show: true,
+    curve: 'smooth',
+    lineCap: 'butt',
+    colors: undefined,
+    width: 2,
+    dashArray: 0,      
+},
+theme: {
+    mode: 'dark', 
+    palette: 'palette1', 
+    monochrome: {
+        enabled: false,
+        color: '#255aee',
+        shadeTo: 'dark',
+        shadeIntensity: 0.65
+    },
+},
+xaxis: {
     categories: dates.map((item: string)=>item.split('-').slice(1).join('/'))
    },
-//    series: [
-//     {
-//         name: 'series-1',
-//         data: [30, 40, 45, 50, 49, 60, 70, 91]
-//     }
-//    ],
+
 
 }
 
@@ -53,17 +78,21 @@ const StockLineGraph: React.FunctionComponent<IStockLineGraphProps> = (props) =>
     return (
     <Container>
        <Chart
+       
         options={options}
         series={[
+            
             {
-                name: 'series-1',
+                name: 'Open Price',
+                data: dates.map((item: string)=>Number(stockTimeData['Time Series (Daily)'][item]['1. open']).toFixed(2))
+            },
+            {
+                name: 'Close Price',
                 data: dates.map((item: string)=>stockTimeData['Time Series (Daily)'][item]['4. close'])
             }
            ]}
            type={'line'}
            width={800}
-        //    style={{color: 'white'}}
-
        />
 
     </Container>
