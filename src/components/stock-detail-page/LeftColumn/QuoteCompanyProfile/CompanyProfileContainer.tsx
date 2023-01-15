@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components'
 import Description from './Description';
 import SectorIndustryOverview from './SectorIndustryOverview'
-import {fetchStockData} from '../../../../api-requests/iexcloud-requests'
+// import {fetchStockData} from '../../../../api-requests/alphavantage-requests'
 interface ComponentProps {
   symbol: string;
   stockData: any;

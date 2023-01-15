@@ -9,3 +9,9 @@
     top: -8px;
     color: #fff;
   }
+
+
+  .apexcharts-svg{
+    border-radius: 12px;
+    padding: 10px;
+  }

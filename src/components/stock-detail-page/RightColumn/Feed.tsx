@@ -55,7 +55,7 @@ const Feed: React.FunctionComponent<ComponentProps> = ({symbol}) => {
         })
 
     }
-    fetchNewsData()
+    // fetchNewsData()
 
   }, [])
   return (

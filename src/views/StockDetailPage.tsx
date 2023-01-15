@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import LeftColumn from '../components/stock-detail-page/LeftColumn/LeftColumn'
 import RightColumn from '../components/stock-detail-page/RightColumn/RightColumn'
-import { fetchStockData } from '../api-requests/iexcloud-requests'
+import { fetchDailyStockDataSeries } from '../api-requests/alphavantage-requests'
 import {useParams} from 'react-router-dom'
 import StockLineGraph from '../components/graphs/StockLineGraph'
 
@@ -28,7 +28,7 @@ const StockDetailPage: React.FunctionComponent<ComponentProps> = ({}) => {
 
 
 
-       symbol && fetchStockData(symbol).then(res=>{
+       symbol && fetchDailyStockDataSeries(symbol).then(res=>{
       console.log(res)
     })
   }, [symbol])
@@ -38,7 +38,9 @@ const StockDetailPage: React.FunctionComponent<ComponentProps> = ({}) => {
     <Container>
      {symbol && <> <LeftColumn stockData={stockData} symbol={symbol} />
 
-      <StockLineGraph />
+      <StockLineGraph 
+        symbol={symbol}
+      />
 
       <RightColumn symbol={symbol} /></>}
     </Container>
