@@ -44,7 +44,7 @@ const LinkBatch: React.FunctionComponent<ComponentProps>  = () => {
         to=''>Upgrade</StyledLink>
       <StyledLink
         style={{}}
-        to=''>JC</StyledLink>
+        to='/login'>Login</StyledLink>
     </>
   );
 }

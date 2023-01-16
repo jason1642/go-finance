@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using NetFinanceApi.Services;
 using net_finance_api.Models;
 
@@ -33,7 +34,7 @@ namespace net_finance_api.Controllers
 
         // GET: api/Users/5
         [HttpGet("{id:length(24)}")]
-        public async Task<ActionResult<Users>> Get(string id)
+        public async Task<ActionResult<Users>> Get(ObjectId id)
         {
             var user = await _usersService.GetAsync(id);
 
@@ -48,7 +49,7 @@ namespace net_finance_api.Controllers
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsers(string id, Users updatedUser)
+        public async Task<IActionResult> PutUsers(ObjectId id, Users updatedUser)
         {
             var user = await _usersService.GetAsync(id);
 
@@ -76,7 +77,7 @@ namespace net_finance_api.Controllers
 
         // DELETE: api/Users/5
         [HttpDelete("{id:length(24)}")]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(ObjectId id)
         {
             var user = await _usersService.GetAsync(id);
 

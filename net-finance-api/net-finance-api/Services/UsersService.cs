@@ -2,12 +2,15 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace NetFinanceApi.Services;
 
 public class UsersService
 {
     private readonly IMongoCollection<Users> _usersCollection;
+
 
     public UsersService(
         IOptions<NetFinanceDatabaseSettings> netFinanceDatabaseSettings)
@@ -27,15 +30,16 @@ public class UsersService
     public async Task<List<Users>> GetAsync() =>
         await _usersCollection.Find(_ => true).ToListAsync();
 
-    public async Task<Users?> GetAsync(string id) =>
+    public async Task<Users?> GetAsync(ObjectId id) =>
         await _usersCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
     public async Task CreateAsync(Users newUser) =>
         await _usersCollection.InsertOneAsync(newUser);
 
-    public async Task UpdateAsync(string id, Users updatedUser) =>
+
+    public async Task UpdateAsync(ObjectId id, Users updatedUser) =>
         await _usersCollection.ReplaceOneAsync(x => x.Id == id, updatedUser);
 
-    public async Task RemoveAsync(string id) =>
+    public async Task RemoveAsync(ObjectId id) =>
         await _usersCollection.DeleteOneAsync(x => x.Id == id);
 }

@@ -10,13 +10,13 @@ public class Users
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string? Id { get; set; }
+    public ObjectId Id { get; set; }
 
     [BsonElement("Name")]
-    [JsonPropertyName("Name")]
+    [JsonPropertyName("username")]
 
-    public string? Name { get; set; }
-    public string? Password { get; set; }
+    public string? username { get; set; }
+    public string? password { get; set; }
     public bool IsComplete { get; set; }
     public string? Secret { get; set; }
 }
