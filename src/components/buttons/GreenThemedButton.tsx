@@ -22,6 +22,7 @@ const Container = styled(ButtonUnstyled)`
   margin-top: 15px;
   border-width: 0px;
   border-radius: 4px;
+  
   &:hover {
     /* border-bottom: 1px solid #52e3c2; */
     background-color: #48ac99;

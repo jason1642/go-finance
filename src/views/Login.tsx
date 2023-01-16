@@ -12,6 +12,9 @@ const Container = styled.form`
   color: white;
   flex-direction: column;
   max-width: 616px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
 `;
 
 const Title = styled.div`
@@ -32,7 +35,37 @@ const Input = styled(TextField)`
   color: white;
   background-color: #3f3f4a;
   width: calc(50% - 8px);
+  border: none;
+  &:focus-visible{
+    border-width: none;
+
+    label{ 
+        border: none;
+    }
+   }
+   label{ 
+    color: white;
+   }
+   input {
+    color: white;
+    
+    &:focus-visible{
+    border-width: none;
+
+    label{ 
+        border: none;
+    }
+   }
+   }
+   
 `;
+
+// const inputStyles = {
+ 
+//          color: "white",
+//          backgroundColor: '#3f3f4a',
+//          width: 'calc(50% - 8px)',
+// }        
 
 
 const Login: React.FunctionComponent<ILoginProps> = (props) => {
@@ -59,11 +92,16 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
         <Input
             {...register('username')}
             label='Username'
+            
         />
 
         <Input
             {...register('password')}
             type='password'
+            variant='standard'
+            inputProps={{
+                disableUnderline: true,
+              }}
             label={'Password'}
         />
     </Wrapper>

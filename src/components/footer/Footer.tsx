@@ -19,7 +19,7 @@ const Footer: React.FunctionComponent<ComponentProps> = () => {
 
   return (
     <Container>
-      ©2020 Jason Cruz, Inc. Some rights reserved.
+      ©2022 Jason Cruz, Inc. Some rights reserved.
       |
       <Links>Terms of Use</Links>|
       <Links>Privacy Policy</Links>
