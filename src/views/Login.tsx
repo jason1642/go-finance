@@ -1,43 +1,18 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import {useForm} from 'react-hook-form'
-import TextField from '@mui/material/TextField';
 import GreenThemedButton from '../components/buttons/GreenThemedButton';
 import { Link } from 'react-router-dom';
-// import Button from '@mui/material/Button';
+import {Container, Title, Input, } from '../styles/login-signup'
 
 interface ILoginProps {
 }
-
-const Container = styled.form`
-  display: flex;
-  color: white;
-  flex-direction: column;
-  max-width: 616px;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  padding: 70px 0px;
-  /* height: 100%; */
-  /* flex-grow: 10; */
-`;
-
-const Title = styled.div`
-  display: flex;
-  font-size: 42px;
-  margin-bottom: 1rem;
-  font-weight: 300;
-  text-align: left;
-  width: 100%;
-`;
-
 
 const Wrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
 `;
-
 const ButtonWrapper = styled.div`
     display: flex;
     margin-top: 14px;
@@ -46,24 +21,6 @@ const ButtonWrapper = styled.div`
     align-items: center;
 
 `
-
-const Input = styled.input`
-  color: white;
-  background-color: #3f3f4a;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  padding: 18px 22px;
-
-   @media (min-width: 770px) {
-    width: calc(43% - 8px);
-
-    }
-    &:active{ 
-        border: none;
-    }
-`;
-
 
 const ForgotPasswordButton = styled(Link)`
   color: #52e3c2;
@@ -77,6 +34,9 @@ const ForgotPasswordButton = styled(Link)`
 `;
 
 
+// Error handling
+// Api request
+
 const Login: React.FunctionComponent<ILoginProps> = (props) => {
     const {register, handleSubmit,  } = useForm({
         defaultValues: {
@@ -84,8 +44,13 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
             password: ''
         }
     })
+
     const onSubmit = (formData:any)=> {
         console.log(formData)
+    }
+
+    const onErrors = (errors: any) => {
+
     }
 
 
@@ -93,7 +58,7 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
     <Container onSubmit={handleSubmit(onSubmit)}>
        
        
-        <Title>Log in to Net Finance</Title>
+        <Title>Log in to Net Finance.</Title>
 
 
 

@@ -20,11 +20,11 @@ import NavButtons from './NavButtons'
     width: auto;
   `;
 
-  const StyledLink = styled(Link)`
+  export const StyledLink = styled(Link)`
     color: white;
     display: block;
     font-size: 12px;
-    font-weight: bold;
+    font-weight: 500;
     text-decoration: none;
     padding: 6px 0px;
     font-family: Helvetica, Arial, sans-serif;
@@ -36,6 +36,14 @@ import NavButtons from './NavButtons'
 interface ComponentProps {
 
 }
+
+const LogoLink = styled(Link)`
+  display: flex;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5em;
+`;
 const Header: React.FunctionComponent<ComponentProps>  = () => {
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
@@ -45,7 +53,10 @@ const Header: React.FunctionComponent<ComponentProps>  = () => {
 
   return (
     <Container>
-      <Link to='/'><SiteLogo src={siteLogo} alt='Site logo' /></Link>
+      <LogoLink to='/'>
+        {/* <SiteLogo src={siteLogo} alt='Site logo' /> */}
+          .Net Finance |
+        </LogoLink>
       {/* {windowWidth <= 768 ? 'X' : <LinkBatch />} */}
       {/* <Menu> */}
       <StyledLink to=''>HUBS</StyledLink>

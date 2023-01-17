@@ -1,21 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import {StyledLink} from './Header'
 
 
-  const StyledLink = styled(Link)`
-  color: white;
-  display: block;
-  font-size: 12px;
-  font-weight: bold;
-  text-decoration: none;
-  padding: 6px 0px;
-  font-family: Helvetica, Arial, sans-serif;
-  &:hover {
-    border-bottom: 1px solid #52e3c2;
-    margin-top: 1px;
-  }
-  `;
+
 interface ComponentProps {
 
 }
@@ -41,10 +28,10 @@ const LinkBatch: React.FunctionComponent<ComponentProps>  = () => {
           color: 'black',
           borderRadius: '3px',
         }}
-        to=''>Upgrade</StyledLink>
-      <StyledLink
+        to='login'>Login</StyledLink>
+      {/* <StyledLink
         style={{}}
-        to='/login'>Login</StyledLink>
+        to='/login'>Login</StyledLink> */}
     </>
   );
 }

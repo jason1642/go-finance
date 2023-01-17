@@ -5,10 +5,10 @@ import './App.css';
 import HomeSearchBar from './components/search-bar/HomeSearchBar';
 import MainRoutes from './routes/main-routes';
 import axios from 'axios'
-
+import { useParams } from 'react-router-dom';
 
 const App = () =>{
-
+  
   React.useEffect(()=>{
     axios.get('https://localhost:7025/api/Users').then(res=>{
       console.log(res.data)
@@ -19,7 +19,8 @@ const App = () =>{
     <div className="App">
        <Header />
        <main>
-            <HomeSearchBar />
+        {/* Change conditional method  */}
+            {<HomeSearchBar />}
     
         <MainRoutes />
 

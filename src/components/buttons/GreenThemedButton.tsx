@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 interface IGreenThemedButtonProps {
   title: string;
+  onClick?: Function;
+  buttonProps?: any;
 }
 
 const Container = styled(ButtonUnstyled)`
@@ -22,19 +24,16 @@ const Container = styled(ButtonUnstyled)`
   margin-top: 15px;
   border-width: 0px;
   border-radius: 4px;
-  
-  &:hover {
-    /* border-bottom: 1px solid #52e3c2; */
-    background-color: #48ac99;
-    /* margin-top: 1px; */
-    cursor: pointer;
 
+  &:hover {
+    background-color: #48ac99;
+    cursor: pointer;
   }
 `
 
-const GreenThemedButton: React.FunctionComponent<IGreenThemedButtonProps> = ({title}) => {
+const GreenThemedButton: React.FunctionComponent<IGreenThemedButtonProps> = ({buttonProps, title, onClick = ()=>{}}) => {
   return (
-    <Container >
+    <Container {...buttonProps} onClick={(e)=>onClick(e)}>
       {title}
     </Container>
   );

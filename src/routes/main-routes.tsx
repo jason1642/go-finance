@@ -3,6 +3,7 @@ import * as React from 'react';
 import StockDetailPage from '../views/StockDetailPage'
 import HomePage from "../views/HomePage";
 import Login from "../views/Login";
+import SignUp from "../views/SignUp";
 
 
 const MainRoutes = () => {
@@ -12,6 +13,10 @@ const MainRoutes = () => {
         {
             path: '/login',
             element: <Login /> 
+        },
+        {
+            path: '/sign-up',
+            element: <SignUp /> 
         },
         {
             path: '/quote/:symbol',
