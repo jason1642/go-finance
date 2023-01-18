@@ -10,7 +10,7 @@ public class Users
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public ObjectId Id { get; set; }
+    public string? _id { get; set; }
 
     [BsonElement("username")]
     [JsonPropertyName("username")]
