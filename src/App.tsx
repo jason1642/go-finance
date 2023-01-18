@@ -8,19 +8,20 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom';
 
 const App = () =>{
-  
+  const paramsRef = useParams()
   React.useEffect(()=>{
-    axios.get('https://localhost:7025/api/Users').then(res=>{
-      console.log(res.data)
-    })
-  },[])
+    // axios.get('https://localhost:7025/api/Users').then(res=>{
+    //   console.log(res.data)
+    // })
+    console.log(paramsRef)
+
+  },[paramsRef])
 
   return (
     <div className="App">
        <Header />
        <main>
         {/* Change conditional method  */}
-            {<HomeSearchBar />}
     
         <MainRoutes />
 

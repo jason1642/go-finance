@@ -12,11 +12,13 @@ public class Users
     [BsonRepresentation(BsonType.ObjectId)]
     public ObjectId Id { get; set; }
 
-    [BsonElement("Name")]
+    [BsonElement("username")]
     [JsonPropertyName("username")]
 
     public string? username { get; set; }
+
+    [BsonElement("password")]
+    [JsonPropertyName("password")]
     public string? password { get; set; }
-    public bool IsComplete { get; set; }
-    public string? Secret { get; set; }
+   
 }

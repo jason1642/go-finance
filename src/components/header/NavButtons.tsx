@@ -14,10 +14,10 @@ const LinkBatch: React.FunctionComponent<ComponentProps>  = () => {
     <>
       <StyledLink to=''>HOME</StyledLink>
       <StyledLink to=''>PORTFOLIO</StyledLink>
-      <StyledLink to=''>HUBS</StyledLink>
+      {/* <StyledLink to=''>HUBS</StyledLink> */}
       <StyledLink to=''>CHAT</StyledLink>
-      <StyledLink to=''>COMPARE</StyledLink>
-      <StyledLink to=''>SCREENER</StyledLink>
+      {/* <StyledLink to=''>COMPARE</StyledLink> */}
+      {/* <StyledLink to=''>SCREENER</StyledLink> */}
       <div style={{ flexGrow: .7, display: 'flex' }}></div>
       <StyledLink to=''>HELP</StyledLink>
       <StyledLink to=''>FEEDBACK</StyledLink>

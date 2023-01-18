@@ -28,7 +28,7 @@ namespace net_finance_api.Controllers
         // GET: api/Users
         [HttpGet]
         public async Task<List<Users>> Get() =>
-      await _usersService.GetAsync();
+            await _usersService.GetAsync();
 
 
 
@@ -72,7 +72,7 @@ namespace net_finance_api.Controllers
         {
             await _usersService.CreateAsync(newUser);
 
-            return CreatedAtAction(nameof(Get), new { id = newUser.Id }, newUser);
+            return CreatedAtAction(nameof(Get), newUser);
         }
 
         // DELETE: api/Users/5
