@@ -9,7 +9,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using NetFinanceApi.Services;
 using net_finance_api.Models;
-
+using BCrypt;
 
 
 namespace net_finance_api.Controllers
@@ -72,8 +72,9 @@ namespace net_finance_api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(Users newUser)
         {
+            newUser.password = BCrypt.Net.BCrypt.HashPassword(newUser.password);
             await _usersService.CreateAsync(newUser);
-
+            
             return CreatedAtAction(nameof(Get), newUser);
         }
 

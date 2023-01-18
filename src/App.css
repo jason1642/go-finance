@@ -28,13 +28,18 @@ html {
 .App {
   background-color: #32323e;
   width: 100%;
+  min-height: 100vh;
   height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between
 }
 
 main {
   padding: 2rem;
   margin-top: -16px;
   flex-direction: column;
+  
 }
 
 @media only screen and (max-width: 768px) {
