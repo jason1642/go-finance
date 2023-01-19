@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using net_finance_api.Models;
 using NetFinanceApi.Services;
+using System.Security.Claims;
+
 
 var policyName = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -39,7 +41,13 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication("Bearer").AddJwtBearer();
+
+
 var app = builder.Build();
+
+app.UseAuthorization();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

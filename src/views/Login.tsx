@@ -4,6 +4,7 @@ import {useForm} from 'react-hook-form'
 import GreenThemedButton from '../components/buttons/GreenThemedButton';
 import { Link } from 'react-router-dom';
 import {Container, Title, Input, } from '../styles/login-signup'
+import { LoginUser } from '../api-requests/user-requests';
 
 interface ILoginProps {
 }
@@ -47,6 +48,11 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
 
     const onSubmit = (formData:any)=> {
         console.log(formData)
+        LoginUser(formData).then(res=>{
+            console.log(res)
+        }).catch(err=> {
+            console.log(err, 'Wrong username or password')
+        })
     }
 
     const onErrors = (errors: any) => {
@@ -55,7 +61,7 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
 
 
   return (
-    <Container onSubmit={handleSubmit(onSubmit)}>
+    <Container>
        
        
         <Title>Log in to Net Finance.</Title>
@@ -78,7 +84,7 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
 
 
     <ButtonWrapper>
-    <GreenThemedButton title='Log In'/>
+    <GreenThemedButton onClick={handleSubmit(onSubmit, onErrors)} title='Log In'/>
 
     <ForgotPasswordButton to='/forgot-password' >Forgot Password?</ForgotPasswordButton>
 

@@ -7,12 +7,16 @@ import MainRoutes from './routes/main-routes';
 import axios from 'axios'
 import { useParams } from 'react-router-dom';
 
+
+
 const App = () =>{
   const paramsRef = useParams()
   React.useEffect(()=>{
-    // axios.get('https://localhost:7025/api/Users').then(res=>{
+    // axios.get('https://localhost:7025/api/users').then(res=>{
     //   console.log(res.data)
     // })
+
+
     console.log(paramsRef)
 
   },[paramsRef])
