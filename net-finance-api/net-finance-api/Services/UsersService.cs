@@ -42,4 +42,22 @@ public class UsersService
 
     public async Task RemoveAsync(string id) =>
         await _usersCollection.DeleteOneAsync(x => x._id == id);
+
+
+
+
+
+    public async Task<Users?> Login(Users user)
+    {
+        Users matchingUser = await _usersCollection.Find(x => x.username == user.username).FirstOrDefaultAsync();
+        bool isValidPassword = BCrypt.Net.BCrypt.Verify(user.password, matchingUser.password);
+        if (isValidPassword)
+        {
+            return matchingUser;
+        }
+        return null;
+    }
+        
+
+
 }

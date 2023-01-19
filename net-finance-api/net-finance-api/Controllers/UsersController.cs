@@ -27,14 +27,14 @@ namespace net_finance_api.Controllers
             _usersService = usersService;
         }
 
-        // GET: api/Users
+        // GET: api/users
         [HttpGet]
         public async Task<List<Users>> Get() =>
             await _usersService.GetAsync();
 
 
 
-        // GET: api/Users/5
+        // GET: api/users/5
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Users>> Get(string id)
         {
@@ -48,7 +48,7 @@ namespace net_finance_api.Controllers
             return user;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsers(string id, Users updatedUser)
@@ -67,18 +67,18 @@ namespace net_finance_api.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<IActionResult> Post(Users newUser)
         {
-            newUser.password = BCrypt.Net.BCrypt.HashPassword(newUser.password);
+            newUser.password = BCrypt.Net.BCrypt.HashPassword(newUser.password, 12);
             await _usersService.CreateAsync(newUser);
-            
+
             return CreatedAtAction(nameof(Get), newUser);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/users/5
         [HttpDelete("{id:length(24)}")]
         public async Task<IActionResult> Delete(string id)
         {
@@ -94,6 +94,15 @@ namespace net_finance_api.Controllers
             return NoContent();
         }
 
+        // Post: api/Users/login
+        [HttpPost("login")]
+        public async Task<IActionResult?> Login([FromBody] Users user)
+        {
+            Users? loginResponse = await _usersService.Login(user);
+
+            //return loginResponse ?? null;
+            return loginResponse != null ? Ok(loginResponse) : BadRequest(new { message = "Invalid Username or Password"}) ;
+        }
         //private bool UsersExists(long id)
         //{
         //    return (_usersService.Users?.Any(e => e.Id == id)).GetValueOrDefault();
