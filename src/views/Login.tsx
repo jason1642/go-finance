@@ -56,7 +56,7 @@ const Login: React.FunctionComponent<ILoginProps> = (props) => {
     }
 
     const onErrors = (errors: any) => {
-
+        console.log(errors)
     }
 
 

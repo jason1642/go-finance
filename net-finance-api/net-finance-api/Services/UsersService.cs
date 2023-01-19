@@ -58,6 +58,9 @@ public class UsersService
         return null;
     }
         
-
+    public async Task<Users?> Verify()
+    {
+        return null;
+    }
 
 }

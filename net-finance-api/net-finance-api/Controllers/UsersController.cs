@@ -10,7 +10,10 @@ using MongoDB.Bson.Serialization.Attributes;
 using NetFinanceApi.Services;
 using net_finance_api.Models;
 using BCrypt;
-
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace net_finance_api.Controllers
 {
@@ -20,10 +23,12 @@ namespace net_finance_api.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        public IConfiguration _configuration;
         private readonly UsersService _usersService;
 
-        public UsersController(UsersService usersService)
+        public UsersController(IConfiguration config, UsersService usersService)
         {
+            _configuration = config;
             _usersService = usersService;
         }
 
@@ -50,6 +55,7 @@ namespace net_finance_api.Controllers
 
         // PUT: api/users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsers(string id, Users updatedUser)
         {
@@ -99,9 +105,30 @@ namespace net_finance_api.Controllers
         public async Task<IActionResult?> Login([FromBody] Users user)
         {
             Users? loginResponse = await _usersService.Login(user);
+            if (loginResponse == null) return BadRequest(new { message = "Invalid Username or Password" });
+            //Claim [] claims;
+          
+             Claim [] claims = new[] {
+                                    new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
+                                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                                    new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                                    new Claim("UserId", loginResponse._id.ToString()),
+                                    new Claim("Username", loginResponse.username)
+                                    //new Claim("Email", user.Email)
+                                };
+            
+           
 
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                      _configuration["Jwt:Issuer"],
+                      _configuration["Jwt:Audience"],
+                      claims,
+                      expires: DateTime.UtcNow.AddMinutes(10),
+                      signingCredentials: signIn);
             //return loginResponse ?? null;
-            return loginResponse != null ? Ok(loginResponse) : BadRequest(new { message = "Invalid Username or Password"}) ;
+            return loginResponse != null ? Ok(new JwtSecurityTokenHandler().WriteToken(token)) : BadRequest(new { message = "Invalid Username or Password"}) ;
         }
         //private bool UsersExists(long id)
         //{
