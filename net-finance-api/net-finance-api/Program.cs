@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 using net_finance_api.Models;
 using NetFinanceApi.Services;
 using System.Security.Claims;
@@ -61,6 +62,25 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
+}).AddCookie("Cookies", options =>
+{
+    options.LoginPath = "/login";
+    options.ExpireTimeSpan = TimeSpan.FromDays(1);
+        // this is the key piece!
+
+}).AddPolicyScheme("JWT_OR_COOKIE", "JWT_OR_COOKIE", options =>
+{
+    // runs on each request
+    options.ForwardDefaultSelector = context =>
+    {
+        // filter by auth type
+        string authorization = context.Request.Headers[HeaderNames.Authorization];
+        if (!string.IsNullOrEmpty(authorization) && authorization.StartsWith("Bearer "))
+            return "Bearer";
+
+        // otherwise always check for cookie auth
+        return "Cookies";
+    };
 });
 
 var app = builder.Build();
@@ -73,7 +93,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseAuthentication();
-
+app.UseAuthorization();
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
@@ -82,7 +102,6 @@ app.UseHttpsRedirection();
 
 app.UseCors(policyName);
 
-app.UseAuthorization();
 
 app.MapControllers();
 

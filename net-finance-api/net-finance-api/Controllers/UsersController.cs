@@ -18,7 +18,6 @@ using System.Text;
 namespace net_finance_api.Controllers
 {
     //[Route("api/[controller]")]
-    [Authorize]
     [Route("api/users")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -127,6 +126,12 @@ namespace net_finance_api.Controllers
                       claims,
                       expires: DateTime.UtcNow.AddMinutes(10),
                       signingCredentials: signIn);
+
+            var RefreshToken = Guid.NewGuid().ToString();
+
+            Response.Cookies.Append("X-Access-Token", token.ToString(), new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+            Response.Cookies.Append("X-Username", user.username, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+            Response.Cookies.Append("X-Refresh-Token", RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
             //return loginResponse ?? null;
             return loginResponse != null ? Ok(new JwtSecurityTokenHandler().WriteToken(token)) : BadRequest(new { message = "Invalid Username or Password"}) ;
         }
