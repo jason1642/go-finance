@@ -18,7 +18,7 @@ using System.Text;
 namespace net_finance_api.Controllers
 {
     //[Route("api/[controller]")]
-
+    [Authorize]
     [Route("api/users")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -55,7 +55,7 @@ namespace net_finance_api.Controllers
 
         // PUT: api/users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[Authorize]
+        //[AutoValidateAntiforgeryToken]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsers(string id, Users updatedUser)
         {
