@@ -14,7 +14,7 @@ export const LoginUser = async (userInput: UserLoginSchema) =>
     await api.post('/login', userInput).then(res=>{
         console.log(res)
         return res.data
-    })
+    }, err=>err)
 
 
 
