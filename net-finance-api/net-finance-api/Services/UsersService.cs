@@ -4,6 +4,20 @@ using MongoDB.Driver;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Azure;
+using Azure.Core;
+using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
 
 namespace NetFinanceApi.Services;
 
@@ -58,9 +72,29 @@ public class UsersService
         return null;
     }
         
-    public async Task<Users?> Verify()
+    public async Task<List<Users?>> Verify()
     {
-        return null;
+        return await _usersCollection.Find(_ => true).ToListAsync();
+
+        //if (!(Request.Cookies.TryGetValue("X-Username", out var userName) && Request.Cookies.TryGetValue("X-Refresh-Token", out var refreshToken)))
+        //    return BadRequest();
+
+        //var user = _userManager.Users.FirstOrDefault(i => i.UserName == userName && i.RefreshToken == refreshToken);
+
+        //if (user == null)
+        //    return BadRequest();
+
+        //var token = _jwtCreator.Generate(user.Email, user.Id);
+
+        //user.RefreshToken = Guid.NewGuid().ToString();
+
+        //await _userManager.UpdateAsync(user);
+
+        //Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+        //Response.Cookies.Append("X-Username", user.UserName, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+        //Response.Cookies.Append("X-Refresh-Token", user.RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+
+        //return Ok();
     }
 
 }

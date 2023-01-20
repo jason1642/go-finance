@@ -48,9 +48,13 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAuthorization();
 
 
+
+
+
+
 //builder.Services.AddAuthentication("Bearer").AddJwtBearer();
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+builder.Services.AddAuthentication().AddJwtBearer(options =>
 {
     options.RequireHttpsMetadata = false;
     options.SaveToken = true;
@@ -61,6 +65,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidAudience = builder.Configuration["Jwt:Audience"],
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+    };
+
+    options.Events.OnMessageReceived = context => {
+
+        if (context.Request.Cookies.ContainsKey("X-Access-Token"))
+        {
+            context.Token = context.Request.Cookies["X-Access-Token"];
+        }
+        return Task.CompletedTask;
     };
 }).AddCookie("Cookies", options =>
 {
@@ -82,6 +95,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         return "Cookies";
     };
 });
+
+
+
+
+
 
 var app = builder.Build();
 
