@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL: 'https://localhost:7025/api/users'
+    baseURL: 'https://localhost:7025/api/users',
+    withCredentials: true,
 })
 
 
@@ -14,3 +15,10 @@ export const LoginUser = async (userInput: UserLoginSchema) =>
         console.log(res)
         return res.data
     })
+
+
+
+export const verifyUser = async ()=> 
+   await api.post('/verify').then(res=>{
+    console.log(res)
+   },err=>{console.log(err)})

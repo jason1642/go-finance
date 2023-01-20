@@ -152,9 +152,9 @@ namespace net_finance_api.Controllers
                     user.refresh_token = RefreshToken;
                     await _usersService.UpdateAsync(user._id, user);
                  
-                    Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
-                    Response.Cookies.Append("X-Username", user.username, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
-                    Response.Cookies.Append("X-Refresh-Token", RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+                    Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Domain = "localhost" });
+                    Response.Cookies.Append("X-Username", user.username, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Domain = "localhost" });
+                    Response.Cookies.Append("X-Refresh-Token", RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Domain = "localhost" });
 
                     return Ok(RefreshToken);
                 }
@@ -203,7 +203,7 @@ namespace net_finance_api.Controllers
             Response.Cookies.Append("X-Username", user.username, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
             Response.Cookies.Append("X-Refresh-Token", user.refresh_token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
 
-            return Ok(user.refresh_token);
+            return Ok(user);
         }
 
 

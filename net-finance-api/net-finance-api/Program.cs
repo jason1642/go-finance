@@ -19,11 +19,11 @@ builder.Services.AddCors(options =>
                       builder =>
                       {
                           builder
-                             //.WithOrigins("http://localhost:3000")
-                             .AllowAnyOrigin()
+                             .WithOrigins("http://localhost:3000")
+                             //.AllowAnyOrigin()
                              .AllowAnyMethod()
-                             .AllowAnyHeader();
-                             //.AllowCredentials();
+                             .AllowAnyHeader()
+                             .AllowCredentials();
                       });
 });
 
@@ -62,12 +62,17 @@ builder.Services.AddAuthentication().AddJwtBearer(options =>
     {
         ValidateIssuer = true,
         ValidateAudience = true,
+
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
         ValidAudience = builder.Configuration["Jwt:Audience"],
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
+    options.Events = new JwtBearerEvents();
 
-    options.Events.OnMessageReceived = context => {
+    options.Events.OnMessageReceived = context =>
+    {
 
         if (context.Request.Cookies.ContainsKey("X-Access-Token"))
         {
@@ -77,24 +82,28 @@ builder.Services.AddAuthentication().AddJwtBearer(options =>
     };
 }).AddCookie("Cookies", options =>
 {
-    options.LoginPath = "/login";
+
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    options.Cookie.IsEssential = true;
+    //options.LoginPath = "/login";
     options.ExpireTimeSpan = TimeSpan.FromDays(1);
-        // this is the key piece!
+    // this is the key piece!
 
-}).AddPolicyScheme("JWT_OR_COOKIE", "JWT_OR_COOKIE", options =>
-{
-    // runs on each request
-    options.ForwardDefaultSelector = context =>
-    {
-        // filter by auth type
-        string authorization = context.Request.Headers[HeaderNames.Authorization];
-        if (!string.IsNullOrEmpty(authorization) && authorization.StartsWith("Bearer "))
-            return "Bearer";
-
-        // otherwise always check for cookie auth
-        return "Cookies";
-    };
 });
+//.AddPolicyScheme("JWT_OR_COOKIE", "JWT_OR_COOKIE", options =>
+//{
+//    // runs on each request
+//    options.ForwardDefaultSelector = context =>
+//    {
+//        // filter by auth type
+//        string authorization = context.Request.Headers[HeaderNames.Authorization];
+//        if (!string.IsNullOrEmpty(authorization) && authorization.StartsWith("Bearer "))
+//            return "Bearer";
+
+//        // otherwise always check for cookie auth
+//        return "Cookies";
+//    };
+//});
 
 
 

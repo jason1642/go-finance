@@ -4,9 +4,8 @@ import Header from './components/header/Header'
 import './App.css';
 import HomeSearchBar from './components/search-bar/HomeSearchBar';
 import MainRoutes from './routes/main-routes';
-import axios from 'axios'
 import { useParams } from 'react-router-dom';
-
+import { verifyUser } from './api-requests/user-requests';
 
 
 const App = () =>{
@@ -15,7 +14,11 @@ const App = () =>{
     // axios.get('https://localhost:7025/api/users').then(res=>{
     //   console.log(res.data)
     // })
-
+    verifyUser().then(res=>{
+      console.log(res)
+    }).catch(err=>{
+      console.log(err)
+    })
 
     console.log(paramsRef)
 
