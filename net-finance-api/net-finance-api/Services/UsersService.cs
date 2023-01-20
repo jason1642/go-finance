@@ -57,7 +57,8 @@ public class UsersService
     public async Task RemoveAsync(string id) =>
         await _usersCollection.DeleteOneAsync(x => x._id == id);
 
-
+    public async Task<Users?> GetByUsernameToken(string username, string cookie_token) =>
+        await _usersCollection.Find(i => i.username == username && i.refresh_token == cookie_token).FirstOrDefaultAsync();
 
 
 
@@ -72,29 +73,6 @@ public class UsersService
         return null;
     }
         
-    public async Task<List<Users?>> Verify()
-    {
-        return await _usersCollection.Find(_ => true).ToListAsync();
-
-        //if (!(Request.Cookies.TryGetValue("X-Username", out var userName) && Request.Cookies.TryGetValue("X-Refresh-Token", out var refreshToken)))
-        //    return BadRequest();
-
-        //var user = _userManager.Users.FirstOrDefault(i => i.UserName == userName && i.RefreshToken == refreshToken);
-
-        //if (user == null)
-        //    return BadRequest();
-
-        //var token = _jwtCreator.Generate(user.Email, user.Id);
-
-        //user.RefreshToken = Guid.NewGuid().ToString();
-
-        //await _userManager.UpdateAsync(user);
-
-        //Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
-        //Response.Cookies.Append("X-Username", user.UserName, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
-        //Response.Cookies.Append("X-Refresh-Token", user.RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
-
-        //return Ok();
-    }
+    
 
 }

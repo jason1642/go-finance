@@ -20,5 +20,6 @@ public class Users
     [BsonElement("password")]
     [JsonPropertyName("password")]
     public string? password { get; set; }
-   
+
+    public string? refresh_token { get; internal set; }
 }

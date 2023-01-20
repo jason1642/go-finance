@@ -19,6 +19,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+using MongoDB.Driver;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 
 
@@ -132,7 +134,6 @@ namespace net_finance_api.Controllers
                                             new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                                             new Claim("UserId", user._id.ToString()),
                                             new Claim("Username", user.username)
-                                            //new Claim("Email", user.Email)
                                         };
 
 
@@ -147,10 +148,10 @@ namespace net_finance_api.Controllers
                               signingCredentials: signIn).ToString();
 
                     string RefreshToken = Guid.NewGuid().ToString();
-
-
-                    //await _usersService.
-
+                    
+                    user.refresh_token = RefreshToken;
+                    await _usersService.UpdateAsync(user._id, user);
+                 
                     Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
                     Response.Cookies.Append("X-Username", user.username, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
                     Response.Cookies.Append("X-Refresh-Token", RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
@@ -165,82 +166,45 @@ namespace net_finance_api.Controllers
             else
                 return BadRequest(ModelState);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            //Users? loginResponse = await _usersService.Login(user);
-            //if (loginResponse == null) return BadRequest(new { message = "Invalid Username or Password" });
-            ////Claim [] claims;
-
-            // Claim [] claims = new[] {
-            //                        new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
-            //                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            //                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
-            //                        new Claim("UserId", loginResponse._id.ToString()),
-            //                        new Claim("Username", loginResponse.username)
-            //                        //new Claim("Email", user.Email)
-            //                    };
-
-
-
-            //var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-            //var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            //var token = new JwtSecurityToken(
-            //          _configuration["Jwt:Issuer"],
-            //          _configuration["Jwt:Audience"],
-            //          claims,
-            //          expires: DateTime.UtcNow.AddMinutes(10),
-            //          signingCredentials: signIn);
-
-            //var RefreshToken = Guid.NewGuid().ToString();
-
-            //Response.Cookies.Append("X-Access-Token", token.ToString(), new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
-            //Response.Cookies.Append("X-Username", user.username, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
-            //Response.Cookies.Append("X-Refresh-Token", RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
-            ////return loginResponse ?? null;
-            //return loginResponse != null ? Ok(new JwtSecurityTokenHandler().WriteToken(token)) : BadRequest(new { message = "Invalid Username or Password"}) ;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
 
+        [HttpPost("verify")]
+        public async Task<IActionResult> Verify()
+        {
+            if (!(Request.Cookies.TryGetValue("X-Username", out var userName) && Request.Cookies.TryGetValue("X-Refresh-Token", out var refreshToken)))
+                return BadRequest();
 
+            Users? user = await _usersService.GetByUsernameToken(userName, refreshToken);
+            if (user == null)
+                return BadRequest();
 
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            Claim[] claims = new[] {
+                new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                new Claim("UserId", user._id.ToString()),
+                new Claim("Username", user.username)
+                                        };
+            var token = new JwtSecurityToken(
+                             _configuration["Jwt:Issuer"],
+                             _configuration["Jwt:Audience"],
+                             claims,
+                             expires: DateTime.UtcNow.AddMinutes(10),
+                             signingCredentials: signIn).ToString();
+
+            user.refresh_token = Guid.NewGuid().ToString();
+
+            await _usersService.UpdateAsync(user._id, user);
+
+            Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+            Response.Cookies.Append("X-Username", user.username, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+            Response.Cookies.Append("X-Refresh-Token", user.refresh_token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+
+            return Ok(user.refresh_token);
+        }
 
 
 
