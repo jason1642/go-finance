@@ -1,13 +1,14 @@
+import { Button } from '@mui/material';
 import React from 'react';
 import {StyledLink} from './Header'
 
 
 
 interface ComponentProps {
-  // user: any;
+  user: any;
 }
 
-const LinkBatch: React.FunctionComponent<ComponentProps>  = ({}) => {
+const LinkBatch: React.FunctionComponent<ComponentProps>  = ({user}) => {
 
 
   // React.useEffect(() => {
@@ -25,16 +26,19 @@ const LinkBatch: React.FunctionComponent<ComponentProps>  = ({}) => {
       <StyledLink to=''>HELP</StyledLink>
       <StyledLink to=''>FEEDBACK</StyledLink>
 
-      
-        <StyledLink
+      {
+
+      user ?   
+        <Button
+        onClick={()=>{console.log('trying to log out')}}
         style={{
           backgroundColor: '#52e3c2',
-          padding: '.7rem 1rem',
+          padding: '.4rem .7rem',
           color: 'black',
           borderRadius: '3px',
         }}
-        to='/login'>Logout</StyledLink> 
-     
+      >Log out</Button>
+     :
          <StyledLink
         style={{
           backgroundColor: '#52e3c2',
@@ -44,7 +48,7 @@ const LinkBatch: React.FunctionComponent<ComponentProps>  = ({}) => {
         }}
         to='login'>Login</StyledLink>
         
-   
+   }
    
     </>
   );

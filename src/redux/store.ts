@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import userReducer from './features/user'
+// import userReducer from './features/user'
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
 import { userApi } from './features/userApi'
 import { setupListeners } from '@reduxjs/toolkit/query'

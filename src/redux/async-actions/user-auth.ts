@@ -14,6 +14,19 @@ interface UserLoginSchema {
     username: string;
     password: string;
 }
+
+
+
+
+
+
+// CURRENTLY NOT IN USE
+// Use ../features/userApi file for cleaner fetching and caches
+
+
+
+
+
 export const userLogin = createAsyncThunk('user/login',
     async (userInput: UserLoginSchema, thunkAPI) => 
         await api.post('/login', userInput).then(res=>{

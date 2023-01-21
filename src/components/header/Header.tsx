@@ -46,7 +46,7 @@ const LogoLink = styled(Link)`
   font-size: 1.5em;
 `;
 const Header: React.FunctionComponent<ComponentProps>  = () => {
-  // const user = useAppSelector((state: RootState) => state.user)
+  const user = useAppSelector((state: RootState) => state.userApi)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   console.log(windowWidth)
@@ -65,7 +65,7 @@ const Header: React.FunctionComponent<ComponentProps>  = () => {
       <StyledLink to=''>COMPARE</StyledLink>
       {
       <NavButtons 
-      // user={user}
+           user={user}
        />
       }
       {/* </Menu> */}

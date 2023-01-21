@@ -16,6 +16,14 @@ const initialState: UserState = {
   isLoading: true,
 }
 
+
+
+
+// CURRENTLY NOT IN USE
+// Use ./userApi file for cleaner fetching and caches
+
+
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
