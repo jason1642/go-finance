@@ -11,7 +11,9 @@ interface ILineGraphPortfolioOverviewProps {
 
 const Container = styled.div`
   display: flex;
-
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 `;
 const options: ApexOptions = {
     chart: {
@@ -29,9 +31,12 @@ const options: ApexOptions = {
              speed: 300
          }
      },
+     background: 'transparent'
  
     },
- 
+    legend: {
+        position: 'bottom'
+    },
  
     tooltip: {
      followCursor: true,
@@ -39,14 +44,9 @@ const options: ApexOptions = {
  
  
  },
-//  stroke: {
-//      show: true,
-//      // curve: 'smooth',
-//      lineCap: 'butt',
-//      colors: undefined,
-//      width: 2,
-//      dashArray: 0,      
-//  },
+ stroke: {
+     show: false,     
+ },
  theme: {
      mode: 'dark', 
      palette: 'palette1', 
@@ -57,32 +57,35 @@ const options: ApexOptions = {
          shadeIntensity: 0.65
      },
  },
- 
-    markers: {
-     size: 1,
-     colors: ['#255aee', '#26cb8a'],
-     // strokeColors: '#000000',
-     strokeWidth: 0,
-     strokeOpacity: 0,
-     strokeDashArray: 0,
-     fillOpacity: 0,
-     discrete: [],
-     shape: "circle",
-     radius: 4,
-     offsetX: 0,
-     offsetY: 0,
-     onClick: undefined,
-     onDblClick: undefined,
-     showNullDataPoints: true,
-     hover: {
-       size: undefined,
-       sizeOffset: 2
-     }
- }
+ grid: {
+    show: false
+ },
+
+//     markers: {
+//      size: 0,
+//      colors: ['#255aee', '#26cb8a'],
+//      // strokeColors: '#000000',
+//      strokeWidth: 0,
+//      strokeOpacity: 0,
+//      strokeDashArray: 0,
+//      fillOpacity: 0,
+//      discrete: [],
+//      shape: "circle",
+//     //  radius: 4,
+//      offsetX: 0,
+//      offsetY: 0,
+//      onClick: undefined,
+//      onDblClick: undefined,
+//      showNullDataPoints: true,
+//      hover: {
+//        size: undefined,
+//        sizeOffset: 2
+//      }
+//  }
  
  }
 
-const LineGraphPortfolioOverview: React.FunctionComponent<ILineGraphPortfolioOverviewProps> = (props) => {
+const DonutGraphPortfolioOverview: React.FunctionComponent<ILineGraphPortfolioOverviewProps> = (props) => {
     const [chartOptions, setChartOptions] = React.useState<any>({
         options: {
           chart: {
@@ -106,11 +109,11 @@ const LineGraphPortfolioOverview: React.FunctionComponent<ILineGraphPortfolioOve
             options={options}
             series={[44, 55, 41, 17, 15]}
             type={'donut'}
-            width={'100%'}
+            width={500}
             // style={{borderWidth: 10}}
         />
     </Container>
   );
 };
 
-export default LineGraphPortfolioOverview;
+export default DonutGraphPortfolioOverview;
