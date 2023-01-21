@@ -46,7 +46,7 @@ interface UserLoginSchema {
 // Api request
 
 const Login: React.FunctionComponent<ILoginProps> = ({}) => {
-    const user = useAppSelector((state: RootState) => state.user)
+    // const user = useAppSelector((state: RootState) => state.user)
     const dispatch = useAppDispatch()
 
 

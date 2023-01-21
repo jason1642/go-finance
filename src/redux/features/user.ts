@@ -1,6 +1,6 @@
 import { createSlice, current,  } from '@reduxjs/toolkit'
 // current import used for debugging, to log or inspect the work in progress state
-import { userLogin } from '../async-actions/user-auth'
+import { userLogin, verifyUser, logoutUser } from '../async-actions/user-auth'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 
@@ -13,7 +13,7 @@ export interface UserState {
 const initialState: UserState = {
   data: {},
   isAuthenticated: false,
-  isLoading: false,
+  isLoading: true,
 }
 
 export const userSlice = createSlice({
@@ -46,6 +46,29 @@ export const userSlice = createSlice({
       state.data = action.payload
       return ({...state, isAuthenticated: true})
     })
+    builder.addCase(verifyUser.pending, (state: any, action) => {
+        console.log('Pending verify user...')
+        state.isLoading = true
+        state.data = undefined
+        // console.log(state
+      })
+    builder.addCase(verifyUser.fulfilled, (state: any, action) => {
+      console.log(action.payload)
+      console.log('Verify user successfully fulfilled')
+          
+      return ({...state, ...action.payload,})
+      })
+    builder.addCase(verifyUser.rejected, (state: any, action) => {
+      // console.log(action.payload)
+      console.log('REJECETED VERIFY USER')
+        state.data = undefined
+        state.isLoading = false
+    //   return ({...state, isLoading: false,})
+      })
+    //  builder.addCase(logoutUser.fulfilled, (state: any, action)=>{
+    //   console.log(action)
+    //   return {...state, ...action.payload}
+    //  })
   },
 })
 

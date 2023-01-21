@@ -205,9 +205,31 @@ namespace net_finance_api.Controllers
 
             return Ok(user);
         }
+         
 
-
-
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("X-Access-Token", new CookieOptions
+            {
+                HttpOnly = true,
+                SameSite = SameSiteMode.None,
+                Secure = true
+            });
+            Response.Cookies.Delete("X-Username", new CookieOptions
+            {
+                HttpOnly = true,
+                SameSite = SameSiteMode.None,
+                Secure = true
+            });
+            Response.Cookies.Delete("X-Refresh-Token", new CookieOptions
+            {
+                HttpOnly = true,
+                SameSite = SameSiteMode.None,
+                Secure = true
+            });
+            return Ok();
+        }
 
 
 

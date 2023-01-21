@@ -10,15 +10,15 @@ interface UserLoginSchema {
     username: string;
     password: string;
 }
-export const LoginUser = async (userInput: UserLoginSchema) => 
-    await api.post('/login', userInput).then(res=>{
-        console.log(res)
-        return res.data
-    }, err=>err)
 
 
-
-export const verifyUser = async ()=> 
-   await api.post('/verify').then(res=>{
-    console.log(res)
-   },err=>{console.log(err)})
+// LoginUser / verifyUser are currently not used anywhere, redux user actions handles it but is still here for reference
+// const loginUser = async (userInput: UserLoginSchema) => 
+//     await api.post('/login', userInput).then(res=>{
+//         console.log(res)
+//         return res.data
+//     }, err=>err)
+// const verifyUser = async ()=> 
+//    await api.post('/verify').then(res=>{
+//     console.log(res)
+//    },err=>{console.log(err)})

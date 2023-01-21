@@ -3,40 +3,33 @@ import Footer from './components/footer/Footer'
 import Header from './components/header/Header' 
 import './App.css';
 import MainRoutes from './routes/main-routes';
-import { useParams } from 'react-router-dom';
-import { verifyUser } from './api-requests/user-requests';
-import { useSelector, useDispatch } from 'react-redux'
-import { setUserState,  } from './redux/features/user';
+import { Navigate,  } from 'react-router-dom';
 import type { RootState } from './redux/store';
+import { useAppDispatch, useAppSelector } from './redux/store';
+import {verifyUser} from './redux/async-actions/user-auth'
+import { useLoginUserMutation, useGetAllUsersQuery, useVerifyUserQuery } from './redux/features/userApi';
 
 
 const App = () =>{
-  const paramsRef = useParams()
-  const dispatch = useDispatch()
-  const setUser = useSelector((state: RootState) => state.user)
 
+  // const user = useAppSelector((state: RootState) => state.user)
+  const { data, error, isLoading } = useVerifyUserQuery()
+  // useLoginUserMutation({username: 'jason1', password: 'password'})
+  
+  const dispatch = useAppDispatch()
 
   React.useEffect(()=>{
     // axios.get('https://localhost:7025/api/users').then(res=>{
     //   console.log(res.data)
     // })
-    console.log(setUser)
-    dispatch(setUserState())
-    
+    // console.log(user)
+    // dispatch(verifyUser())
+  
+    console.log(data,error, isLoading)
 
-    verifyUser().then(res=>{
-      console.log(res)
-    }).catch(err=>{
-      console.log(err)
-    })
+  },[data, error, isLoading]) 
 
-    console.log(paramsRef)
-
-  },[])
-
-  React.useEffect(() => {
-    console.log(setUser)
-  }, [setUser]);
+ 
 
 
   return (
@@ -44,8 +37,9 @@ const App = () =>{
        <Header />
        <main>
         {/* Change conditional method  */}
-        <MainRoutes />
-
+       
+          <MainRoutes />
+      
        </main>
     
 

@@ -4,12 +4,15 @@ import {StyledLink} from './Header'
 
 
 interface ComponentProps {
-
+  // user: any;
 }
 
-const LinkBatch: React.FunctionComponent<ComponentProps>  = () => {
+const LinkBatch: React.FunctionComponent<ComponentProps>  = ({}) => {
 
 
+  // React.useEffect(() => {
+  //   console.log(user)
+  // }, [user]);
   return (
     <>
       <StyledLink to=''>HOME</StyledLink>
@@ -21,7 +24,18 @@ const LinkBatch: React.FunctionComponent<ComponentProps>  = () => {
       <div style={{ flexGrow: .7, display: 'flex' }}></div>
       <StyledLink to=''>HELP</StyledLink>
       <StyledLink to=''>FEEDBACK</StyledLink>
-      <StyledLink
+
+      
+        <StyledLink
+        style={{
+          backgroundColor: '#52e3c2',
+          padding: '.7rem 1rem',
+          color: 'black',
+          borderRadius: '3px',
+        }}
+        to='/login'>Logout</StyledLink> 
+     
+         <StyledLink
         style={{
           backgroundColor: '#52e3c2',
           padding: '.7rem 1rem',
@@ -29,9 +43,9 @@ const LinkBatch: React.FunctionComponent<ComponentProps>  = () => {
           borderRadius: '3px',
         }}
         to='login'>Login</StyledLink>
-      {/* <StyledLink
-        style={{}}
-        to='/login'>Login</StyledLink> */}
+        
+   
+   
     </>
   );
 }

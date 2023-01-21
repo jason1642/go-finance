@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import siteLogo from '../../images/siteLogo.png'
 import { Link } from 'react-router-dom'
 import NavButtons from './NavButtons'
-
+import type {RootState} from '../../redux/store'
+import { useAppSelector } from '../../redux/store'
 
 
   const Container = styled.header`
@@ -45,7 +46,7 @@ const LogoLink = styled(Link)`
   font-size: 1.5em;
 `;
 const Header: React.FunctionComponent<ComponentProps>  = () => {
-
+  // const user = useAppSelector((state: RootState) => state.user)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   console.log(windowWidth)
@@ -62,7 +63,11 @@ const Header: React.FunctionComponent<ComponentProps>  = () => {
       <StyledLink to=''>HUBS</StyledLink>
       <StyledLink to=''>CHAT</StyledLink>
       <StyledLink to=''>COMPARE</StyledLink>
-      <NavButtons />
+      {
+      <NavButtons 
+      // user={user}
+       />
+      }
       {/* </Menu> */}
     </Container>
   );
