@@ -4,7 +4,11 @@ import {useForm} from 'react-hook-form'
 import GreenThemedButton from '../components/buttons/GreenThemedButton';
 import { Link } from 'react-router-dom';
 import {Container, Title, Input, } from '../styles/login-signup'
-import { LoginUser } from '../api-requests/user-requests';
+import type { RootState } from '../redux/store';
+import { userLogin } from '../redux/async-actions/user-auth';
+import { useAppDispatch, useAppSelector } from '../redux/store';
+
+
 
 interface ILoginProps {
 }
@@ -33,26 +37,35 @@ const ForgotPasswordButton = styled(Link)`
     cursor: pointer;
   }
 `;
-
+interface UserLoginSchema {
+    username: string;
+    password: string;
+}
 
 // Error handling
 // Api request
 
-const Login: React.FunctionComponent<ILoginProps> = (props) => {
-    const {register, handleSubmit,  } = useForm({
+const Login: React.FunctionComponent<ILoginProps> = ({}) => {
+    const user = useAppSelector((state: RootState) => state.user)
+    const dispatch = useAppDispatch()
+
+
+
+    const {register, handleSubmit, formState: {errors}  } = useForm({
         defaultValues: {
             username: '', 
             password: ''
         }
     })
 
-    const onSubmit = (formData:any)=> {
+    const onSubmit = (formData: UserLoginSchema)=> {
         console.log(formData)
-        LoginUser(formData).then(res=>{
-            console.log(res)
-        }).catch(err=> {
-            console.log(err, 'Wrong username or password')
-        })
+        dispatch(userLogin(formData))
+        // .then((res: any)=>{
+        //     console.log(res)
+        // }).catch(err=> {
+        //     console.log(err, 'Wrong username or password')
+        // }) 
     }
 
     const onErrors = (errors: any) => {
