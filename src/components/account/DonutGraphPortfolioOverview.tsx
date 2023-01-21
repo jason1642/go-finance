@@ -14,6 +14,7 @@ const Container = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
+  padding: 10px;
 `;
 const options: ApexOptions = {
     chart: {

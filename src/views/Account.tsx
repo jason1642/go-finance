@@ -18,14 +18,14 @@ const Title = styled.div`
 const MainContainer = styled.div`
   display:flex;
   flex-direction: column;
-  flex-grow: 2;
+  flex-grow: 6;
   border: white 1px solid;
 `;
 
 const SideContainer = styled.div`
   display:flex;
   flex-direction: column;
-  flex-grow: 2;
+  flex-grow: 4;
   border: 1px solid green;
 `;
 
@@ -47,7 +47,7 @@ const Account: React.FunctionComponent<IAccountProps> = (props) => {
 
 
         <SideContainer> 
-
+q       
         </SideContainer>
 
 </Wrapper>
