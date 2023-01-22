@@ -88,9 +88,15 @@ namespace net_finance_api.Controllers
         // POST: api/users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<IActionResult> Post(Users newUser)
+        public async Task<IActionResult> Post([FromBody] Users newUser)
         {
             newUser.password = BCrypt.Net.BCrypt.HashPassword(newUser.password, 12);
+            newUser.portfolio = new Portfolio();
+            //newUser.portfolio.positions = new Positions[0];
+            //newUser.portfolio.account_value = 0;
+            newUser.order_history = new OrderHistory[0];
+            Console.WriteLine(newUser);
+             
             await _usersService.CreateAsync(newUser);
 
             return CreatedAtAction(nameof(Get), newUser);
@@ -233,12 +239,14 @@ namespace net_finance_api.Controllers
 
 
 
-        [HttpPost]
-        public async Task<TResult> createBuyOrder([FromBody] string username, string symbol, int quantity, string action, int price,  )
+        [HttpPost("createBuyOrder")]
+        public async Task<IActionResult> createBuyOrder([FromBody] string symbol, int quantity, string action, int price)
         {
-            if (!(Request.Cookies.TryGetValue("X-Username", out var userName) && Request.Cookies.TryGetValue("X-Refresh-Token", out var refreshToken)))
+            if (!(Request.Cookies.TryGetValue("X-Username", out var username) && Request.Cookies.TryGetValue("X-Refresh-Token", out var refreshToken)))
                 return BadRequest();
-            _usersService.verifyToken(username, )
+            Users? user = await _usersService.verifyToken(username, refreshToken);
+            Console.WriteLine(user);      
+
             return Ok();
         }
         //private bool UsersExists(long id)

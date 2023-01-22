@@ -7,76 +7,70 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace net_finance_api.Models;
 
 
-public partial class Positons : IEmbeddedObject
+public class Positions
 {
-    [MapTo("symbol")]
     [BsonElement("symbol")]
     public string symbol { get; set; }
 
-    [MapTo("average_price")]
     [BsonElement("average_price")]
     public int average_price { get; set; }
 
-    [MapTo("total_value")]
     [BsonElement("total_value")]
     public int total_value { get; set; }
 
-    [MapTo("type")]
     [BsonElement("type")]
     public string type { get; set; }
     // stock, call, put, spread, etc
 
-    [MapTo("sector")]
     [BsonElement("sector")]
     public string sector { get; set; }
 
-    [MapTo("quantity")]
     [BsonElement("quantity")]
     public int quantity { get; set; }
 
 }
 
 
-public partial class Portfolio : IEmbeddedObject
+public class Portfolio
 {
-    [MapTo("account_value")]
+  
     [BsonElement("account_value")]
-    public number account_value { get; set; }
+    public int account_value { get; set; }
 
-    
 
-    [MapTo("positions")]
+
     [BsonElement("positions")]
     public Positions[] positions { get; set;}
+
+  public Portfolio()
+    {
+        account_value = 0;
+        positions = new Positions[0];
+    }
+
 }
 
 
-public partial class OrderHistory : IEmbeddedObject
+public class OrderHistory
 {
-    [MapTo("symbol")]
     [BsonElement("symbol")]
     public string symbol { get; set; }
 
-    [MapTo("currency")]
     [BsonElement("currency")]
     public int currency {  get; set;}
 
 
-    [MapTo("price")]
     [BsonElement("price")]
     public int price { get; set; }
 
-    [MapTo("action")]
     [BsonElement("action")]
     public string action { get; set; }
 
-    [MapTo("quantity")]
     [BsonElement("quantity")]
     public int quantity { get; set; }
 
-    [MapTo("status")]
     [BsonElement("status")]
-    public string stutus { get; set;}
+    public string status { get; set;}
 
 
 
@@ -86,38 +80,47 @@ public partial class OrderHistory : IEmbeddedObject
 
 public class Users
 {
+   
+
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     public string? _id { get; set; }
 
+    [BsonElement("first_name")]
+    [JsonPropertyName("first_name")]
+    public string? first_name { get; set; }
+
+    [BsonElement("last_name")]
+    [JsonPropertyName("last_name")]
+    public string? last_name { get; set; }
+
     [BsonElement("username")]
     [JsonPropertyName("username")]
-
     public string? username { get; set; }
-
 
     [BsonElement("email")]
     [JsonPropertyName("email")]
-
     public string? email { get; set; }
 
-    [BsonElement("password")]
+    [BsonIgnore]
     [JsonPropertyName("password")]
     public string? password { get; set; }
 
     public string? refresh_token { get; internal set; }
 
+
+    [BsonDefaultValue(0)]
     [BsonElement("cash")]
     [JsonPropertyName("cash")]
-    public int cash { get; set;} 
+    public int cash { get; set;}
 
-    [MapTo("portfolio")]
-    public IList<Portfolio> portfolio { get; }
+    [BsonElement("portfolio")]
+    public Portfolio? portfolio { get; set; }
 
 
-    [MapTo("order_history")]
+    //[MapTo("order_history")]
     [BsonElement("order_history")]
-    public OrderHistory[] order_history { get; set; }
+    public OrderHistory[]? order_history { get; set; }
 
 
 
