@@ -57,7 +57,7 @@ public class UsersService
     public async Task RemoveAsync(string id) =>
         await _usersCollection.DeleteOneAsync(x => x._id == id);
 
-    public async Task<Users?> GetByUsernameToken(string username, string cookie_token) =>
+    public async Task<Users?> verifyToken(string username, string cookie_token) =>
         await _usersCollection.Find(i => i.username == username && i.refresh_token == cookie_token).FirstOrDefaultAsync();
 
 

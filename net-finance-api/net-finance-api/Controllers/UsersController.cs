@@ -174,7 +174,7 @@ namespace net_finance_api.Controllers
             if (!(Request.Cookies.TryGetValue("X-Username", out var userName) && Request.Cookies.TryGetValue("X-Refresh-Token", out var refreshToken)))
                 return BadRequest();
 
-            Users? user = await _usersService.GetByUsernameToken(userName, refreshToken);
+            Users? user = await _usersService.verifyToken(userName, refreshToken);
             if (user == null)
                 return BadRequest();
 
@@ -233,8 +233,14 @@ namespace net_finance_api.Controllers
 
 
 
-
-
+        [HttpPost]
+        public async Task<TResult> createBuyOrder([FromBody] string username, string symbol, int quantity, string action, int price,  )
+        {
+            if (!(Request.Cookies.TryGetValue("X-Username", out var userName) && Request.Cookies.TryGetValue("X-Refresh-Token", out var refreshToken)))
+                return BadRequest();
+            _usersService.verifyToken(username, )
+            return Ok();
+        }
         //private bool UsersExists(long id)
         //{
         //    return (_usersService.Users?.Any(e => e.Id == id)).GetValueOrDefault();

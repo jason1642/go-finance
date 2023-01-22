@@ -7,7 +7,7 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace net_finance_api.Models;
 
 
-private partial class Positons : IEmbeddedObject
+public partial class Positons : IEmbeddedObject
 {
     [MapTo("symbol")]
     [BsonElement("symbol")]
@@ -22,23 +22,28 @@ private partial class Positons : IEmbeddedObject
     public int total_value { get; set; }
 
     [MapTo("type")]
-    [BsonElement("type")]ß
+    [BsonElement("type")]
     public string type { get; set; }
     // stock, call, put, spread, etc
 
     [MapTo("sector")]
     [BsonElement("sector")]
     public string sector { get; set; }
+
+    [MapTo("quantity")]
+    [BsonElement("quantity")]
+    public int quantity { get; set; }
+
 }
 
 
-private partial class Portfolio : IEmbeddedObject
+public partial class Portfolio : IEmbeddedObject
 {
     [MapTo("account_value")]
     [BsonElement("account_value")]
     public number account_value { get; set; }
 
-     
+    
 
     [MapTo("positions")]
     [BsonElement("positions")]
@@ -46,11 +51,16 @@ private partial class Portfolio : IEmbeddedObject
 }
 
 
-private partial class OrderHistory : IEmbeddedObject
+public partial class OrderHistory : IEmbeddedObject
 {
     [MapTo("symbol")]
     [BsonElement("symbol")]
     public string symbol { get; set; }
+
+    [MapTo("currency")]
+    [BsonElement("currency")]
+    public int currency {  get; set;}
+
 
     [MapTo("price")]
     [BsonElement("price")]
@@ -66,8 +76,7 @@ private partial class OrderHistory : IEmbeddedObject
 
     [MapTo("status")]
     [BsonElement("status")]
-    public string status { get; set; }
-
+    public string stutus { get; set;}
 
 
 
@@ -98,6 +107,9 @@ public class Users
 
     public string? refresh_token { get; internal set; }
 
+    [BsonElement("cash")]
+    [JsonPropertyName("cash")]
+    public int cash { get; set;} 
 
     [MapTo("portfolio")]
     public IList<Portfolio> portfolio { get; }
