@@ -90,6 +90,11 @@ namespace net_finance_api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Users newUser)
         {
+            Users? emailExists = await _usersService.GetAsyncEmail(newUser.email);
+            Users? usernameExists = await _usersService.GetAsyncUsername(newUser.username);
+            if (emailExists != null) return BadRequest("Email already Exists");
+            if (usernameExists != null) return BadRequest("Username is already taken");
+
             newUser.password = BCrypt.Net.BCrypt.HashPassword(newUser.password, 12);
             newUser.portfolio = new Portfolio();
             //newUser.portfolio.positions = new Positions[0];
