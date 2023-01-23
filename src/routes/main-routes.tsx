@@ -1,33 +1,30 @@
 import { useRoutes, Navigate} from "react-router-dom";
-import * as React from 'react';
 import StockDetailPage from '../views/StockDetailPage'
 import HomePage from "../views/HomePage";
 import Login from "../views/Login";
 import SignUp from "../views/SignUp";
 import HomeSearchBar from "../components/search-bar/HomeSearchBar";
-import type {RootState} from '../redux/store'
-import { useAppSelector } from '../redux/store'
 import Account from "../views/Account";
-
+import { userApi } from "../redux/features/userApi";
 
 
 const MainRoutes = () => {
     // Check if user is currently logged in, if not redirect to login page
-    const user = useAppSelector((state: RootState) => state.userApi)
+    const {data: userData} = userApi.endpoints.verifyUser.useQueryState()
 
-
+    console.log(userData)
     return useRoutes([
         {
             path: '/account',
-            element: user ? <Account /> : <Navigate to="/" />  
+            element: userData ? <Account /> : <Navigate to="/" />  
         },
         {
             path: '/login',
-            element: !user ? <Navigate to="/" /> : <Login /> 
+            element: userData ? <Navigate to="/" /> : <Login /> 
         },
         {
             path: '/sign-up',
-            element: user ? <Navigate to="/" /> : <SignUp /> 
+            element: userData ? <Navigate to="/" /> : <SignUp /> 
         },
         {
             path: '/quote/:symbol',

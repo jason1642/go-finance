@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 
   const Container = styled.div` display: flex;
@@ -19,12 +20,13 @@ import styled from 'styled-components'
   justify-content: space-between;
   `;
 
-  const LinkButton = styled.div` display: flex;
+  const LinkButton = styled(Link)` display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
+  text-decoration: none;
   color: #40c4ff;
-  padding: 4px 12px;
+  padding: 10px 18px;
   align-items: center;
   border-radius: 30px;
   justify-content: center;
@@ -47,7 +49,7 @@ const LinkPortfolioNotification: React.FunctionComponent<ComponentProps>  = () =
   return (<Container>
     <TextRow>
       <Title> My Portfolio </Title>
-      <LinkButton> LINK PORTFOLIO NOW </LinkButton>
+      <LinkButton to='/login'> LINK PORTFOLIO NOW </LinkButton>
     </TextRow>
 
   </Container>)

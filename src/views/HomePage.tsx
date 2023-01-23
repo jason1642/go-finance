@@ -9,11 +9,11 @@ import LinkPortfolioNotification from '../components/home-page/RightColumn/LinkP
 const Container = styled.div`
       display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-bottom: 1rem;
     margin-top: 29px;
     height: auto;
-    gap: 15px;
+    /* gap: 15px; */
     @media (max-width: 768px) {
       flex-direction: column;
   }
@@ -32,8 +32,8 @@ width: calc(65% - 1rem);
 
 const RightColumnContainer = styled.div`
      display: flex;
-    height: 100%;
-   
+    /* height: 100%; */
+
     flex-direction: column;
 `;
 

@@ -1,11 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import DonutGraphPortfolioOverview from '../components/account/DonutGraphPortfolioOverview';
+import SectorDonutGraph from '../components/account/side-panel/SectorDonutGraph';
 interface IAccountProps {
 }
 
 const Container = styled.div`
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
   color: white;
 `;
@@ -25,7 +27,7 @@ const MainContainer = styled.div`
 const SideContainer = styled.div`
   display:flex;
   flex-direction: column;
-  flex-grow: 4;
+  flex-grow: 3;
   border: 1px solid green;
 `;
 
@@ -33,6 +35,14 @@ const Wrapper = styled.div`
   display: flex;
 
 `;
+const PanelTitle = styled.h2`
+  display:flex;
+  font-weight: 300;
+  text-align: center;
+  margin: 0 auto;
+  padding: 10px;
+`;
+
 const Account: React.FunctionComponent<IAccountProps> = (props) => {
   return (
     <Container>
@@ -47,7 +57,9 @@ const Account: React.FunctionComponent<IAccountProps> = (props) => {
 
 
         <SideContainer> 
-q       
+            <PanelTitle>Positions</PanelTitle>  
+
+            <SectorDonutGraph />  
         </SideContainer>
 
 </Wrapper>

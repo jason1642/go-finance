@@ -29,10 +29,10 @@ html {
   background-color: #32323e;
   width: 100%;
   min-height: 100vh;
-  height: auto;
+  /* height: auto; */
   display: flex;
   flex-direction: column;
-  justify-content: space-between
+  /* justify-content: space-between */
 }
 
 main {

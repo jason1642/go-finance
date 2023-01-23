@@ -4,7 +4,6 @@ import {useForm} from 'react-hook-form'
 import GreenThemedButton from '../components/buttons/GreenThemedButton';
 import { Link } from 'react-router-dom';
 import {Container, Title, Input, } from '../styles/login-signup'
-import type { RootState } from '../redux/store';
 import { userLogin } from '../redux/async-actions/user-auth';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import Swal from 'sweetalert2';
@@ -14,7 +13,7 @@ import { useNavigate} from 'react-router-dom';
 interface ILoginProps {
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.form`
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -104,20 +103,19 @@ const Login: React.FunctionComponent<ILoginProps> = ({}) => {
 
 
   return (
-    <Container>
+    <Container >
        
        
         <Title>Log in to Net Finance.</Title>
 
 
 
-    <Wrapper>
+    <Wrapper onSubmit={handleSubmit(onFormSubmit, onErrors)}>
         <Input
             {...register('username')}
             placeholder={'Username or email'}
             
         />
-
         <Input
             {...register('password')}
             type='password'
@@ -127,12 +125,12 @@ const Login: React.FunctionComponent<ILoginProps> = ({}) => {
 
 
     <ButtonWrapper>
-    <GreenThemedButton onClick={handleSubmit(onFormSubmit, onErrors)} title='Log In'/>
-
+    <GreenThemedButton type='submit' title='Log In'/>
     <ForgotPasswordButton to='/forgot-password' >Forgot Password?</ForgotPasswordButton>
-
     </ButtonWrapper>
+
     </Wrapper>
+    
     </Container>
   );
 };

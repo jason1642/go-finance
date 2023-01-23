@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import siteLogo from '../../images/siteLogo.png'
 import { Link } from 'react-router-dom'
 import NavButtons from './NavButtons'
-import type {RootState} from '../../redux/store'   
 import { userApi} from '../../redux/features/userApi'
-import { UseQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks'
-  const Container = styled.header`
+
+const Container = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -45,8 +43,8 @@ const LogoLink = styled(Link)`
   font-size: 1.5em;
 `;
 const Header: React.FunctionComponent<ComponentProps>  = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-  const {data: userData} = userApi.endpoints.verifyUser.useQueryState()
+  // const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const {data: userData, isLoading} = userApi.endpoints.verifyUser.useQueryState()
 
 
   const user = {}
@@ -68,7 +66,8 @@ const Header: React.FunctionComponent<ComponentProps>  = () => {
       <StyledLink to=''>COMPARE</StyledLink>
       {
       <NavButtons 
-           user={user}
+           userData={userData}
+           isLoading={isLoading}
        />
       }
       {/* </Menu> */}

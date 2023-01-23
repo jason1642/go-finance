@@ -6,6 +6,7 @@ interface IGreenThemedButtonProps {
   title: string;
   onClick?: Function;
   buttonProps?: any;
+  type?: string;
 }
 
 const Container = styled(ButtonUnstyled)`
@@ -31,7 +32,7 @@ const Container = styled(ButtonUnstyled)`
   }
 `
 
-const GreenThemedButton: React.FunctionComponent<IGreenThemedButtonProps> = ({buttonProps, title, onClick = ()=>{}}) => {
+const GreenThemedButton: React.FunctionComponent<IGreenThemedButtonProps> = ({buttonProps, type, title, onClick = ()=>{}}) => {
   return (
     <Container {...buttonProps} onClick={(e)=>onClick(e)}>
       {title}

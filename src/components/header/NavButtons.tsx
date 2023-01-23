@@ -2,17 +2,18 @@ import { Button } from '@mui/material';
 import React from 'react';
 import {StyledLink} from './Header'
 import { removeTokensLogout } from '../../api-requests/user-requests';
+import { useNavigate} from 'react-router-dom';
 
 interface ComponentProps {
-  user: any;
+  userData: any;
+  isLoading: boolean;
 }
 
-const LinkBatch: React.FunctionComponent<ComponentProps>  = ({user}) => {
+const LinkBatch: React.FunctionComponent<ComponentProps>  = ({userData, isLoading,}) => {
+  const navigate = useNavigate()
 
 
-  React.useEffect(() => {
-    console.log(user)
-  }, [user]);
+
   return (
     <>
       <StyledLink to=''>HOME</StyledLink>
@@ -23,14 +24,16 @@ const LinkBatch: React.FunctionComponent<ComponentProps>  = ({user}) => {
       {/* <StyledLink to=''>SCREENER</StyledLink> */}
       <div style={{ flexGrow: .7, display: 'flex' }}></div>
       <StyledLink to=''>HELP</StyledLink>
-      <StyledLink to=''>FEEDBACK</StyledLink>
+      <StyledLink to='account'>Account</StyledLink>
 
       {
 
-      !user ?   
+      userData && !isLoading ?   
         <Button
         onClick={()=>{
           removeTokensLogout()
+          navigate('/')
+              window.location.reload()
         }
         }
         style={{
@@ -38,6 +41,7 @@ const LinkBatch: React.FunctionComponent<ComponentProps>  = ({user}) => {
           padding: '.4rem .7rem',
           color: 'black',
           borderRadius: '3px',
+          textTransform: 'none',
         }}
       >Log out</Button>
      :

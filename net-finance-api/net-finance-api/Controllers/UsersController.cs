@@ -140,12 +140,12 @@ namespace net_finance_api.Controllers
                     
 
                     Claim[] claims = new[] {
-                                            new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
-                                            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                                            new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
-                                            new Claim("UserId", user._id.ToString()),
-                                            new Claim("Username", user.username)
-                                        };
+                        new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                        new Claim("UserId", user._id.ToString()),
+                        new Claim("Username", user.username)
+                        };
 
 
 
@@ -200,11 +200,11 @@ namespace net_finance_api.Controllers
                 new Claim("Username", user.username)
                                         };
             var token = new JwtSecurityToken(
-                             _configuration["Jwt:Issuer"],
-                             _configuration["Jwt:Audience"],
-                             claims,
-                             expires: DateTime.UtcNow.AddMinutes(10),
-                             signingCredentials: signIn).ToString();
+                _configuration["Jwt:Issuer"],
+                _configuration["Jwt:Audience"],
+                claims,
+                expires: DateTime.UtcNow.AddMinutes(10),
+                signingCredentials: signIn).ToString();
 
             user.refresh_token = Guid.NewGuid().ToString();
 
