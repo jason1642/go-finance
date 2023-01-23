@@ -38,7 +38,7 @@ const options: ApexOptions = {
     legend: {
         position: 'bottom'
     },
- 
+
     tooltip: {
       // enabled: false,
      followCursor: true,
@@ -46,6 +46,20 @@ const options: ApexOptions = {
  
  
  },
+ dataLabels: {
+  enabled: false,
+  textAnchor: 'start',
+  distributed: true
+ },
+ plotOptions: {
+  pie:{
+      donut:{
+          size: '80%',
+          labels: {show: false}
+        },
+      
+  }
+},
  stroke: {
      show: false,     
  },
@@ -109,9 +123,9 @@ const DonutGraphPortfolioOverview: React.FunctionComponent<ILineGraphPortfolioOv
     <Container>
         <Chart
             options={options}
-            series={[44, 55, 41, 17, 15]}
+            series={[44, 55, 41, 17]}
             type={'donut'}
-            width={400}
+            width={300}
             // style={{borderWidth: 10}}
         />
     </Container>

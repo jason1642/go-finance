@@ -31,14 +31,15 @@ const SideContainer = styled.div`
   display:flex;
   flex-direction: column;
   flex-grow: 3;
-  border: 1px solid grey;
+  border: 1px solid #9b9b9b33;
+  border-top: 0px solid black;
   z-index: 2;
   /* border: 1px solid green; */
 `;
 
 const Wrapper = styled.div`
   display: flex;
-  border-top: 1px solid grey;
+  border-top: 1px solid #9b9b9b33;
 `;
 const PanelTitle = styled.h2`
   display:flex;
@@ -63,7 +64,7 @@ const Account: React.FunctionComponent<IAccountProps> = (props) => {
 
 
         <SideContainer> 
-            <PanelTitle>Sector Allocations</PanelTitle>  
+            <PanelTitle>Sector Allocation</PanelTitle>  
 
             {/* <SectorDonutGraph />   */}
             <DonutGraphPortfolioOverview />
