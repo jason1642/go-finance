@@ -15,6 +15,8 @@ const Container = styled.div`
 const Title = styled.div`
   display: flex;
   font-size: 2em;
+  padding: 15px;
+  padding-left: 2rem;
 `;
 
 
@@ -22,26 +24,28 @@ const MainContainer = styled.div`
   display:flex;
   flex-direction: column;
   flex-grow: 6;
-  border: white 1px solid;
+  /* border: white 1px solid; */
 `;
 
 const SideContainer = styled.div`
   display:flex;
   flex-direction: column;
   flex-grow: 3;
-  border: 1px solid green;
+  border: 1px solid grey;
+  z-index: 2;
+  /* border: 1px solid green; */
 `;
 
 const Wrapper = styled.div`
   display: flex;
-
+  border-top: 1px solid grey;
 `;
 const PanelTitle = styled.h2`
   display:flex;
   font-weight: 300;
-  text-align: center;
-  margin: 0 auto;
-  padding: 10px;
+  text-align: left;
+  /* margin: 0 auto; */
+  padding: 0 1.5rem;
 `;
 
 const Account: React.FunctionComponent<IAccountProps> = (props) => {
@@ -59,7 +63,7 @@ const Account: React.FunctionComponent<IAccountProps> = (props) => {
 
 
         <SideContainer> 
-            <PanelTitle>Positions</PanelTitle>  
+            <PanelTitle>Sector Allocations</PanelTitle>  
 
             {/* <SectorDonutGraph />   */}
             <DonutGraphPortfolioOverview />
@@ -68,7 +72,6 @@ const Account: React.FunctionComponent<IAccountProps> = (props) => {
 
 </Wrapper>
 
-        This is the account page
     </Container>
   );
 };

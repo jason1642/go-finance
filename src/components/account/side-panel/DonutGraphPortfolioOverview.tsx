@@ -14,7 +14,7 @@ const Container = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  /* padding: 10px; */
 `;
 const options: ApexOptions = {
     chart: {
@@ -40,6 +40,7 @@ const options: ApexOptions = {
     },
  
     tooltip: {
+      // enabled: false,
      followCursor: true,
      theme: 'dark',
  
@@ -110,7 +111,7 @@ const DonutGraphPortfolioOverview: React.FunctionComponent<ILineGraphPortfolioOv
             options={options}
             series={[44, 55, 41, 17, 15]}
             type={'donut'}
-            width={500}
+            width={400}
             // style={{borderWidth: 10}}
         />
     </Container>

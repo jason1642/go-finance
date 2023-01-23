@@ -32,15 +32,54 @@ const options: ApexOptions = {
          }
      },
      background: '#32323e',
+     toolbar: {
+        show: false,
+    },
+    zoom: {
+        enabled: false,
+    }
+    
     },
  
- 
+   
     tooltip: {
+        // enabled: false,
      followCursor: true,
      theme: 'dark',
  
  
  },
+ xaxis: {
+    type: 'datetime',
+    labels: {
+        show: false,
+        formatter: val => ''
+    },
+    axisBorder:{
+        show: false,
+    },
+     axisTicks: {
+        show: false,
+     },
+     
+ },
+
+grid: {
+    xaxis: {
+        lines: {
+            show: false,
+        },
+    },
+    yaxis: {
+        lines: {
+            show: false,
+        },
+        
+    }
+},
+dataLabels: {
+    enabled: false,
+},
  stroke: {
      show: true,
      // curve: 'smooth',
@@ -60,33 +99,33 @@ const options: ApexOptions = {
      },
  },
  
-    markers: {
-     size: 3,
-     colors: ['#255aee', '#26cb8a'],
-     // strokeColors: '#000000',
-     strokeWidth: 0,
-     strokeOpacity: 0,
-     strokeDashArray: 0,
-     fillOpacity: 0,
-     discrete: [],
-     shape: "circle",
-     radius: 4,
-     offsetX: 0,
-     offsetY: 0,
-     onClick: undefined,
-     onDblClick: undefined,
-     showNullDataPoints: true,
-     hover: {
-       size: undefined,
-       sizeOffset: 2
-     }
- }
+markers: {
+    size: 0,
+    colors: ['#255aee', '#26cb8a'],
+    // strokeColors: '#000000',
+    strokeWidth: 0,
+    strokeOpacity: 0,
+    strokeDashArray: 0,
+    fillOpacity: 0,
+    discrete: [],
+    shape: "circle",
+    radius: 4,
+    offsetX: 0,
+    offsetY: 0,
+    onClick: undefined,
+    onDblClick: undefined,
+    showNullDataPoints: true,
+    hover: {
+    size: undefined,
+    sizeOffset: 2
+    }
+}
  
  }
 const OverviewLineGraph: React.FunctionComponent<IOverviewLineGraphProps> = ({symbol}) => {
 
     const [stockDailyData, setStockDailyData] = React.useState<any>(stockTimeData)
-    const [stockDates, setStockDates] = React.useState<Array<any>>(Object.keys(stockTimeData['Time Series (Daily)']).slice(0, 12).reverse())
+    const [stockDates, setStockDates] = React.useState<Array<any>>(Object.keys(stockTimeData['Time Series (Daily)']).slice(0, undefined).reverse())
     React.useEffect(()=>{
         // fetchDailyStockDataSeries(symbol).then(res=>{
         //     setStockDailyData(res.data)
@@ -104,6 +143,8 @@ const OverviewLineGraph: React.FunctionComponent<IOverviewLineGraphProps> = ({sy
         options={{
             ...options,
             xaxis: {
+                labels: {show: false},
+                axisBorder: {show: false},
             categories: stockDates.map((item: string)=>item.split('-').slice(1).join('/'))
            }
         }}
@@ -119,8 +160,8 @@ const OverviewLineGraph: React.FunctionComponent<IOverviewLineGraphProps> = ({sy
             }
            ]}
            type={'line'}
-           width={800}
-           style={{borderWidth: 10}}
+           width={750}
+           style={{borderWidth: 0}}
        />
 }
     </Container>
