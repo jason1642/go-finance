@@ -22,3 +22,14 @@ interface UserLoginSchema {
 //    await api.post('/verify').then(res=>{
 //     console.log(res)
 //    },err=>{console.log(err)})
+
+
+
+export const removeTokensLogout = async () => 
+    await api.post('/logout').then(res=>{
+        console.log(res)
+        return res
+    }, err=> {
+        console.log(err)
+        return err
+    })

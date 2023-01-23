@@ -1,4 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createSelector } from '@reduxjs/toolkit'
+import { RootState } from '../store';
 
 export interface UserState {
     data: any,
@@ -13,13 +15,14 @@ interface UserLoginSchema {
 export const userApi = createApi({
     reducerPath: 'userApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'https://localhost:7025/api/users/' }),
+    tagTypes: ['User'],
     endpoints: (builder) => ({
       getAllUsers: builder.query<any, void>({
         // query: (name) => `pokemon/${name}`,
         query: ()=>''
       }),
 
-      loginUser: builder.mutation({
+      loginUser: builder.query({
         query: (userForm: UserLoginSchema) => ({
           url: '/login',
           method: 'POST',
@@ -30,11 +33,12 @@ export const userApi = createApi({
         })
       }),
 
-      verifyUser: builder.query<any, void>({
+      verifyUser: builder.query<void, void>({
         query: () => ({
           url: '/verify',
           method: 'POST',
-          credentials: "include"
+          credentials: "include",
+          provideTags: ['User']
           // Include the entire post object as the body of the request
         //   body: userForm
         })
@@ -46,7 +50,10 @@ export const userApi = createApi({
 
     }),
   })
-  
+
   // Export hooks for usage in functional components, which are
   // auto-generated based on the defined endpoints
-  export const { useLoginUserMutation, useVerifyUserQuery, useGetAllUsersQuery, } = userApi
+
+
+  export const { useLoginUserQuery, useVerifyUserQuery, useGetAllUsersQuery, } = userApi
+

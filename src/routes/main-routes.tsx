@@ -23,7 +23,7 @@ const MainRoutes = () => {
         },
         {
             path: '/login',
-            element: user ? <Navigate to="/" /> : <Login /> 
+            element: !user ? <Navigate to="/" /> : <Login /> 
         },
         {
             path: '/sign-up',

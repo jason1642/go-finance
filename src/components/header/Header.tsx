@@ -3,10 +3,9 @@ import styled from 'styled-components'
 import siteLogo from '../../images/siteLogo.png'
 import { Link } from 'react-router-dom'
 import NavButtons from './NavButtons'
-import type {RootState} from '../../redux/store'
-import { useAppSelector } from '../../redux/store'
-
-
+import type {RootState} from '../../redux/store'   
+import { userApi} from '../../redux/features/userApi'
+import { UseQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks'
   const Container = styled.header`
     display: flex;
     justify-content: space-between;
@@ -46,11 +45,15 @@ const LogoLink = styled(Link)`
   font-size: 1.5em;
 `;
 const Header: React.FunctionComponent<ComponentProps>  = () => {
-  const user = useAppSelector((state: RootState) => state.userApi)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const {data: userData} = userApi.endpoints.verifyUser.useQueryState()
 
-  console.log(windowWidth)
 
+  const user = {}
+  // console.log(windowWidth)
+  React.useEffect(() => {
+    console.log(userData)
+  }, [userData])
 
   return (
     <Container>

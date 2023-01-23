@@ -1,8 +1,7 @@
 import { Button } from '@mui/material';
 import React from 'react';
 import {StyledLink} from './Header'
-
-
+import { removeTokensLogout } from '../../api-requests/user-requests';
 
 interface ComponentProps {
   user: any;
@@ -11,9 +10,9 @@ interface ComponentProps {
 const LinkBatch: React.FunctionComponent<ComponentProps>  = ({user}) => {
 
 
-  // React.useEffect(() => {
-  //   console.log(user)
-  // }, [user]);
+  React.useEffect(() => {
+    console.log(user)
+  }, [user]);
   return (
     <>
       <StyledLink to=''>HOME</StyledLink>
@@ -28,9 +27,12 @@ const LinkBatch: React.FunctionComponent<ComponentProps>  = ({user}) => {
 
       {
 
-      user ?   
+      !user ?   
         <Button
-        onClick={()=>{console.log('trying to log out')}}
+        onClick={()=>{
+          removeTokensLogout()
+        }
+        }
         style={{
           backgroundColor: '#52e3c2',
           padding: '.4rem .7rem',

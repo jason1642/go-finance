@@ -5,20 +5,21 @@ import './App.css';
 import MainRoutes from './routes/main-routes';
 import { Navigate,  } from 'react-router-dom';
 import {  useVerifyUserQuery } from './redux/features/userApi';
+import { userApi } from './redux/features/userApi';
+import { store } from './redux/store';
 
 
 const App = () =>{
-
-
-  const { data, error, isLoading } = useVerifyUserQuery()
-  
+  const {data } = useVerifyUserQuery()
 
   React.useEffect(()=>{
    
-  
-    console.log(data,error, isLoading)
+    console.log(data)
 
-  },[data, error, isLoading]) 
+  },[
+ 
+    data
+  ]) 
 
  
 
@@ -27,7 +28,7 @@ const App = () =>{
     <div className="App">
        <Header />
        <main>
-       {!isLoading ? 
+       {true? 
           <MainRoutes />
           : 
           <div>IS LOADING</div>

@@ -102,7 +102,7 @@ public class Users
     [JsonPropertyName("email")]
     public string? email { get; set; }
 
-    [BsonIgnore]
+    //[BsonIgnore]
     [JsonPropertyName("password")]
     public string? password { get; set; }
 
