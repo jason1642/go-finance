@@ -7,7 +7,8 @@ import {Container, Title, Input, } from '../styles/login-signup'
 import type { RootState } from '../redux/store';
 import { userLogin } from '../redux/async-actions/user-auth';
 import { useAppDispatch, useAppSelector } from '../redux/store';
-
+import Swal from 'sweetalert2';
+import { useNavigate} from 'react-router-dom';
 
 
 interface ILoginProps {
@@ -48,6 +49,7 @@ interface UserLoginSchema {
 const Login: React.FunctionComponent<ILoginProps> = ({}) => {
     // const user = useAppSelector((state: RootState) => state.user)
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
 
 
@@ -57,16 +59,44 @@ const Login: React.FunctionComponent<ILoginProps> = ({}) => {
             password: ''
         }
     })
+    
 
-    const onSubmit = (formData: UserLoginSchema)=> {
+    const onFormSubmit = async (formData:any) => {
+        let timerInterval: any
         console.log(formData)
-        dispatch(userLogin(formData))
-        // .then((res: any)=>{
-        //     console.log(res)
-        // }).catch(err=> {
-        //     console.log(err, 'Wrong username or password')
-        // }) 
-    }
+        await dispatch(userLogin(formData)).then(res => {
+            console.log(res)
+          if (res.payload.status === 200) {   
+            Swal.fire({
+              title: 'Successfully logged in!!',
+              html: '...redirecting you to the home page now',
+              timer: 1000,
+              timerProgressBar: true,
+              didOpen: () => {
+                timerInterval = setInterval(() => {
+                }, 100)
+              },
+              willClose: () => {
+                clearInterval(timerInterval)
+              }
+            }).then(() => {
+              navigate('/')
+              window.location.reload()
+            })
+            
+          } else {
+            Swal.fire({
+              title: 'Wrong username or password',
+              icon: 'error',
+              html: 'Sorry, wrong username or password. Please try again',
+              timer: 1500,
+              willClose: () => {
+                clearInterval(timerInterval)
+              }
+            })
+          }
+        })
+      };
 
     const onErrors = (errors: any) => {
         console.log(errors)
@@ -97,7 +127,7 @@ const Login: React.FunctionComponent<ILoginProps> = ({}) => {
 
 
     <ButtonWrapper>
-    <GreenThemedButton onClick={handleSubmit(onSubmit, onErrors)} title='Log In'/>
+    <GreenThemedButton onClick={handleSubmit(onFormSubmit, onErrors)} title='Log In'/>
 
     <ForgotPasswordButton to='/forgot-password' >Forgot Password?</ForgotPasswordButton>
 
