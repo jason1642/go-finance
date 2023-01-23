@@ -11,7 +11,7 @@ import {Tooltip }from 'react-tooltip';
     padding: 1em;
     padding-left: 3rem;
     background-color: #393945; 
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
     margin-top: 14px;
     &:hover{
       background-color:#40424f;
@@ -48,7 +48,7 @@ import {Tooltip }from 'react-tooltip';
   `;
 
   const InfoIconContainer = styled.div`
-    padding-right: 3rem;
+    padding-right: 3rem; 
   `;
 
  

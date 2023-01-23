@@ -32,9 +32,9 @@ const Container = styled(ButtonUnstyled)`
   }
 `
 
-const GreenThemedButton: React.FunctionComponent<IGreenThemedButtonProps> = ({buttonProps, type, title, onClick = ()=>{}}) => {
+const GreenThemedButton: React.FunctionComponent<IGreenThemedButtonProps> = ({buttonProps, type = 'button', title, onClick = ()=>{}}) => {
   return (
-    <Container {...buttonProps} onClick={(e)=>onClick(e)}>
+    <Container type={type} {...buttonProps} onClick={(e)=>onClick(e)}>
       {title}
     </Container>
   );
