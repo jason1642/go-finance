@@ -6,18 +6,38 @@ import { ApexOptions } from "apexcharts";
 
 
 interface ILineGraphPortfolioOverviewProps {
+  title: string;
+  series: any[];
 }
 
 
 const Container = styled.div`
   display: flex;
   width: 100%;
+  flex-direction: column;
   justify-content: center;
   border-bottom: 1px solid #9b9b9b33;
   padding-bottom: 32px;
   align-items: center;
   /* padding: 10px; */
 `;
+
+const PanelTitle = styled.h2`
+  display:flex;
+  font-weight: 300;
+  text-align: left;
+  /* margin: 0 auto; */
+  padding: 0 1.5rem;
+  /* width: 100%; */
+  /* padding-left: 5rem; */
+`;
+
+
+
+
+
+
+
 const options: ApexOptions = {
     chart: {
      id: 'stockPieGraph',
@@ -109,7 +129,7 @@ const options: ApexOptions = {
  
  }
 
-const DonutGraphPortfolioOverview: React.FunctionComponent<ILineGraphPortfolioOverviewProps> = (props) => {
+const DonutGraphPortfolioOverview: React.FunctionComponent<ILineGraphPortfolioOverviewProps> = ({title, series}) => {
     const [chartOptions, setChartOptions] = React.useState<any>({
         options: {
           chart: {
@@ -130,9 +150,12 @@ const DonutGraphPortfolioOverview: React.FunctionComponent<ILineGraphPortfolioOv
  
     return (
     <Container>
+            <PanelTitle>{title}</PanelTitle>  
+
+
         <Chart
             options={options}
-            series={[44, 55, 41, 17]}
+            series={series}
             type={'donut'}
             width={305}
             // style={{borderWidth: 10}}

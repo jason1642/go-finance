@@ -68,10 +68,11 @@ const Account: React.FunctionComponent<IAccountProps> = (props) => {
 
 
         <SideContainer> 
-            <PanelTitle>Sector Allocation</PanelTitle>  
+            {/* <PanelTitle>Sector Allocation</PanelTitle>   */}
 
             {/* <SectorDonutGraph />   */}
-            <DonutGraphPortfolioOverview />
+            <DonutGraphPortfolioOverview series={[44, 55, 41, 17]} title={'Sector Allocation'}/>
+            <DonutGraphPortfolioOverview series={[23, 10, 4, 3]} title={'Asset class allocation'}/>
 
         </SideContainer>
 
