@@ -11,9 +11,21 @@ interface IOverviewLineGraphProps {
 
 const Container = styled.div`
   display: flex;
-  width: 100%;
+  flex-direction: column;
+  /* border: 1px solid white; */
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  padding-top: 10px;
+  /* width: 100%; */
+
   * > {
   }
+`;
+
+const Header = styled.div`
+  display: flex;    
+  width: 100%;
+
 `;
 const options: ApexOptions = {
     chart: {
@@ -62,6 +74,11 @@ const options: ApexOptions = {
         show: false,
      },
      
+ },
+ yaxis: {
+    labels: {
+        show: false,
+    }
  },
 
 grid: {
@@ -137,6 +154,9 @@ const OverviewLineGraph: React.FunctionComponent<IOverviewLineGraphProps> = ({sy
 
   return (
     <Container>
+        <Header>
+            1M return: 0.23% vs. S&P500: $0.28
+        </Header>
   {
         stockDailyData && stockDates && <Chart
        
@@ -161,6 +181,7 @@ const OverviewLineGraph: React.FunctionComponent<IOverviewLineGraphProps> = ({sy
            ]}
            type={'line'}
            width={750}
+           height={340}
            style={{borderWidth: 0}}
        />
 }

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import OverviewLineGraph from '../components/account/main-sections/OverviewLineGraph';
+import PortfolioStatistics from '../components/account/main-sections/PortFolioStatistics';
 import DonutGraphPortfolioOverview from '../components/account/side-panel/DonutGraphPortfolioOverview';
 import SectorDonutGraph from '../components/account/side-panel/SectorDonutGraph';
 interface IAccountProps {
@@ -11,6 +12,7 @@ const Container = styled.div`
   flex: 1 1 auto;
   flex-direction: column;
   color: white;
+  padding: 0 1rem;
 `;
 const Title = styled.div`
   display: flex;
@@ -60,6 +62,8 @@ const Account: React.FunctionComponent<IAccountProps> = (props) => {
         <MainContainer> 
     {/* <DonutGraphPortfolioOverview /> */}
     <OverviewLineGraph symbol={"MSFT"}/>
+
+    <PortfolioStatistics />
         </MainContainer>
 
 

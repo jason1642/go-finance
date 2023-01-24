@@ -13,12 +13,15 @@ const Container = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
+  border-bottom: 1px solid #9b9b9b33;
+  padding-bottom: 32px;
   align-items: center;
   /* padding: 10px; */
 `;
 const options: ApexOptions = {
     chart: {
      id: 'stockPieGraph',
+     
      animations: {
          enabled: true,
          easing: 'easeinout',
@@ -33,10 +36,14 @@ const options: ApexOptions = {
          }
      },
      background: 'transparent'
- 
+     
     },
+
+    labels: ['Technology', 'Energy','Consumer','Materials'],
     legend: {
-        position: 'bottom'
+        position: 'bottom',
+        horizontalAlign: 'center',
+        width: 300,
     },
 
     tooltip: {
@@ -49,12 +56,13 @@ const options: ApexOptions = {
  dataLabels: {
   enabled: false,
   textAnchor: 'start',
-  distributed: true
+  
+  // distributed: true
  },
  plotOptions: {
   pie:{
       donut:{
-          size: '80%',
+          size: '82%',
           labels: {show: false}
         },
       
@@ -111,6 +119,7 @@ const DonutGraphPortfolioOverview: React.FunctionComponent<ILineGraphPortfolioOv
             categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
           }
         },
+        
         series: [
           {
             name: "series-1",
@@ -125,7 +134,7 @@ const DonutGraphPortfolioOverview: React.FunctionComponent<ILineGraphPortfolioOv
             options={options}
             series={[44, 55, 41, 17]}
             type={'donut'}
-            width={300}
+            width={305}
             // style={{borderWidth: 10}}
         />
     </Container>
