@@ -4,6 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using net_finance_api.Models;
+using NetFinanceApi.Services;
+
+
+
 
 namespace net_finance_api.Controllers
 {
@@ -11,12 +16,27 @@ namespace net_finance_api.Controllers
     [ApiController]
     public class MonthlyHistoricDataController : ControllerBase
     {
+
+
+        public IConfiguration _configuration;
+        private readonly MonthlyHistoricDataService _MonthlyHistoricDataService;
+
+
+        public MonthlyHistoricDataController(IConfiguration config, MonthlyHistoricDataService MonthlyHistoricDataService)
+        {
+            _configuration = config;
+            _MonthlyHistoricDataService = MonthlyHistoricDataService;
+
+
+        }
+
+
+
         // GET: api/MonthlyHistoricData
         [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        public async Task<List<MonthlyHistoricData>> Get() =>
+        await _MonthlyHistoricDataService.GetAsync();
+
 
         // GET: api/MonthlyHistoricData/5
         [HttpGet("{id}", Name = "Get")]

@@ -55,7 +55,7 @@ public class MonthlyHistoricDataService
     //await _MonthlyHistoricDataCollection.Find(x => x.username == username).FirstOrDefaultAsync();
 
 
-    public async Task CreateAsync(MonthlyHistoricData item) =>
+    public async Task CreateAsync(MonthlyHistoricData newItem) =>
         await _MonthlyHistoricDataCollection.InsertOneAsync(newItem);
 
 

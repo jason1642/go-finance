@@ -30,6 +30,21 @@ public class MetaData
 
 public class MonthlyTimeSeries
 {
+    [BsonElement("1. open")]
+    [JsonPropertyName("1. open")]
+    public string? Open { get; set; }
+
+    [BsonElement("2. open")]
+    [JsonPropertyName("2. open")]
+    public string? Open { get; set; }
+
+    [BsonElement("3. open")]
+    [JsonPropertyName("3. open")]
+    public string? Open { get; set; }
+
+    [BsonElement("4. open")]
+    [JsonPropertyName("4. open")]
+    public string? Open { get; set; }
 
 }
 

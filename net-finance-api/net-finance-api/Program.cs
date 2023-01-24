@@ -36,7 +36,7 @@ builder.Services.Configure<NetFinanceDatabaseSettings>(
     builder.Configuration.GetSection("NetFinanceDatabase"));
 
 builder.Services.AddSingleton<UsersService>();
-
+builder.Services.AddSingleton<MonthlyHistoricDataService>();
 builder.Services.AddControllers()
     .AddJsonOptions(
         options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
