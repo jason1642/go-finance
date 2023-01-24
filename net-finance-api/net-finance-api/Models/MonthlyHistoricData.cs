@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace net_finance_api.Models
+namespace net_finance_api.Models;
 
 
 
@@ -15,15 +15,15 @@ public class MetaData
 
     [BsonElement("2. Symbol")]
     [JsonPropertyName("2. Symbol")]
-    public string? Information { get; set; }
+    public string?  Symbol { get; set; }
 
     [BsonElement("3. Last Refreshed")]
     [JsonPropertyName("3. Last Refreshed")]
-    public string? Information { get; set; }
+    public string? LastRefreshed { get; set; }
 
     [BsonElement("4. Time Zone")]
     [JsonPropertyName("4. Time Zone")]
-    public string? Information { get; set; }
+    public string? TimeZone { get; set; }
 }
 
 
