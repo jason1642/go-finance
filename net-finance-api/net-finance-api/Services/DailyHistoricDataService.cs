@@ -62,6 +62,8 @@ public class DailyHistoricDataService
     public async Task UpdateAsync(string id, DailyHistoricData updatedItem) =>
         await _DailyHistoricDataCollection.ReplaceOneAsync(x => x._id == id, updatedItem);
 
+    public async Task<List<DailyHistoricData>> FindMultipleAsync(FilterDefinition<DailyHistoricData> filter) =>
+        await _DailyHistoricDataCollection.Find(filter).ToListAsync();
     //public async Task RemoveAsync(string id) =>
     //    await _DailyHistoricDataCollection.DeleteOneAsync(x => x._id == id);
 

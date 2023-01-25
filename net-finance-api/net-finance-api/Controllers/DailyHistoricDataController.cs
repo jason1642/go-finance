@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using net_finance_api.Models;
 using NetFinanceApi.Services;
+using MongoDB.Driver;
 
 
 
@@ -38,12 +39,16 @@ namespace net_finance_api.Controllers
             await _DailyHistoricDataService.GetAsync();
 
 
-        // GET: api/DailyHistoricData/5
-        //[HttpGet("{id}", Name = "Get")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        //GET: api/DailyHistoricData/multiple
+        [HttpGet("multiple/{symbolList}")]
+        public async Task<List<DailyHistoricData>> GetMultiple(string symbolList)
+        {
+           string[] symbolArray = symbolList.Split(',');
+            Console.WriteLine(symbolArray);
+            var filter = Builders<DailyHistoricData>.Filter.In(x => x.symbol, symbolArray);
+            List<DailyHistoricData> results = await _DailyHistoricDataService.FindMultipleAsync(filter);
+            return results;
+        }
 
         // POST: api/DailyHistoricData
         [HttpPost]
