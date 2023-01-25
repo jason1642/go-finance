@@ -34,17 +34,21 @@ public class MonthlyTimeSeries
     [JsonPropertyName("1. open")]
     public string? Open { get; set; }
 
-    [BsonElement("2. open")]
-    [JsonPropertyName("2. open")]
-    public string? Open { get; set; }
+    [BsonElement("2. high")]
+    [JsonPropertyName("2. high")]
+    public string? High { get; set; }
 
-    [BsonElement("3. open")]
+    [BsonElement("3. low")]
     [JsonPropertyName("3. open")]
-    public string? Open { get; set; }
+    public string? Low { get; set; }
 
-    [BsonElement("4. open")]
+    [BsonElement("4. close")]
     [JsonPropertyName("4. open")]
-    public string? Open { get; set; }
+    public string? Close { get; set; }
+
+    [BsonElement("5. volume")]
+    [JsonPropertyName("5. volume")]
+    public string? Volume { get; set; }
 
 }
 
@@ -67,7 +71,7 @@ public class MonthlyHistoricData
 
     [BsonElement("Monthly Time Series")]
     [JsonPropertyName("Monthly Time Series")]
-    public MonthlyTimeSeries? MonthlyTimeSeries { get; set; }
+    public Dictionary<string, MonthlyTimeSeries> Objects { get; set; }
 }
 
 
