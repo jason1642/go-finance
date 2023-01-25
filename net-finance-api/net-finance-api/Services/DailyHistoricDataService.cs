@@ -21,12 +21,12 @@ using Microsoft.Extensions.Logging;
 
 namespace NetFinanceApi.Services;
 
-public class MonthlyHistoricDataService
+public class DailyHistoricDataService
 {
-    private readonly IMongoCollection<MonthlyHistoricData> _MonthlyHistoricDataCollection;
+    private readonly IMongoCollection<DailyHistoricData> _DailyHistoricDataCollection;
 
 
-    public MonthlyHistoricDataService(
+    public DailyHistoricDataService(
         IOptions<NetFinanceDatabaseSettings> netFinanceDatabaseSettings)
     {
         System.Diagnostics.Debug.WriteLine(netFinanceDatabaseSettings);
@@ -37,36 +37,36 @@ public class MonthlyHistoricDataService
         var mongoDatabase = mongoClient.GetDatabase(
             netFinanceDatabaseSettings.Value.DatabaseName);
 
-        _MonthlyHistoricDataCollection = mongoDatabase.GetCollection<MonthlyHistoricData>(
-            netFinanceDatabaseSettings.Value.MonthlyHistoricDataCollectionName);
+        _DailyHistoricDataCollection = mongoDatabase.GetCollection<DailyHistoricData>(
+            netFinanceDatabaseSettings.Value.DailyHistoricDataCollectionName);
     }
 
-    public async Task<List<MonthlyHistoricData>> GetAsync() =>
-        await _MonthlyHistoricDataCollection.Find(_ => true).ToListAsync();
+    public async Task<List<DailyHistoricData>> GetAsync() =>
+        await _DailyHistoricDataCollection.Find(_ => true).ToListAsync();
 
-    public async Task<MonthlyHistoricData?> GetAsync(string symbol) =>
-        await _MonthlyHistoricDataCollection.Find(x => x.symbol == symbol).FirstOrDefaultAsync();
+    public async Task<DailyHistoricData?> GetAsync(string symbol) =>
+        await _DailyHistoricDataCollection.Find(x => x.symbol == symbol).FirstOrDefaultAsync();
 
     //public async Task<Users?> GetAsyncEmail(string email) =>
-    //await _MonthlyHistoricDataCollection.Find(x => x.email == email).FirstOrDefaultAsync();
+    //await _DailyHistoricDataCollection.Find(x => x.email == email).FirstOrDefaultAsync();
 
 
     //public async Task<Users?> GetAsyncUsername(string username) =>
-    //await _MonthlyHistoricDataCollection.Find(x => x.username == username).FirstOrDefaultAsync();
+    //await _DailyHistoricDataCollection.Find(x => x.username == username).FirstOrDefaultAsync();
 
 
-    public async Task CreateAsync(MonthlyHistoricData newItem) =>
-        await _MonthlyHistoricDataCollection.InsertOneAsync(newItem);
+    public async Task CreateAsync(DailyHistoricData newItem) =>
+        await _DailyHistoricDataCollection.InsertOneAsync(newItem);
 
 
-    public async Task UpdateAsync(string id, MonthlyHistoricData updatedItem) =>
-        await _MonthlyHistoricDataCollection.ReplaceOneAsync(x => x._id == id, updatedItem);
+    public async Task UpdateAsync(string id, DailyHistoricData updatedItem) =>
+        await _DailyHistoricDataCollection.ReplaceOneAsync(x => x._id == id, updatedItem);
 
     //public async Task RemoveAsync(string id) =>
-    //    await _MonthlyHistoricDataCollection.DeleteOneAsync(x => x._id == id);
+    //    await _DailyHistoricDataCollection.DeleteOneAsync(x => x._id == id);
 
     //public async Task<Users?> verifyToken(string username, string cookie_token) =>
-    //    await _MonthlyHistoricDataCollection.Find(i => i.username == username && i.refresh_token == cookie_token).FirstOrDefaultAsync();
+    //    await _DailyHistoricDataCollection.Find(i => i.username == username && i.refresh_token == cookie_token).FirstOrDefaultAsync();
 
 
 

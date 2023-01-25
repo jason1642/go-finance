@@ -2,33 +2,34 @@
 using System.Text.Json.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using net_finance_api.Models;
 
 namespace net_finance_api.Models;
 
+// For MetaData and DailyTimeSeries class changes, see DailyHistoricData.cs
+
+//public class MetaData
+//{
+//    [BsonElement("1. Information")]
+//    [JsonPropertyName("1. Information")]
+//    public string? Information { get; set; }
+
+//    [BsonElement("2. Symbol")]
+//    [JsonPropertyName("2. Symbol")]
+//    public string?  Symbol { get; set; }
+
+//    [BsonElement("3. Last Refreshed")]
+//    [JsonPropertyName("3. Last Refreshed")]
+//    public string? LastRefreshed { get; set; }
+
+//    [BsonElement("4. Time Zone")]
+//    [JsonPropertyName("4. Time Zone")]
+//    public string? TimeZone { get; set; }
+//}
 
 
-public class MetaData
-{
-    [BsonElement("1. Information")]
-    [JsonPropertyName("1. Information")]
-    public string? Information { get; set; }
 
-    [BsonElement("2. Symbol")]
-    [JsonPropertyName("2. Symbol")]
-    public string?  Symbol { get; set; }
-
-    [BsonElement("3. Last Refreshed")]
-    [JsonPropertyName("3. Last Refreshed")]
-    public string? LastRefreshed { get; set; }
-
-    [BsonElement("4. Time Zone")]
-    [JsonPropertyName("4. Time Zone")]
-    public string? TimeZone { get; set; }
-}
-
-
-
-public class MonthlyTimeSeries
+public class DailyTimeSeries
 {
     [BsonElement("1. open")]
     [JsonPropertyName("1. open")]
@@ -54,9 +55,9 @@ public class MonthlyTimeSeries
 
 
 
-public class MonthlyHistoricData
+public class DailyHistoricData
 {
-	public MonthlyHistoricData()
+	public DailyHistoricData()
 	{
 
 	}
@@ -76,9 +77,9 @@ public class MonthlyHistoricData
     [JsonPropertyName("Meta Data")]
     public MetaData? MetaData { get; set; }
 
-    [BsonElement("Monthly Time Series")]
-    [JsonPropertyName("Monthly Time Series")]
-    public Dictionary<string, MonthlyTimeSeries> Objects { get; set; }
+    [BsonElement("Daily Time Series")]
+    [JsonPropertyName("Daily Time Series")]
+    public Dictionary<string, DailyTimeSeries> Objects { get; set; }
 }
 
 
