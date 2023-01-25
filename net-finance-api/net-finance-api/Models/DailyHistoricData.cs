@@ -2,7 +2,7 @@
 using System.Text.Json.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using net_finance_api.Models;
+
 
 namespace net_finance_api.Models;
 
@@ -57,10 +57,10 @@ public class DailyTimeSeries
 
 public class DailyHistoricData
 {
-	public DailyHistoricData()
-	{
+	//public DailyHistoricData()
+	//{
 
-	}
+	//}
 
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
@@ -77,8 +77,8 @@ public class DailyHistoricData
     [JsonPropertyName("Meta Data")]
     public MetaData? MetaData { get; set; }
 
-    [BsonElement("Daily Time Series")]
-    [JsonPropertyName("Daily Time Series")]
+    [BsonElement("Time Series (Daily)")]
+    [JsonPropertyName("Time Series (Daily)")]
     public Dictionary<string, DailyTimeSeries> Objects { get; set; }
 }
 
