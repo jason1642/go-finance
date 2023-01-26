@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useMemo, FC } from 'react'
+import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { fetchMultipleDailyHistoricData } from '../../../../api-requests/stock-historic-data-requests';
 import type { DailyHistoricDataTypes } from '../../../../types/stock-data-type-db';
+import type { MarketOverviewTupleTypes } from './MarketOverview';
 // import isMarketOpenFunction from '../../../../resources/isMarketOpenFunction'
 
 const Container = styled.div`
@@ -98,7 +98,7 @@ return [<></>]
 
 
 interface ComponentProps {
-  marketOverviewData: [DailyHistoricDataTypes, DailyHistoricDataTypes, DailyHistoricDataTypes ,DailyHistoricDataTypes] | undefined;
+  marketOverviewData: MarketOverviewTupleTypes;
 }
 type colorArrayType = [string, string, string, string]
 const colors: colorArrayType = ['#52e3c2', '#ff4495','#d211fe', '#40c4ff']

@@ -2,10 +2,8 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { ApexOptions } from "apexcharts";
 import Chart from 'react-apexcharts'
+import type { MarketOverviewTupleTypes } from './MarketOverview';
 
-
-interface IMarketOverviewLineGraphProps {
-}
 const Container = styled.div`
   display: flex;
 `;
@@ -123,7 +121,16 @@ markers: {
 }
 
 }
-const MarketOverviewLineGraph: React.FunctionComponent<IMarketOverviewLineGraphProps> = (props) => {
+
+
+
+
+interface IMarketOverviewLineGraphProps {
+  marketOverviewData: MarketOverviewTupleTypes;
+}
+
+
+const MarketOverviewLineGraph: React.FunctionComponent<IMarketOverviewLineGraphProps> = ({marketOverviewData}) => {
   return (
     <Container>
 

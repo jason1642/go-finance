@@ -23,20 +23,24 @@ const Container = styled.div`
       margin: 0 0 1rem 0;
       color: #8f94ab;
   `;
-type MarketOverviewTupleTypes  = [DailyHistoricDataTypes, DailyHistoricDataTypes, DailyHistoricDataTypes ,DailyHistoricDataTypes]
+export type MarketOverviewTupleTypes  = [DailyHistoricDataTypes, DailyHistoricDataTypes, DailyHistoricDataTypes ,DailyHistoricDataTypes] | undefined;
 
 
 const MarketOverview: React.FunctionComponent<ComponentProps> = () => {
 
   const [marketOverviewData, setMarketOverviewData] = React.useState<MarketOverviewTupleTypes>()
 
-  fetchMultipleDailyHistoricData('SPY,QQQ,NDAQ,DIA').then(res=>{
-    setMarketOverviewData(res.data)
-    console.log(res)
-  }).catch(err=>{
-    console.log(err)
-  }   
-    )
+  React.useEffect(() => {
+    fetchMultipleDailyHistoricData('SPY,QQQ,NDAQ,DIA').then(res=>{
+      setMarketOverviewData(res.data)
+      console.log(res)
+    }).catch(err=>{
+      console.log(err)
+    }   
+      )
+  }, [])
+
+
 
   return (
     <Container>
@@ -46,7 +50,7 @@ const MarketOverview: React.FunctionComponent<ComponentProps> = () => {
 
 
 
-      <MarketOverviewLineGraph />
+      <MarketOverviewLineGraph marketOverviewData={marketOverviewData}/>
     </Container>
   );
 }
