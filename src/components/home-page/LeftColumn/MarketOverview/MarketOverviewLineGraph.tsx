@@ -130,7 +130,41 @@ interface IMarketOverviewLineGraphProps {
 }
 
 
+
+const mapStockDataSeries: (marketData: any) => Array<{symbol: string, data: [...any]}> = (marketData: any) => {
+    
+  const result: Array<any> = marketData !== undefined ?  marketData.map((item: any)=>{
+
+    const timeSeriesData = Object.keys(item['Time Series (Daily)']).map(dateData=> dateData)
+
+    return ({symbol: item.symbol, data: timeSeriesData})
+  }) : []
+ 
+  return result
+}
+
+
+
 const MarketOverviewLineGraph: React.FunctionComponent<IMarketOverviewLineGraphProps> = ({marketOverviewData}) => {
+  
+  
+  const stockSeriesData: Array<{symbol: string, data: [...any]}> = React.useMemo(()=>mapStockDataSeries(marketOverviewData), [marketOverviewData])
+
+ 
+
+
+
+  
+
+
+
+
+
+  React.useEffect(()=>{
+    console.log(marketOverviewData)
+    console.log(stockSeriesData)
+  },[marketOverviewData])
+
   return (
     <Container>
 
@@ -143,20 +177,20 @@ const MarketOverviewLineGraph: React.FunctionComponent<IMarketOverviewLineGraphP
            xaxis: {
                labels: {show: false},
                axisBorder: {show: false},
-           categories: stockDates.map((item: string)=>item.split('-').slice(1).join('/'))
+          //  categories: stockDates.map((item: string)=>item.split('-').slice(1).join('/'))
           }
        }}
-       series={[
+      //  series={[
            
-           {
-               name: 'Open Price',
-               data: stockDates.map((item: string)=>Number(stockDailyData['Time Series (Daily)'][item]['1. open']).toFixed(2))
-           },
-           {
-               name: 'Close Price',
-               data: stockDates.map((item: string)=>stockDailyData['Time Series (Daily)'][item]['4. close'])
-           }
-          ]}
+      //      {
+      //          name: 'Open Price',
+      //          data: stockDates.map((item: string)=>Number(stockDailyData['Time Series (Daily)'][item]['1. open']).toFixed(2))
+      //      },
+      //      {
+      //          name: 'Close Price',
+      //          data: stockDates.map((item: string)=>stockDailyData['Time Series (Daily)'][item]['4. close'])
+      //      }
+      //     ]}
           type={'line'}
           width={750}
           height={340}

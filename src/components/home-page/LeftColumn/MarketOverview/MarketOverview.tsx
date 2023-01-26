@@ -45,12 +45,13 @@ const MarketOverview: React.FunctionComponent<ComponentProps> = () => {
   return (
     <Container>
       <Title>Markets</Title>
-      <MarketPriceTable marketOverviewData={marketOverviewData} />  
+     {marketOverviewData && <> <MarketPriceTable marketOverviewData={marketOverviewData} />  
 
 
 
 
-      <MarketOverviewLineGraph marketOverviewData={marketOverviewData}/>
+      <MarketOverviewLineGraph marketOverviewData={marketOverviewData}/></>
+      }
     </Container>
   );
 }
