@@ -39,7 +39,7 @@ namespace net_finance_api.Controllers
             await _DailyHistoricDataService.GetAsync();
 
 
-        //GET: api/DailyHistoricData/multiple
+        //GET: api/DailyHistoricData/multiple/SPY,QQQ,DIA
         [HttpGet("multiple/{symbolList}")]
         public async Task<List<DailyHistoricData>> GetMultiple(string symbolList)
         {

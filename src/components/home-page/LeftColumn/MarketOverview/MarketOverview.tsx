@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import MarketPriceTable from './MarketPriceTable'
+import MarketOverviewLineGraph from './MarketOverviewLineGraph';
+import { fetchMultipleDailyHistoricData } from '../../../../api-requests/stock-historic-data-requests';
+import { DailyHistoricDataTypes } from '../../../../types/stock-data-type-db';
 
 interface ComponentProps {
   
@@ -20,14 +23,30 @@ const Container = styled.div`
       margin: 0 0 1rem 0;
       color: #8f94ab;
   `;
+type MarketOverviewTupleTypes  = [DailyHistoricDataTypes, DailyHistoricDataTypes, DailyHistoricDataTypes ,DailyHistoricDataTypes]
+
 
 const MarketOverview: React.FunctionComponent<ComponentProps> = () => {
 
+  const [marketOverviewData, setMarketOverviewData] = React.useState<MarketOverviewTupleTypes>()
+
+  fetchMultipleDailyHistoricData('SPY,QQQ,NDAQ,DIA').then(res=>{
+    setMarketOverviewData(res.data)
+    console.log(res)
+  }).catch(err=>{
+    console.log(err)
+  }   
+    )
 
   return (
     <Container>
       <Title>Markets</Title>
-      <MarketPriceTable />  
+      <MarketPriceTable marketOverviewData={marketOverviewData} />  
+
+
+
+
+      <MarketOverviewLineGraph />
     </Container>
   );
 }

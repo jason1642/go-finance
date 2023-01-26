@@ -40,11 +40,11 @@ public class DailyTimeSeries
     public string? High { get; set; }
 
     [BsonElement("3. low")]
-    [JsonPropertyName("3. open")]
+    [JsonPropertyName("3. low")]
     public string? Low { get; set; }
 
     [BsonElement("4. close")]
-    [JsonPropertyName("4. open")]
+    [JsonPropertyName("4. close")]
     public string? Close { get; set; }
 
     [BsonElement("5. volume")]
