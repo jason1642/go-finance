@@ -73,7 +73,7 @@ const HomeMyStocksMain = () => {
         console.log(response.data)
       }
       // setUsersStocksData(marketDataArray)
-      fetchStockData()
+      // fetchStockData()
     })
 
 
