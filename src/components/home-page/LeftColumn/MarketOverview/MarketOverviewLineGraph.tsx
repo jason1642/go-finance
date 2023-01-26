@@ -6,6 +6,10 @@ import type { MarketOverviewTupleTypes } from './MarketOverview';
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  margin-top: 1rem;
+  /* width: 100%; */
 `;
 
 
@@ -25,7 +29,7 @@ const options: ApexOptions = {
            speed: 300
        }
    },
-   background: '#32323e',
+   background: 'transparent',
    toolbar: {
       show: false,
   },
@@ -46,8 +50,8 @@ const options: ApexOptions = {
 xaxis: {
   type: 'datetime',
   labels: {
-      show: false,
-      formatter: val => ''
+      // show: false,
+      // formatter: val => ''
   },
   axisBorder:{
       show: false,
@@ -66,7 +70,7 @@ yaxis: {
 grid: {
   xaxis: {
       lines: {
-          show: false,
+          show: true,
       },
   },
   yaxis: {
@@ -76,13 +80,16 @@ grid: {
       
   }
 },
+legend: {
+  show: false
+},
 dataLabels: {
   enabled: false,
 },
 stroke: {
    show: true,
    // curve: 'smooth',
-   lineCap: 'butt',
+   lineCap: 'round',
    colors: undefined,
    width: 2,
    dashArray: 0,      
@@ -131,13 +138,13 @@ interface IMarketOverviewLineGraphProps {
 
 
 
-const mapStockDataSeries: (marketData: any) => Array<{symbol: string, data: [...any]}> = (marketData: any) => {
+const mapStockDataSeries: (marketData: any) => Array<{symbol: string, singleDateData: Array<{date: string, data: any}>}> | undefined = (marketData: any) => {
     
   const result: Array<any> = marketData !== undefined ?  marketData.map((item: any)=>{
 
-    const timeSeriesData = Object.keys(item['Time Series (Daily)']).map(dateData=> dateData)
+    const timeSeriesData = Object.keys(item['Time Series (Daily)']).map(dateKey=> ({date: dateKey, data: item['Time Series (Daily)'][dateKey]}))
 
-    return ({symbol: item.symbol, data: timeSeriesData})
+    return ({symbol: item.symbol, singleDateData: timeSeriesData})
   }) : []
  
   return result
@@ -148,7 +155,14 @@ const mapStockDataSeries: (marketData: any) => Array<{symbol: string, data: [...
 const MarketOverviewLineGraph: React.FunctionComponent<IMarketOverviewLineGraphProps> = ({marketOverviewData}) => {
   
   
-  const stockSeriesData: Array<{symbol: string, data: [...any]}> = React.useMemo(()=>mapStockDataSeries(marketOverviewData), [marketOverviewData])
+  const stockSeriesData: Array<{symbol: string, singleDateData: Array<{date: string, data:  {
+    ['1. open']: string;
+    ['2. high']: string;
+    ['3. low']: string;
+    ['4. close']: string;
+    ['5. volume']: string;
+    
+}}>}> | undefined = React.useMemo(()=>mapStockDataSeries(marketOverviewData), [marketOverviewData])
 
  
 
@@ -168,8 +182,9 @@ const MarketOverviewLineGraph: React.FunctionComponent<IMarketOverviewLineGraphP
   return (
     <Container>
 
-        market over view graphs
+        {/* market over view graphs */}
 
+       {stockSeriesData !== undefined && marketOverviewData &&
         <Chart
        
        options={{
@@ -177,25 +192,19 @@ const MarketOverviewLineGraph: React.FunctionComponent<IMarketOverviewLineGraphP
            xaxis: {
                labels: {show: false},
                axisBorder: {show: false},
-          //  categories: stockDates.map((item: string)=>item.split('-').slice(1).join('/'))
+           categories: stockSeriesData && stockSeriesData.length > 0 ? stockSeriesData[0].singleDateData.map(item=>item.date.split('-').slice(1).join('/')) : []
           }
        }}
-      //  series={[
-           
-      //      {
-      //          name: 'Open Price',
-      //          data: stockDates.map((item: string)=>Number(stockDailyData['Time Series (Daily)'][item]['1. open']).toFixed(2))
-      //      },
-      //      {
-      //          name: 'Close Price',
-      //          data: stockDates.map((item: string)=>stockDailyData['Time Series (Daily)'][item]['4. close'])
-      //      }
-      //     ]}
+       series={
+        
+        stockSeriesData.map(item=> ({name: item.symbol, data: item.singleDateData.map(ele=>+Number(ele.data['1. open']).toFixed(2))}))
+
+       }
           type={'line'}
-          width={750}
+          // width='100%'
           height={340}
           style={{borderWidth: 0}}
-      />
+      />}
 
 
 
