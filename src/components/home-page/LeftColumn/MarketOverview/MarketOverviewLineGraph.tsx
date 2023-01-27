@@ -8,7 +8,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   /* align-items: center; */
-  margin-top: 1rem;
+  /* margin-top: .5rem; */
   /* width: 100%; */
 `;
 
@@ -31,11 +31,12 @@ const options: ApexOptions = {
    },
    background: 'transparent',
    toolbar: {
-      // show: false,
+      show: false,
   },
   zoom: {
       // enabled: false,
-  }
+  },
+  
   
   },
 colors:['#52e3c2', '#ff4495','#d211fe', '#40c4ff'],
@@ -61,12 +62,19 @@ xaxis: {
    },
    
 },
+
 yaxis: {
+  opposite: true,
+  // reversed: true,
+  
   labels: {
-    show: false,
+    // show: false,
+    // align: 'right',
+    // rotate: 12,
+    // offsetX: -10,
     style:{ 
-      fontSize: '.9em',
-      fontWeight: 300
+      // fontSize: '.9em',
+      // fontWeight: 300
     },
       // show: true,
       formatter: (val)=> {

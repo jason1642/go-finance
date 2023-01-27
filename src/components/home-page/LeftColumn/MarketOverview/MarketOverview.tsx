@@ -4,7 +4,7 @@ import MarketPriceTable from './MarketPriceTable'
 import MarketOverviewLineGraph from './MarketOverviewLineGraph';
 import { fetchMultipleDailyHistoricData } from '../../../../api-requests/stock-historic-data-requests';
 import { DailyHistoricDataTypes } from '../../../../types/stock-data-type-db';
-
+import DateRangeNav from './DateRangeNav';
 interface ComponentProps {
   
 }  
@@ -45,9 +45,13 @@ const MarketOverview: React.FunctionComponent<ComponentProps> = () => {
   return (
     <Container>
       <Title>Markets</Title>
+
+
+
+
      {marketOverviewData && <> <MarketPriceTable marketOverviewData={marketOverviewData} />  
 
-
+<DateRangeNav />
 
 
       <MarketOverviewLineGraph marketOverviewData={marketOverviewData}/></>
