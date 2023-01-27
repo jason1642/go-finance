@@ -15,6 +15,7 @@ const Container = styled.div`
 
 const options: ApexOptions = {
   chart: {
+    stacked: true,
    id: 'stockLineGraph',
    animations: {
        enabled: true,
@@ -50,8 +51,10 @@ colors:['#52e3c2', '#ff4495','#d211fe', '#40c4ff'],
 },
 xaxis: {
   type: 'datetime',
+  // range: 8,
+
   labels: {
-      // show: false,
+      show: true,
       // formatter: val => ''
   },
   axisBorder:{
@@ -65,7 +68,6 @@ xaxis: {
 
 yaxis: {
   opposite: true,
-  // reversed: true,
   
   labels: {
     // show: false,
@@ -77,8 +79,8 @@ yaxis: {
       // fontWeight: 300
     },
       // show: true,
-      formatter: (val)=> {
-        // console.log(val)
+      formatter: (val:any)=> {
+
         return val.toFixed(0).toString()
       }
   }
@@ -163,7 +165,7 @@ const mapStockDataSeries: (marketData: any) => Array<{symbol: string, singleDate
     
   const result: Array<any> = marketData !== undefined ?  marketData.map((item: any)=>{
 
-    const timeSeriesData = Object.keys(item['Time Series (Daily)']).map(dateKey=> ({date: dateKey, data: item['Time Series (Daily)'][dateKey]}))
+    const timeSeriesData = Object.keys(item['Time Series (Daily)']).map(dateKey=> ({date: dateKey, data: item['Time Series (Daily)'][dateKey]}) )
 
     return ({symbol: item.symbol, singleDateData: timeSeriesData})
   }) : []
@@ -211,9 +213,20 @@ const MarketOverviewLineGraph: React.FunctionComponent<IMarketOverviewLineGraphP
        options={{
            ...options,
            xaxis: {
-               labels: {show: false},
+              //  labels: {show: false},
+              // range: 15,
+              labels: {
+                // trim: true,
+                datetimeUTC: true,
+                // hideOverlappingLabels: true,
+                format: 'dd/MM',
+                formatter: (val: any, x:any,time: any)=> {
+                  console.log(val)
+                  return typeof val.date === 'string' ? val.date.split('-').slice(1).join('/') : ''
+                }
+              },
                axisBorder: {show: false},
-           categories: stockSeriesData && stockSeriesData.length > 0 ? stockSeriesData[0].singleDateData.map(item=>item.date.split('-').slice(1).join('/')).reverse() : []
+           categories: stockSeriesData && stockSeriesData.length > 0 ? stockSeriesData[0].singleDateData.map(item=>item) : []
           }
        }}
        series={
