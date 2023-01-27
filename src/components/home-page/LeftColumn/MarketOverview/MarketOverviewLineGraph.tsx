@@ -31,14 +31,14 @@ const options: ApexOptions = {
    },
    background: 'transparent',
    toolbar: {
-      show: false,
+      // show: false,
   },
   zoom: {
-      enabled: false,
+      // enabled: false,
   }
   
   },
-
+colors:['#52e3c2', '#ff4495','#d211fe', '#40c4ff'],
  
   tooltip: {
       // enabled: false,
@@ -54,20 +54,33 @@ xaxis: {
       // formatter: val => ''
   },
   axisBorder:{
-      show: false,
+      // show: false,
   },
    axisTicks: {
-      show: false,
+      // show: false,
    },
    
 },
 yaxis: {
   labels: {
-      show: false,
+    show: false,
+    style:{ 
+      fontSize: '.9em',
+      fontWeight: 300
+    },
+      // show: true,
+      formatter: (val)=> {
+        // console.log(val)
+        return val.toFixed(0).toString()
+      }
   }
 },
 
 grid: {
+  show: true,
+  borderColor: '#5b5b677a',
+  strokeDashArray: 0,
+  position: 'back',
   xaxis: {
       lines: {
           show: true,
@@ -75,7 +88,7 @@ grid: {
   },
   yaxis: {
       lines: {
-          show: false,
+          // show: false,   
       },
       
   }
@@ -107,7 +120,7 @@ theme: {
 
 markers: {
   size: 0,
-  colors: ['#255aee', '#26cb8a'],
+  colors: ['#52e3c2', '#ff4495','#d211fe', '#40c4ff'],
   // strokeColors: '#000000',
   strokeWidth: 0,
   strokeOpacity: 0,
@@ -192,12 +205,12 @@ const MarketOverviewLineGraph: React.FunctionComponent<IMarketOverviewLineGraphP
            xaxis: {
                labels: {show: false},
                axisBorder: {show: false},
-           categories: stockSeriesData && stockSeriesData.length > 0 ? stockSeriesData[0].singleDateData.map(item=>item.date.split('-').slice(1).join('/')) : []
+           categories: stockSeriesData && stockSeriesData.length > 0 ? stockSeriesData[0].singleDateData.map(item=>item.date.split('-').slice(1).join('/')).reverse() : []
           }
        }}
        series={
         
-        stockSeriesData.map(item=> ({name: item.symbol, data: item.singleDateData.map(ele=>+Number(ele.data['1. open']).toFixed(2))}))
+        stockSeriesData.map(item=> ({name: item.symbol, data: item.singleDateData.map(ele=>+Number(ele.data['1. open']).toFixed(2))})).reverse()
 
        }
           type={'line'}

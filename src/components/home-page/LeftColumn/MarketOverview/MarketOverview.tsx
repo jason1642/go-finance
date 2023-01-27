@@ -31,7 +31,7 @@ const MarketOverview: React.FunctionComponent<ComponentProps> = () => {
   const [marketOverviewData, setMarketOverviewData] = React.useState<MarketOverviewTupleTypes>()
 
   React.useEffect(() => {
-    fetchMultipleDailyHistoricData('SPY,QQQ,NDAQ,DIA').then(res=>{
+    fetchMultipleDailyHistoricData('SPY,QQQ,DIA').then(res=>{
       setMarketOverviewData(res.data)
       console.log(res)
     }).catch(err=>{
