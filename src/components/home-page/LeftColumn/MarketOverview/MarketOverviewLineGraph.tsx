@@ -15,7 +15,7 @@ const Container = styled.div`
 
 const options: ApexOptions = {
   chart: {
-    stacked: true,
+   
    id: 'stockLineGraph',
    animations: {
        enabled: true,
@@ -42,35 +42,19 @@ const options: ApexOptions = {
   },
 colors:['#52e3c2', '#ff4495','#d211fe', '#40c4ff'],
  
-  tooltip: {
-      // enabled: false,
-   followCursor: true,
-   theme: 'dark',
-
-
-},
+  
 xaxis: {
   type: 'datetime',
-  // range: 8,
-
-  labels: {
-      show: true,
-      // formatter: val => ''
-  },
-  axisBorder:{
-      // show: false,
-  },
-   axisTicks: {
-      // show: false,
-   },
-   
+  tooltip: {
+    enabled: false
+  }
 },
 
 yaxis: {
   opposite: true,
   
   labels: {
-    // show: false,
+    show: true,
     // align: 'right',
     // rotate: 12,
     // offsetX: -10,
@@ -190,12 +174,6 @@ const MarketOverviewLineGraph: React.FunctionComponent<IMarketOverviewLineGraphP
 
 
 
-  
-
-
-
-
-
   React.useEffect(()=>{
     console.log(marketOverviewData)
     console.log(stockSeriesData)
@@ -216,24 +194,41 @@ const MarketOverviewLineGraph: React.FunctionComponent<IMarketOverviewLineGraphP
               // range: 15,
             
               labels: {
-                // trim: true,
                 // datetimeUTC: true,
-                // show: false,
                 rotate: 0,
                 // hideOverlappingLabels: true,
-                // format: 'dd/MM',
                 formatter: (val: any)=> {
-                  console.log(val)
-                  return val !== undefined && typeof val.date === 'string' ? val.date.split('-').slice(1).join('/') : ''
+                  // console.log(val)
+                  return val !== undefined && typeof val === 'string' ? val.split('-').slice(1).join('/') : ''
                 }
               },
                axisBorder: {show: false},
            categories: 
             stockSeriesData && stockSeriesData.length > 0 ? 
               stockSeriesData[0].singleDateData.map((item:any, i: number)=>
-                 (i === 0 || i === stockSeriesData[0].singleDateData.length - 1 || i % 9 === 0 ) && item) 
+                 (i === 0 || i === stockSeriesData[0].singleDateData.length - 1 || i % 9 === 0 ) && item.date) 
                  : []
-          }
+          },
+          tooltip: {
+            // enabled: false,
+         followCursor: true,
+         theme: 'dark',
+         x:{
+          show: true,
+          formatter: (val: any, opts: any) =>{
+            // console.log()
+            return stockSeriesData[0].singleDateData[val].date.split('-').slice(1).join('/')
+          } 
+         },
+         y: {
+          formatter: (val: any, opts: any) =>{
+            // console.log(opts)
+            return val.toString()
+          } 
+        }
+      
+      
+      },
        }}
        series={
         stockSeriesData.map(item=>
