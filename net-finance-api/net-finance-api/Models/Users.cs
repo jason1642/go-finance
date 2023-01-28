@@ -1,10 +1,12 @@
 ﻿using System.Text.Json.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-
-
+using MongoDB.Driver;
        
 namespace net_finance_api.Models;
+
+
+
 
 
 public class Positions
@@ -31,21 +33,46 @@ public class Positions
 }
 
 
+
+public class DailyAccountValueHistory
+{
+
+    [BsonElement("current_value")]
+    public int current_value { get; set; }
+
+    [BsonElement("previous_business_day_value")]
+    public int previous_business_day_value { get; set; }
+
+    [BsonElement("previous_business_day_date")]
+    public string? previous_business_day_date { get; set; }
+
+
+
+
+
+}
+
+
+
+
+
 public class Portfolio
 {
   
-    [BsonElement("account_value")]
-    public int account_value { get; set; }
+    [BsonElement("current_account_value")]
+    public int current_account_value { get; set; }
 
-
+    [BsonElement("account_value_history")]
+    public DailyAccountValueHistory[]? daily_account_value_history { get; set; }
 
     [BsonElement("positions")]
     public Positions[] positions { get; set;}
 
   public Portfolio()
     {
-        account_value = 0;
+        current_account_value = 0;
         positions = new Positions[0];
+        daily_account_value_history = new DailyAccountValueHistory[0];
     }
 
 }
@@ -81,10 +108,23 @@ public class OrderHistory
 public class Users
 {
    
-
+    public Users ()
+    {
+        created_at = DateTime.Now;
+        //updated_at = updated_at;
+    }
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     public string? _id { get; set; }
+
+
+    [BsonElement("created_at")]
+    public DateTime created_at { get; }
+
+
+
+
+
 
     [BsonElement("first_name")]
     [JsonPropertyName("first_name")]
@@ -123,6 +163,6 @@ public class Users
     public OrderHistory[]? order_history { get; set; }
 
 
-
+ 
 
     }

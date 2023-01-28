@@ -10,4 +10,5 @@ public class UserContext : DbContext
     }
 
     public DbSet<Users> Users { get; set; } = null!;
+
 }
