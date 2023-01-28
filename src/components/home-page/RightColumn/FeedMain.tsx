@@ -71,7 +71,7 @@ interface ComponentProps {
 }
 const FeedMain: React.FunctionComponent<ComponentProps> = ({businessNews}) => {
 
-  console.log(businessNews)
+  // console.log(businessNews)
   return (<>
     <Container className='no-scroll-feed'>
       {businessNews.map((ele:any, i:number) =>

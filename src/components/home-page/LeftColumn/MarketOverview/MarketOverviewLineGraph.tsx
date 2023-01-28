@@ -15,7 +15,6 @@ const Container = styled.div`
 
 const options: ApexOptions = {
   chart: {
-   
    id: 'stockLineGraph',
    animations: {
        enabled: true,
@@ -35,9 +34,8 @@ const options: ApexOptions = {
       show: false,
   },
   zoom: {
-      // enabled: false,
+      enabled: false,
   },
-  
   
   },
 colors:['#52e3c2', '#ff4495','#d211fe', '#40c4ff'],
@@ -58,13 +56,8 @@ yaxis: {
     // align: 'right',
     // rotate: 12,
     // offsetX: -10,
-    style:{ 
-      // fontSize: '.9em',
-      // fontWeight: 300
-    },
-      // show: true,
       formatter: (val:any)=> {
-        console.log(val)
+        // console.log(val)
         return val.toFixed(0).toString()
       }
   }
@@ -84,7 +77,6 @@ grid: {
       lines: {
           // show: false,   
       },
-      
   }
 },
 legend: {
@@ -115,7 +107,6 @@ theme: {
 markers: {
   size: 0,
   colors: ['#52e3c2', '#ff4495','#d211fe', '#40c4ff'],
-  // strokeColors: '#000000',
   strokeWidth: 0,
   strokeOpacity: 0,
   strokeDashArray: 0,
@@ -130,14 +121,10 @@ markers: {
   showNullDataPoints: true,
   hover: {
   size: undefined,
-  sizeOffset: 2
+  sizeOffset: 4
+    }
   }
 }
-
-}
-
-
-
 
 interface IMarketOverviewLineGraphProps {
   marketOverviewData: MarketOverviewTupleTypes;
@@ -149,14 +136,11 @@ const mapStockDataSeries: (marketData: any) => Array<{symbol: string, singleDate
   const result: Array<any> = marketData !== undefined ?  marketData.map((item: any)=>{
 
     const timeSeriesData = Object.keys(item['Time Series (Daily)']).map(dateKey=> ({date: dateKey, data: item['Time Series (Daily)'][dateKey]}) ).reverse()
-
     return ({symbol: item.symbol, singleDateData: timeSeriesData})
   }) : []
- 
+
   return result
 }
-
-
 
 const MarketOverviewLineGraph: React.FunctionComponent<IMarketOverviewLineGraphProps> = ({marketOverviewData}) => {
   
@@ -175,8 +159,8 @@ const MarketOverviewLineGraph: React.FunctionComponent<IMarketOverviewLineGraphP
 
 
   React.useEffect(()=>{
-    console.log(marketOverviewData)
-    console.log(stockSeriesData)
+    // console.log(marketOverviewData)
+    // console.log(stockSeriesData)
   },[marketOverviewData])
 
   return (
@@ -189,14 +173,10 @@ const MarketOverviewLineGraph: React.FunctionComponent<IMarketOverviewLineGraphP
        
        options={{
            ...options,
-           xaxis: {
-              //  labels: {show: false},
-              // range: 15,
-            
+           xaxis: {        
               labels: {
-                // datetimeUTC: true,
                 rotate: 0,
-                // hideOverlappingLabels: true,
+                hideOverlappingLabels: true,
                 formatter: (val: any)=> {
                   // console.log(val)
                   return val !== undefined && typeof val === 'string' ? val.split('-').slice(1).join('/') : ''
@@ -210,7 +190,6 @@ const MarketOverviewLineGraph: React.FunctionComponent<IMarketOverviewLineGraphP
                  : []
           },
           tooltip: {
-            // enabled: false,
          followCursor: true,
          theme: 'dark',
          x:{
@@ -239,9 +218,7 @@ const MarketOverviewLineGraph: React.FunctionComponent<IMarketOverviewLineGraphP
            )
         }
           type={'line'}
-          // width='100%'
           height={340}
-          style={{borderWidth: 0}}
       />}
 
 

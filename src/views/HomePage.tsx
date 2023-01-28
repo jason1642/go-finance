@@ -4,7 +4,8 @@ import HomeMyStocksContainer from '../components/home-page/LeftColumn/HomeMyStoc
 import styled from 'styled-components';
 import Feed from '../components/home-page/RightColumn/Feed';
 import LinkPortfolioNotification from '../components/home-page/RightColumn/LinkPortfolioNotification';
-
+import { userApi } from '../redux/features/userApi';
+import PortfolioInfo from '../components/home-page/RightColumn/PortfolioInfo';
 
 const Container = styled.div`
       display: flex;
@@ -43,6 +44,7 @@ interface ComponentProps {
 
 const HomePage: React.FunctionComponent<ComponentProps> = () => {
 
+  const {data: userData} = userApi.endpoints.verifyUser.useQueryState()
 
 
   return (
@@ -60,7 +62,9 @@ const HomePage: React.FunctionComponent<ComponentProps> = () => {
 
       <RightColumnContainer>
 
-      <LinkPortfolioNotification />
+      {
+        userData ? <PortfolioInfo user={userData} /> : <LinkPortfolioNotification />
+      }
       <Feed />
       </RightColumnContainer>
     </Container>

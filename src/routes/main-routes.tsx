@@ -12,7 +12,7 @@ const MainRoutes = () => {
     // Check if user is currently logged in, if not redirect to login page
     const {data: userData} = userApi.endpoints.verifyUser.useQueryState()
 
-    console.log(userData)
+    // console.log(userData)
     return useRoutes([
         {
             path: '/account',

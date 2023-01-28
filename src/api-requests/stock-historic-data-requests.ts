@@ -7,6 +7,6 @@ const dailyHistoricData = 'DailyHistoricdata'
 
 export const fetchMultipleDailyHistoricData = async (stringList: string) => 
     await api.get(`/${dailyHistoricData}/multiple/${stringList}`).then(res=>{
-        console.log(res)
+        // console.log(res)
         return res
     }, err=> err)

@@ -47,10 +47,10 @@ const Header: React.FunctionComponent<ComponentProps>  = () => {
   const {data: userData, isLoading} = userApi.endpoints.verifyUser.useQueryState()
 
 
-  const user = {}
+
   // console.log(windowWidth)
   React.useEffect(() => {
-    console.log(userData)
+    // console.log(userData)
   }, [userData])
 
   return (

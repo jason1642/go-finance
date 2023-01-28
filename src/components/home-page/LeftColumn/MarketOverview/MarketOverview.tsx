@@ -33,7 +33,7 @@ const MarketOverview: React.FunctionComponent<ComponentProps> = () => {
   React.useEffect(() => {
     fetchMultipleDailyHistoricData('SPY,QQQ,DIA').then(res=>{
       setMarketOverviewData(res.data)
-      console.log(res)
+      // console.log(res)
     }).catch(err=>{
       console.log(err)
     }   

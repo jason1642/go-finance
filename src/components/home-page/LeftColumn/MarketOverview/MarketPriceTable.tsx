@@ -57,12 +57,12 @@ const fourMarketsNames = [
 ]
 
 const pairContainerFunction: (marketData: any) => React.ReactElement[] = (marketData) => {
-  console.log(marketData)
+  // console.log(marketData)
   if(marketData !== undefined) return marketData.map(( {symbol, 'Meta Data': {'3. Last Refreshed': lastRefreshed}, 'Time Series (Daily)': TimeSeries}:DailyHistoricDataTypes, i:number) =>
 {
   const {'1. open': open, '4. close': close} = TimeSeries[lastRefreshed]
   const changePercent: number = Number((((Number(open) - Number(close)) / Number(open)) * 100).toFixed(2)) 
-  console.log(TimeSeries)
+  // console.log(TimeSeries)
 return <MarketTile key={symbol} style={{ borderLeft: `3px solid ${colors[i]}` }}>
  <Link style={{ textDecoration: 'none' }} to={`/quote/${symbol}`}>
 
@@ -111,7 +111,7 @@ const MarketPriceTable: React.FunctionComponent<ComponentProps> = ({marketOvervi
   const ElementContainers: (marketData: any)=>React.ReactElement[] =  useMemo(() => pairContainerFunction, [marketOverviewData])
  
 
-console.log(marketOverviewData)
+// console.log(marketOverviewData)
 
   return (marketOverviewData ?
     <Container>

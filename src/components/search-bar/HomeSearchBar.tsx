@@ -61,7 +61,7 @@ const HomeSearchBar: React.FunctionComponent<ComponentProps>  = () => {
 
  
   const [input, setInput] = useState('exmaple12');
-  console.log(input)
+  // console.log(input)
 
 
   return (

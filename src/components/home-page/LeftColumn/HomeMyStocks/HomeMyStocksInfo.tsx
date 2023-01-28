@@ -39,7 +39,7 @@ interface ComponentProps {
 const HomeMyStocksInfo: React.FunctionComponent<ComponentProps> = ({stockData}) => {
 
 
-  console.log(stockData)
+  // console.log(stockData)
   return (
     <Container>
 
