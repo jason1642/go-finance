@@ -80,7 +80,7 @@ yaxis: {
     },
       // show: true,
       formatter: (val:any)=> {
-
+        console.log(val)
         return val.toFixed(0).toString()
       }
   }
@@ -162,10 +162,9 @@ interface IMarketOverviewLineGraphProps {
 
 
 const mapStockDataSeries: (marketData: any) => Array<{symbol: string, singleDateData: Array<{date: string, data: any}>}> | undefined = (marketData: any) => {
-    
   const result: Array<any> = marketData !== undefined ?  marketData.map((item: any)=>{
 
-    const timeSeriesData = Object.keys(item['Time Series (Daily)']).map(dateKey=> ({date: dateKey, data: item['Time Series (Daily)'][dateKey]}) )
+    const timeSeriesData = Object.keys(item['Time Series (Daily)']).map(dateKey=> ({date: dateKey, data: item['Time Series (Daily)'][dateKey]}) ).reverse()
 
     return ({symbol: item.symbol, singleDateData: timeSeriesData})
   }) : []
@@ -215,25 +214,35 @@ const MarketOverviewLineGraph: React.FunctionComponent<IMarketOverviewLineGraphP
            xaxis: {
               //  labels: {show: false},
               // range: 15,
+            
               labels: {
                 // trim: true,
-                datetimeUTC: true,
+                // datetimeUTC: true,
+                // show: false,
+                rotate: 0,
                 // hideOverlappingLabels: true,
-                format: 'dd/MM',
-                formatter: (val: any, x:any,time: any)=> {
+                // format: 'dd/MM',
+                formatter: (val: any)=> {
                   console.log(val)
-                  return typeof val.date === 'string' ? val.date.split('-').slice(1).join('/') : ''
+                  return val !== undefined && typeof val.date === 'string' ? val.date.split('-').slice(1).join('/') : ''
                 }
               },
                axisBorder: {show: false},
-           categories: stockSeriesData && stockSeriesData.length > 0 ? stockSeriesData[0].singleDateData.map(item=>item) : []
+           categories: 
+            stockSeriesData && stockSeriesData.length > 0 ? 
+              stockSeriesData[0].singleDateData.map((item:any, i: number)=>
+                 (i === 0 || i === stockSeriesData[0].singleDateData.length - 1 || i % 9 === 0 ) && item) 
+                 : []
           }
        }}
        series={
-        
-        stockSeriesData.map(item=> ({name: item.symbol, data: item.singleDateData.map(ele=>+Number(ele.data['1. open']).toFixed(2))})).reverse()
-
-       }
+        stockSeriesData.map(item=>
+           ({
+             name: item.symbol,
+             data: item.singleDateData.map(ele=>+Number(ele.data['4. close']).toFixed(2))
+            })
+           )
+        }
           type={'line'}
           // width='100%'
           height={340}
