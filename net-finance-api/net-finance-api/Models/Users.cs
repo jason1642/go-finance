@@ -1,8 +1,8 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Driver;
-       
+
 namespace net_finance_api.Models;
 
 
@@ -104,24 +104,27 @@ public class OrderHistory
 }
 
 
-
 public class Users
 {
    
     public Users ()
     {
-        created_at = DateTime.Now;
-        //updated_at = updated_at;
+        
+        
     }
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     public string? _id { get; set; }
 
-
+    //[BsonDefaultValue(c)]
+    
     [BsonElement("created_at")]
-    public DateTime created_at { get; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public DateTime created_at { get; set; }
 
-
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+    [BsonElement("updated_at")]
+    public DateTime updated_at { get; set; } 
 
 
 

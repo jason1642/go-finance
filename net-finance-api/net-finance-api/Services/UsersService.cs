@@ -59,8 +59,8 @@ public class UsersService
         await _usersCollection.InsertOneAsync(newUser);
 
 
-    public async Task UpdateAsync(string id, Users updatedUser) =>
-        await _usersCollection.ReplaceOneAsync(x => x._id == id, updatedUser);
+    //public async Task UpdateAsync(string id, Users updatedUser) =>
+    //    await _usersCollection.FindOneAndUpdateAsync(Builders<Users>.Filter.Where(x => x._id == id), updatedUser);
 
     public async Task RemoveAsync(string id) =>
         await _usersCollection.DeleteOneAsync(x => x._id == id);
