@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -12,7 +12,7 @@ namespace net_finance_api.Models;
 public class Positions
 {
     [BsonElement("symbol")]
-    public string symbol { get; set; }
+    public string? symbol { get; set; }
 
     [BsonElement("average_price")]
     public int average_price { get; set; }
@@ -21,11 +21,11 @@ public class Positions
     public int total_value { get; set; }
 
     [BsonElement("type")]
-    public string type { get; set; }
+    public string? type { get; set; }
     // stock, call, put, spread, etc
 
     [BsonElement("sector")]
-    public string sector { get; set; }
+    public string? sector { get; set; }
 
     [BsonElement("quantity")]
     public int quantity { get; set; }
@@ -81,7 +81,7 @@ public class Portfolio
 public class OrderHistory
 {
     [BsonElement("symbol")]
-    public string symbol { get; set; }
+    public string? symbol { get; set; }
 
     [BsonElement("currency")]
     public int currency {  get; set;}
@@ -91,13 +91,13 @@ public class OrderHistory
     public int price { get; set; }
 
     [BsonElement("action")]
-    public string action { get; set; }
+    public string? action { get; set; }
 
     [BsonElement("quantity")]
-    public int quantity { get; set; }
+    public int? quantity { get; set; }
 
     [BsonElement("status")]
-    public string status { get; set;}
+    public string? status { get; set;}
 
 
 
@@ -107,11 +107,11 @@ public class OrderHistory
 public class Users
 {
    
-    public Users ()
-    {
+    // public Users ()
+    // {
         
         
-    }
+    // }
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     public string? _id { get; set; }

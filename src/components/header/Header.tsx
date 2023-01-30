@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import NavButtons from './NavButtons'
@@ -13,10 +13,10 @@ const Container = styled.header`
     background-color: #32323e;
   `;
 
-  const SiteLogo = styled.img`
-    height: 100px;
-    width: auto;
-  `;
+  // const SiteLogo = styled.img`
+  //   height: 100px;
+  //   width: auto;
+  // `;
 
   export const StyledLink = styled(Link)`
     color: white;

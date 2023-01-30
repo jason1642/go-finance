@@ -56,10 +56,10 @@ public class MonthlyTimeSeries
 
 public class MonthlyHistoricData
 {
-	public MonthlyHistoricData()
-	{
+	// public MonthlyHistoricData()
+	// {
 
-	}
+	// }
 
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
@@ -78,7 +78,7 @@ public class MonthlyHistoricData
 
     [BsonElement("Monthly Time Series")]
     [JsonPropertyName("Monthly Time Series")]
-    public Dictionary<string, MonthlyTimeSeries> Objects { get; set; }
+    public Dictionary<string, MonthlyTimeSeries>? Objects { get; set; }
 }
 
 

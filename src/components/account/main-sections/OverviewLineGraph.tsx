@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { ApexOptions } from "apexcharts";
 import Chart from 'react-apexcharts'
-import { fetchDailyStockDataSeries } from '../../../api-requests/alphavantage-requests';
+// import { fetchDailyStockDataSeries } from '../../../api-requests/alphavantage-requests';
 import { stockTimeData } from '../../graphs/testOptions';
 
 interface IOverviewLineGraphProps {
@@ -141,8 +141,13 @@ markers: {
  }
 const OverviewLineGraph: React.FunctionComponent<IOverviewLineGraphProps> = ({symbol}) => {
 
-    const [stockDailyData, setStockDailyData] = React.useState<any>(stockTimeData)
-    const [stockDates, setStockDates] = React.useState<Array<any>>(Object.keys(stockTimeData['Time Series (Daily)']).slice(0, undefined).reverse())
+    // const [stockDailyData, setStockDailyData] = React.useState<any>(stockTimeData)
+    const stockDailyData = stockTimeData
+    const stockDates = Object.keys(stockTimeData['Time Series (Daily)']).slice(0, undefined).reverse()
+    // const [stockDates, setStockDates] = React.useState<Array<any>>(Object.keys(stockTimeData['Time Series (Daily)']).slice(0, undefined).reverse())
+
+
+
     React.useEffect(()=>{
         // fetchDailyStockDataSeries(symbol).then(res=>{
         //     setStockDailyData(res.data)

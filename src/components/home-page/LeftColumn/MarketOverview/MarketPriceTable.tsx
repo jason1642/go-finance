@@ -108,7 +108,7 @@ const colors: colorArrayType = ['#52e3c2', '#ff4495','#d211fe', '#40c4ff']
 const MarketPriceTable: React.FunctionComponent<ComponentProps> = ({marketOverviewData}) => {
   // console.log(isMarketOpenFunction.isItPremarket())
   // console.log(isMarketOpenFunction.isItAfterHours())
-  const ElementContainers: (marketData: any)=>React.ReactElement[] =  useMemo(() => pairContainerFunction, [marketOverviewData])
+  const ElementContainers: (marketData: any)=>React.ReactElement[] =  useMemo(() => pairContainerFunction, [])
  
 
 // console.log(marketOverviewData)

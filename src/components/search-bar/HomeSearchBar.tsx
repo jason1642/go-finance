@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components'
 import SearchIconSVG from '../../images/searchIcon.svg'
 import InfoIconSVG from '../../images/infoicon01.svg'
@@ -60,7 +60,7 @@ const HomeSearchBar: React.FunctionComponent<ComponentProps>  = () => {
 
 
  
-  const [input, setInput] = useState('exmaple12');
+  // const [input, setInput] = useState('exmaple12');
   // console.log(input)
 
 

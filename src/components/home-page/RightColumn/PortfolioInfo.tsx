@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 
 interface IPortfolioInfoProps {
     user: any;
@@ -32,26 +32,26 @@ margin-top: 1rem;
 /* padding: 10px 0px; */
 `;
 
-const LinkButton = styled(Link)` display: flex;
-align-items: center;
-font-size: 14px;
-font-weight: bold;
-text-decoration: none;
-color: #40c4ff;
-padding: 10px 18px;
-align-items: center;
-border-radius: 30px;
-justify-content: center;
-margin-left: 12px;
-min-width: 150px;
-background-color: #4d505f;
+// const LinkButton = styled(Link)` display: flex;
+// align-items: center;
+// font-size: 14px;
+// font-weight: bold;
+// text-decoration: none;
+// color: #40c4ff;
+// padding: 10px 18px;
+// align-items: center;
+// border-radius: 30px;
+// justify-content: center;
+// margin-left: 12px;
+// min-width: 150px;
+// background-color: #4d505f;
 
-&:hover {
-  cursor: pointer;
-  /* background-color: #bab9b9; */
-}
+// &:hover {
+//   cursor: pointer;
+//   /* background-color: #bab9b9; */
+// }
 
-`;
+// `;
 
 
 

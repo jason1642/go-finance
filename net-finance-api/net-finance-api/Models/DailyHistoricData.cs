@@ -79,7 +79,7 @@ public class DailyHistoricData
 
     [BsonElement("Time Series (Daily)")]
     [JsonPropertyName("Time Series (Daily)")]
-    public Dictionary<string, DailyTimeSeries> Objects { get; set; }
+    public Dictionary<string, DailyTimeSeries>? Objects { get; set; }
 }
 
 

@@ -8,7 +8,7 @@ public class NetFinanceDatabaseSettings
 
     public string UsersCollectionName { get; set; } = null!;
 
-    public string MonthlyHistoricDataCollectionName { get; set; }
+    public string? MonthlyHistoricDataCollectionName { get; set; }
 
-    public string DailyHistoricDataCollectionName { get; set; }
+    public string? DailyHistoricDataCollectionName { get; set; }
 }
