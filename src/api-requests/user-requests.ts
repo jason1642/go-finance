@@ -6,10 +6,10 @@ const api = axios.create({
 })
 
 
-interface UserLoginSchema {
-    username: string;
-    password: string;
-}
+// interface UserLoginSchema {
+//     username: string;
+//     password: string;
+// }
 
 
 // LoginUser / verifyUser are currently not used anywhere, redux user actions handles it but is still here for reference

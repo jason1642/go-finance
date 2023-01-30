@@ -5,7 +5,7 @@ import GreenThemedButton from '../components/buttons/GreenThemedButton';
 import { Link } from 'react-router-dom';
 import {Container, Title, Input, } from '../styles/login-signup'
 import { userLogin } from '../redux/async-actions/user-auth';
-import { useAppDispatch, useAppSelector } from '../redux/store';
+import { useAppDispatch } from '../redux/store';
 import Swal from 'sweetalert2';
 import { useNavigate} from 'react-router-dom';
 
@@ -37,22 +37,24 @@ const ForgotPasswordButton = styled(Link)`
     cursor: pointer;
   }
 `;
-interface UserLoginSchema {
-    username: string;
-    password: string;
-}
+// interface UserLoginSchema {
+//     username: string;
+//     password: string;
+// }
 
 // Error handling
 // Api request
 
-const Login: React.FunctionComponent<ILoginProps> = ({}) => {
+const Login: React.FunctionComponent<ILoginProps> = () => {
     // const user = useAppSelector((state: RootState) => state.user)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
 
 
-    const {register, handleSubmit, formState: {errors}  } = useForm({
+    const {register, handleSubmit,
+      //  formState: {errors} 
+       } = useForm({
         defaultValues: {
             username: '', 
             password: ''

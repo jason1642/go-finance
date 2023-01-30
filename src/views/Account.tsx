@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import OverviewLineGraph from '../components/account/main-sections/OverviewLineGraph';
 import PortfolioStatistics from '../components/account/main-sections/PortFolioStatistics';
 import DonutGraphPortfolioOverview from '../components/account/side-panel/DonutGraphPortfolioOverview';
-import SectorDonutGraph from '../components/account/side-panel/SectorDonutGraph';
+// import SectorDonutGraph from '../components/account/side-panel/SectorDonutGraph';
 interface IAccountProps {
 }
 
@@ -43,13 +43,13 @@ const Wrapper = styled.div`
   display: flex;
   border-top: 1px solid #9b9b9b33;
 `;
-const PanelTitle = styled.h2`
-  display:flex;
-  font-weight: 300;
-  text-align: left;
-  /* margin: 0 auto; */
-  padding: 0 1.5rem;
-`;
+// const PanelTitle = styled.h2`
+//   display:flex;
+//   font-weight: 300;
+//   text-align: left;
+//   /* margin: 0 auto; */
+//   padding: 0 1.5rem;
+// `;
 
 const Account: React.FunctionComponent<IAccountProps> = (props) => {
   return (

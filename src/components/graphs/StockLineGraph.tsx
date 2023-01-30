@@ -102,6 +102,7 @@ const StockLineGraph: React.FunctionComponent<IStockLineGraphProps> = ({symbol})
             setStockDates(Object.keys(res.data['Time Series (Daily)']).slice(0, 12).reverse())
             console.log(stockDailyData, stockDates)
         })
+            // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     return (
     <Container>

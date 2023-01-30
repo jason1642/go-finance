@@ -1,7 +1,7 @@
 import { createSlice, current,  } from '@reduxjs/toolkit'
 // current import used for debugging, to log or inspect the work in progress state
-import { userLogin, verifyUser, logoutUser } from '../async-actions/user-auth'
-import type { PayloadAction } from '@reduxjs/toolkit'
+import { userLogin, verifyUser, } from '../async-actions/user-auth'
+// import type { PayloadAction } from '@reduxjs/toolkit'
 
 
 export interface UserState {

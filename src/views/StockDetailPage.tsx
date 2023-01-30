@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import LeftColumn from '../components/stock-detail-page/LeftColumn/LeftColumn'
 import RightColumn from '../components/stock-detail-page/RightColumn/RightColumn'
@@ -12,7 +12,7 @@ interface ComponentProps {
 
 
 
-const StockDetailPage: React.FunctionComponent<ComponentProps> = ({}) => {
+const StockDetailPage: React.FunctionComponent<ComponentProps> = () => {
   const {symbol} = useParams()
 
   const Container = styled.div`
@@ -23,7 +23,8 @@ const StockDetailPage: React.FunctionComponent<ComponentProps> = ({}) => {
     flex-direction: column;
   }
   `;
-  const [stockData, setStockData] = useState()
+  // const [stockData, setStockData] = useState()
+  const stockData = undefined
   useEffect(() => {
 
 

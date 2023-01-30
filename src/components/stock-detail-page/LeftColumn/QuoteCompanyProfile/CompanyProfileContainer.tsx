@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components'
 import Description from './Description';
 import SectorIndustryOverview from './SectorIndustryOverview'
@@ -19,7 +19,8 @@ interface ComponentProps {
 const QuoteCompanyProfile: React.FunctionComponent<ComponentProps> = ({symbol, stockData}) => {
 
 
-  const [companyProfile, setCompanyProfile] = useState()
+  // const [companyProfile, setCompanyProfile] = useState()
+  const companyProfile = undefined
   useEffect(() => {
 
 

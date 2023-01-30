@@ -1,21 +1,21 @@
-import React from 'react'
-import marketOpenDates from './marketopenDates.json'
+// import React from 'react'
+// import marketOpenDates from './marketopenDates.json'
 
 const usaTime = new Date().toLocaleString("en-US", { timeZone: "America/New_York" })
-const currentMonth = new Date().getMonth() + 1
-const currentDayOfMonth = new Date().getDate() + 1
-const currentYear = new Date().getFullYear()
+// const currentMonth = new Date().getMonth() + 1
+// const currentDayOfMonth = new Date().getDate() + 1
+// const currentYear = new Date().getFullYear()
 const splitTime = usaTime.split(' ')
-const todaysDate = splitTime[0]
-const dateArray = [currentMonth, currentDayOfMonth]
+// const todaysDate = splitTime[0]
+// const dateArray = [currentMonth, currentDayOfMonth]
 
-const dateStrToArr = (str: string) => {
-  let arr:[...any] = []
-  if (typeof str === 'string') {
-    str.split('/').forEach(elem => arr.push(Number.parseInt(elem)))
-  }
-  return arr
-}
+// const dateStrToArr = (str: string) => {
+//   let arr:[...any] = []
+//   if (typeof str === 'string') {
+//     str.split('/').forEach(elem => arr.push(Number.parseInt(elem)))
+//   }
+//   return arr
+// }
 
 const splitHour = splitTime[4].split(":").slice(0, 2)
 
