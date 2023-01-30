@@ -78,7 +78,7 @@ namespace net_finance_api.Controllers
                 return NotFound();
             }
 
-            //updatedUser._id = user._id;
+            updatedUser._id = user._id;
             updatedUser.updated_at = DateTime.Now;
 
             await _usersService.UpdateAsync(id, updatedUser);

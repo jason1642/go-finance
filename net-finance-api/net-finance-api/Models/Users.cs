@@ -122,11 +122,17 @@ public class Users
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public DateTime created_at { get; set; }
 
+
+    // Manually set new updated_at in controllers with - put, create, 
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     [BsonElement("updated_at")]
-    public DateTime updated_at { get; set; } 
+    public DateTime updated_at { get; set; }
 
 
+    // Default to no date, re set last online on login or verify; potentially even on message send and more 
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+    [BsonElement("last_online")]
+    public DateTime last_online { get; set; }
 
 
     [BsonElement("first_name")]
