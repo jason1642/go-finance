@@ -1,6 +1,13 @@
 import axios from 'axios'
 
-const api = axios.create({baseURL: 'https://localhost:7025/api'})
+const api = axios.create(
+    {
+        baseURL: process.env.NODE_ENV === 'production' ?
+             'https://net-finance.netlify.app/api' 
+             :'https://localhost:7025/api'
+    
+    }
+        )
 
 const dailyHistoricData = 'DailyHistoricdata'
 
