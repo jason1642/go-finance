@@ -94,6 +94,8 @@ builder.Services.AddAuthentication().AddJwtBearer(options =>
     // this is the key piece!
 
 });
+Console.WriteLine("Hello World!");
+
 //.AddPolicyScheme("JWT_OR_COOKIE", "JWT_OR_COOKIE", options =>
 //{
 //    // runs on each request
