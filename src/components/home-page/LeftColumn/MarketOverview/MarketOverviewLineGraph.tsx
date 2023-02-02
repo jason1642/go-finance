@@ -133,13 +133,19 @@ interface IMarketOverviewLineGraphProps {
 
 
 const mapStockDataSeries: (marketData: MarketOverviewTupleTypes) => Array<{symbol: string, singleDateData: Array<{date: string, data: any}>}> | [] = (marketData: MarketOverviewTupleTypes) => {
-  const result: Array<any> = marketData !== undefined ?  marketData.map((item: any)=>{
+  try {
+      const result: Array<any> = marketData !== undefined ?  marketData.map((item: any)=>{
 
     const timeSeriesData = Object.keys(item['Time Series (Daily)']).map(dateKey=> ({date: dateKey, data: item['Time Series (Daily)'][dateKey]}) ).reverse()
     return ({symbol: item.symbol, singleDateData: timeSeriesData})
   }) : []
 
   return result
+  }
+  catch(err){
+    return []
+  }
+
 }
 
 const MarketOverviewLineGraph: React.FunctionComponent<IMarketOverviewLineGraphProps> = ({marketOverviewData}) => {
