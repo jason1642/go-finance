@@ -106,7 +106,7 @@ namespace net_finance_api.Controllers
             await _usersService.CreateAsync(newUser);
 
             return CreatedAtAction(nameof(Get), newUser);
-        }
+        } 
 
         // DELETE: api/users/5
         [HttpDelete("{id:length(24)}")]
