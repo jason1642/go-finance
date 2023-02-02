@@ -4,7 +4,9 @@ import axios from 'axios'
 
 
 const api = axios.create({
-    baseURL: 'https://localhost:7025/api/users',
+    baseURL: process.env.NODE_ENV === 'production' ?
+    'https://main.d1pbrktrl7a0d8.amplifyapp.com/api' 
+    :'https://localhost:7025/api',
     withCredentials: true,
     // ^ Enables cookie access and changes
 })
