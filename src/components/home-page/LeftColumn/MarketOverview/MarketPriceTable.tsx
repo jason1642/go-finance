@@ -58,7 +58,8 @@ const fourMarketsNames = [
 
 const pairContainerFunction: (marketData: MarketOverviewTupleTypes) => React.ReactElement[] = (marketData: MarketOverviewTupleTypes) => {
   // console.log(marketData)
-  if(marketData !== undefined && marketData.length > 0) return marketData.map(( {symbol, 'Meta Data': {'3. Last Refreshed': lastRefreshed}, 'Time Series (Daily)': TimeSeries}:DailyHistoricDataTypes, i:number) =>
+  try{
+      if(marketData !== undefined && marketData.length > 0) return marketData.map(( {symbol, 'Meta Data': {'3. Last Refreshed': lastRefreshed}, 'Time Series (Daily)': TimeSeries}:DailyHistoricDataTypes, i:number) =>
 {
   const {'1. open': open, '4. close': close} = TimeSeries[lastRefreshed]
   const changePercent: number = Number((((Number(open) - Number(close)) / Number(open)) * 100).toFixed(2)) 
@@ -88,8 +89,14 @@ return <MarketTile key={symbol} style={{ borderLeft: `3px solid ${colors[i]}` }}
  </Link>
 </MarketTile>
 })
-
 return [<></>]
+  }
+catch(err){
+  return [<></>]
+
+}
+
+
 
 }
 

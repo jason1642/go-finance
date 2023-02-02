@@ -132,7 +132,7 @@ interface IMarketOverviewLineGraphProps {
 
 
 
-const mapStockDataSeries: (marketData: any) => Array<{symbol: string, singleDateData: Array<{date: string, data: any}>}> | undefined = (marketData: any) => {
+const mapStockDataSeries: (marketData: MarketOverviewTupleTypes) => Array<{symbol: string, singleDateData: Array<{date: string, data: any}>}> | [] = (marketData: any) => {
   const result: Array<any> = marketData !== undefined ?  marketData.map((item: any)=>{
 
     const timeSeriesData = Object.keys(item['Time Series (Daily)']).map(dateKey=> ({date: dateKey, data: item['Time Series (Daily)'][dateKey]}) ).reverse()
@@ -152,7 +152,7 @@ const MarketOverviewLineGraph: React.FunctionComponent<IMarketOverviewLineGraphP
     ['4. close']: string;
     ['5. volume']: string;
     
-}}>}> | undefined = React.useMemo(()=>mapStockDataSeries(marketOverviewData), [marketOverviewData])
+}}>}> | undefined = React.useMemo(()=>marketOverviewData && mapStockDataSeries(marketOverviewData), [marketOverviewData])
 
  
 
