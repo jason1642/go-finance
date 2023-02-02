@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const api = axios.create({
     baseURL: process.env.NODE_ENV === 'production' ?
-    'https://net-finance.netlify.app/api' 
+    'https://main.d1pbrktrl7a0d8.amplifyapp.com/api' 
     :'https://localhost:7025/api',
     withCredentials: true,
 })
