@@ -14,7 +14,9 @@ interface UserLoginSchema {
 // Define a service using a base URL and expected endpoints
 export const userApi = createApi({
     reducerPath: 'userApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://localhost:7025/api/users/' }),
+    baseQuery: fetchBaseQuery({  baseUrl: process.env.NODE_ENV === 'production' ?
+    'https://main.d1pbrktrl7a0d8.amplifyapp.com/api' 
+    :'https://localhost:7025/api', }),
     tagTypes: ['User'],
     endpoints: (builder) => ({
       getAllUsers: builder.query<any, void>({
