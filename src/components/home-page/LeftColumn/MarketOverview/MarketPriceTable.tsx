@@ -56,7 +56,7 @@ const fourMarketsNames = [
   { symbol: 'DIA', name: 'DIA' }
 ]
 
-const pairContainerFunction: (marketData: Array<any>) => React.ReactElement[] = (marketData: Array<any>) => {
+const pairContainerFunction: (marketData: MarketOverviewTupleTypes) => React.ReactElement[] = (marketData: MarketOverviewTupleTypes) => {
   // console.log(marketData)
   if(marketData !== undefined && marketData.length > 0) return marketData.map(( {symbol, 'Meta Data': {'3. Last Refreshed': lastRefreshed}, 'Time Series (Daily)': TimeSeries}:DailyHistoricDataTypes, i:number) =>
 {
@@ -108,17 +108,17 @@ const colors: colorArrayType = ['#52e3c2', '#ff4495','#d211fe', '#40c4ff']
 const MarketPriceTable: React.FunctionComponent<ComponentProps> = ({marketOverviewData}) => {
   // console.log(isMarketOpenFunction.isItPremarket())
   // console.log(isMarketOpenFunction.isItAfterHours())
-const ElementContainers: (marketData: any)=>React.ReactElement[] =  useMemo(() => pairContainerFunction, [marketOverviewData])
+const ElementContainers: React.ReactElement[] =  useMemo(() => pairContainerFunction(marketOverviewData), [marketOverviewData])
  
 
 // console.log(marketOverviewData)
-// React.useEffect(()=>{
-//   console.log(marketOverviewData)
-// },[marketOverviewData])
+React.useEffect(()=>{
+  console.log(marketOverviewData)
+},[marketOverviewData])
   return (marketOverviewData ?
     <Container>
    
-      {marketOverviewData && ElementContainers(marketOverviewData)}
+      {marketOverviewData && ElementContainers}
 
     </Container> : <></>
   );

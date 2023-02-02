@@ -13,7 +13,7 @@ const api = axios.create({
     }
 })
 
-console.log(process.env.REACT_APP_ALPHAVANTAGE_API_KEY)
+// console.log(process.env.REACT_APP_ALPHAVANTAGE_API_KEY)
 export const fetchDailyStockDataSeries = async (symbol: string) => 
 await api.get(`?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${symbol}`).then(res=>res,err=>err)
     
