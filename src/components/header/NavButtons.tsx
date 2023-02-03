@@ -33,7 +33,7 @@ const LinkBatch: React.FunctionComponent<ComponentProps>  = ({userData, isLoadin
         onClick={()=>{
           removeTokensLogout()
           navigate('/')
-              window.location.reload()
+          window.location.reload()
         }
         }
         style={{

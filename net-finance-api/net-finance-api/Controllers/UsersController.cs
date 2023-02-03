@@ -68,7 +68,7 @@ namespace net_finance_api.Controllers
         // PUT: api/users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         //[AutoValidateAntiforgeryToken]
-        [HttpPut("{id}")]
+        [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> PutUsers(string id, Users updatedUser)
         {
             var user = await _usersService.GetAsync(id);
@@ -225,19 +225,19 @@ namespace net_finance_api.Controllers
             Response.Cookies.Delete("X-Access-Token", new CookieOptions
             {
                 HttpOnly = true,
-                SameSite = SameSiteMode.None,
+                SameSite = SameSiteMode.Strict,
                 Secure = true
             });
             Response.Cookies.Delete("X-Username", new CookieOptions
             {
                 HttpOnly = true,
-                SameSite = SameSiteMode.None,
+                SameSite = SameSiteMode.Strict,
                 Secure = true
             });
             Response.Cookies.Delete("X-Refresh-Token", new CookieOptions
             {
                 HttpOnly = true,
-                SameSite = SameSiteMode.None,
+                SameSite = SameSiteMode.Strict,
                 Secure = true
             });
             return Ok();
