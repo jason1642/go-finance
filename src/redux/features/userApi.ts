@@ -15,8 +15,8 @@ interface UserLoginSchema {
 export const userApi = createApi({
     reducerPath: 'userApi',
     baseQuery: fetchBaseQuery({  baseUrl: process.env.NODE_ENV === 'production' ?
-    'https://main.d1pbrktrl7a0d8.amplifyapp.com/api' 
-    :'https://localhost:7025/api', }),
+    'https://main.d1pbrktrl7a0d8.amplifyapp.com/api/users' 
+    :'https://localhost:7025/api/users', }),
     tagTypes: ['User'],
     endpoints: (builder) => ({
       getAllUsers: builder.query<any, void>({
@@ -28,10 +28,10 @@ export const userApi = createApi({
         query: (userForm: UserLoginSchema) => ({
           url: '/login',
           method: 'POST',
-          // Include the entire post object as the body of the request
+          // Include the entire post object as the body of the request 
           body: userForm,
           credentials: "include"
-
+ 
         })
       }),
 

@@ -151,7 +151,7 @@ namespace net_finance_api.Controllers
 
 
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-                    var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                    var signIn = new  SigningCredentials(key, SecurityAlgorithms.HmacSha256);
                     var token = new JwtSecurityToken(
                               _configuration["Jwt:Issuer"],
                               _configuration["Jwt:Audience"],
