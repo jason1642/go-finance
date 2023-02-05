@@ -124,61 +124,7 @@ namespace net_finance_api.Controllers
             return NoContent();
         }
 
-        // Post: api/Users/login
-        [HttpPost("login")]
-        public async Task<IActionResult?> Login([FromBody] Users userSignin)
-        {
-
-
-
-
-            if (ModelState.IsValid)
-            {
-                var user = await _usersService.Login(userSignin);
-
-                if (user != null)
-                {
-                    
-
-                    Claim[] claims = new[] {
-                        new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
-                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
-                        new Claim("UserId", user._id.ToString()),
-                        new Claim("Username", user.username)
-                        };
-
-
-
-                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-                    var signIn = new  SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                    var token = new JwtSecurityToken(
-                              _configuration["Jwt:Issuer"],
-                              _configuration["Jwt:Audience"],
-                              claims,
-                              expires: DateTime.UtcNow.AddMinutes(10),
-                              signingCredentials: signIn).ToString();
-
-                    string RefreshToken = Guid.NewGuid().ToString();
-                    
-                    user.refresh_token = RefreshToken;
-                    await _usersService.UpdateAsync(user._id, user);
-                 
-                    Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Domain = "localhost" });
-                    Response.Cookies.Append("X-Username", user.username, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Domain = "localhost" });
-                    Response.Cookies.Append("X-Refresh-Token", RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Domain = "localhost" });
-
-                    return Ok(RefreshToken);
-                }
-                else
-                {
-                    return BadRequest();
-                }
-            }
-            else
-                return BadRequest(ModelState);
-
-        }
+      
 
         [HttpPost("verify")]
         public async Task<IActionResult> Verify()
@@ -243,7 +189,61 @@ namespace net_finance_api.Controllers
             return Ok();
         }
 
+        // Post: api/Users/login
+        [HttpPost("login")]
+        public async Task<IActionResult?> Login([FromBody] Users userSignin)
+        {
 
+
+
+
+            if (ModelState.IsValid)
+            {
+                var user = await _usersService.Login(userSignin);
+
+                if (user != null)
+                {
+
+
+                    Claim[] claims = new[] {
+                        new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                        new Claim("UserId", user._id.ToString()),
+                        new Claim("Username", user.username)
+                        };
+
+
+
+                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+                    var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                    var token = new JwtSecurityToken(
+                              _configuration["Jwt:Issuer"],
+                              _configuration["Jwt:Audience"],
+                              claims,
+                              expires: DateTime.UtcNow.AddMinutes(10),
+                              signingCredentials: signIn).ToString();
+
+                    string RefreshToken = Guid.NewGuid().ToString();
+
+                    user.refresh_token = RefreshToken;
+                    await _usersService.UpdateAsync(user._id, user);
+
+                    Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Domain = "localhost" });
+                    Response.Cookies.Append("X-Username", user.username, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Domain = "localhost" });
+                    Response.Cookies.Append("X-Refresh-Token", RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Domain = "localhost" });
+
+                    return Ok(RefreshToken);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            else
+                return BadRequest(ModelState);
+
+        }
 
         [HttpPost("createBuyOrder")]
         public async Task<IActionResult> createBuyOrder([FromBody] string symbol, int quantity, string action, int price)
