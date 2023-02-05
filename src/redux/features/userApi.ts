@@ -28,6 +28,10 @@ export const userApi = createApi({
         query: (userForm: UserLoginSchema) => ({
           url: '/login',
           method: 'POST',
+          headers: { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
           // Include the entire post object as the body of the request 
           body: userForm,
           credentials: "include"
