@@ -41,13 +41,13 @@ namespace net_finance_api.Controllers
 
         //GET: api/DailyHistoricData/multiple/SPY,QQQ,DIA
         [HttpGet("multiple/{symbolList}")]
-        public async Task<List<DailyHistoricData>> GetMultiple(string symbolList)
+        public async Task<IActionResult> GetMultiple(string symbolList)
         {
            string[] symbolArray = symbolList.Split(',');
             Console.WriteLine(symbolArray);
             var filter = Builders<DailyHistoricData>.Filter.In(x => x.symbol, symbolArray);
             List<DailyHistoricData> results = await _DailyHistoricDataService.FindMultipleAsync(filter);
-            return results;
+            return Ok(results);
         }
 
         // POST: api/DailyHistoricData
