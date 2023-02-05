@@ -33,10 +33,6 @@ namespace net_finance_api.Controllers
 
 
 
-        // GET: api/DailyHistoricData
-        [HttpGet]
-        public async Task<List<DailyHistoricData>> Get() =>
-            await _DailyHistoricDataService.GetAsync();
 
 
         //GET: api/DailyHistoricData/multiple/SPY,QQQ,DIA
@@ -49,6 +45,13 @@ namespace net_finance_api.Controllers
             List<DailyHistoricData> results = await _DailyHistoricDataService.FindMultipleAsync(filter);
             return Ok(results);
         }
+
+
+
+        // GET: api/DailyHistoricData
+        [HttpGet]
+        public async Task<List<DailyHistoricData>> Get() =>
+            await _DailyHistoricDataService.GetAsync();
 
         // POST: api/DailyHistoricData
         [HttpPost]
