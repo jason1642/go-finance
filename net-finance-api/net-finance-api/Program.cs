@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
 using net_finance_api.Models;
+using net_finance_api.Controllers;
 using NetFinanceApi.Services;
 using System.Security.Claims;
 using System.Text;
@@ -16,15 +17,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: policyName,
-                      builder =>
-                      {
-                          builder
-                             .WithOrigins("https://localhost:5172", "http://localhost:5172", "https://localhost:3001", "https://main.d1pbrktrl7a0d8.amplifyapp.com", "https://localhost:7025")
-                             //.AllowAnyOrigin()
-                             .AllowAnyMethod()
-                             .AllowAnyHeader()
-                             .AllowCredentials();
-                      });
+        builder =>
+        {
+            builder
+                .WithOrigins("https://localhost:5172", "http://localhost:5172", "https://localhost:3001", "https://main.d1pbrktrl7a0d8.amplifyapp.com", "https://localhost:7025")
+                //.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials();
+        });
 });
 
 

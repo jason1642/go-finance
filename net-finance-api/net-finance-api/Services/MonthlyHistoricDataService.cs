@@ -1,22 +1,7 @@
 ﻿using net_finance_api.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Azure;
-using Azure.Core;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+
 
 
 namespace NetFinanceApi.Services;
