@@ -9,7 +9,9 @@ using System.Security.Claims;
 using System.Text;
 
 
-var policyName = "_myAllowSpecificOrigins";
+// var policyName = "_myAllowSpecificOrigins";
+var policyName = "LowCorsPolicy";
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
