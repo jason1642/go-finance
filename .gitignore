@@ -24,6 +24,4 @@ yarn-error.log*
 .env
 net-finance-api/net-finance-api/appsettings.json
 net-finance-api/net-finance-api/AWSCLIV2.pkg
-net-finance-api/net-finance-api/appsettings.json
-net-finance-api/net-finance-api/appsettings.json
-net-finance-api/net-finance-api/appsettings.json
+
