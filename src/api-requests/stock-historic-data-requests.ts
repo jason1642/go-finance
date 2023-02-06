@@ -12,8 +12,8 @@ const api = axios.create(
     },
     
         )
-
-const dailyHistoricData = 'DailyHistoricdata'
+ console.log(process.env.NODE_ENV)
+const dailyHistoricData = 'DailyHistoricData'
 
 
 export const fetchMultipleDailyHistoricData = async (stringList: string) => 
