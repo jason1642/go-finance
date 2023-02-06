@@ -84,3 +84,37 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0
 # WORKDIR /App
 # COPY --from=build-env /App/out .
 # ENTRYPOINT ["dotnet", "DotNet.Docker.dll"]
+
+
+
+
+
+
+
+
+
+
+# AWS BUILD SETTINGS
+# backend:
+#   phases:
+#     preBuild:
+#       commands:
+#         - cd net-finance-api/net-finance-api
+#         - curl -sSL https://dot.net/v1/dotnet-install.sh > dotnet-install.sh
+#         - chmod +x *.sh
+#         - ./dotnet-install.sh -c 7.0 -InstallDir ./dotnet7
+#         - ./dotnet7/dotnet --version
+#     build:
+#       commands:
+#         - ./dotnet7/dotnet publish -c Release -o release
+   
+#     postBuild:
+#         commands:
+       
+#     artifacts:
+#      baseDirectory: /net-finance-api/net-finance-api/release/wwwroot
+#      files:
+#      - '**/*'
+#      cache:
+#      paths: []
+ 
