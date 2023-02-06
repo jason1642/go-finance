@@ -20,7 +20,7 @@ builder.Services.AddCors(options =>
         builder =>
         {
             builder
-                .WithOrigins("https://localhost:5172", "http://localhost:5172", "https://localhost:3001", "https://main.d1pbrktrl7a0d8.amplifyapp.com", "https://localhost:7025")
+                .WithOrigins("https://localhost:5172", "https://dtg1w6c05xnaz.cloudfront.net", "http://localhost:5172", "https://localhost:3001", "https://main.d1pbrktrl7a0d8.amplifyapp.com", "https://localhost:7025")
                 //.AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
