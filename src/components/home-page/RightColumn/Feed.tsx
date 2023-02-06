@@ -26,32 +26,32 @@ const Feed: React.FunctionComponent<ComponentProps> = () => {
     //   console.log(response)
     //   setNewsApiData(response.data.articles)
     // }
-    const fetchNewsData = async () => {
+    // const fetchNewsData = async () => {
 
-      axios({
-        "method": "GET",
-        "url": "https://bing-news-search1.p.rapidapi.com/news",
-        "headers": {
-          "content-type": "application/octet-stream",
-          "x-rapidapi-host": "bing-news-search1.p.rapidapi.com",
-          "x-rapidapi-key": BING_NEWS_API_KEY,
-          "x-bingapis-sdk": "true",
-          "useQueryString": true
-        }, "params": {
-          "safeSearch": "Off",
-          "category": "business",
-          "textFormat": "Raw"
-        } 
-      })
-        .then((response) => {
-          setNewsApiData(response.data.value)
-          console.log(response)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+    //   axios({
+    //     "method": "GET",
+    //     "url": "https://bing-news-search1.p.rapidapi.com/news",
+    //     "headers": {
+    //       "content-type": "application/octet-stream",
+    //       "x-rapidapi-host": "bing-news-search1.p.rapidapi.com",
+    //       "x-rapidapi-key": BING_NEWS_API_KEY,
+    //       "x-bingapis-sdk": "true",
+    //       "useQueryString": true
+    //     }, "params": {
+    //       "safeSearch": "Off",
+    //       "category": "business",
+    //       "textFormat": "Raw"
+    //     } 
+    //   })
+    //     .then((response) => {
+    //       setNewsApiData(response.data.value)
+    //       console.log(response)
+    //     })
+    //     .catch((error) => {
+    //       console.log(error)
+    //     })
 
-    }
+    // }
     // fetchNewsData()
 
   }, [])
