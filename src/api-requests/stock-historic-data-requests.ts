@@ -3,7 +3,7 @@ import axios from 'axios'
 const api = axios.create(
     {
         baseURL: process.env.NODE_ENV === 'production' ?
-             'https://dtg1w6c05xnaz.cloudfront.net/api' 
+             'https://net-finance.azurewebsites.net/api' 
              :'https://localhost:7025/api'
     ,headers: {
         'Accept': 'application/json',
