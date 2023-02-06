@@ -34,6 +34,7 @@
   <ItemGroup>
     <None Remove="Microsoft.EntityFrameworkCore.InMemory" />
     <None Remove="Models\" />
+     <None Remove="Controllers\" />
     <None Remove="Services\" />
     <None Remove="BCrypt.Net-Next" />
     <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
@@ -44,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Controllers\" />
     <Folder Include="Services\" />
     <Folder Include="context\" />
   </ItemGroup>

@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-netfinanceapi-dev-45902-authRole",
+      "UnauthRoleArn": "arn:aws:iam::984819823758:role/amplify-netfinanceapi-dev-45902-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::984819823758:role/amplify-netfinanceapi-dev-45902-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-netfinanceapi-dev-45902-deployment",
+      "UnauthRoleName": "amplify-netfinanceapi-dev-45902-unauthRole",
+      "StackName": "amplify-netfinanceapi-dev-45902",
+      "StackId": "arn:aws:cloudformation:us-east-1:984819823758:stack/amplify-netfinanceapi-dev-45902/e3414920-a604-11ed-8d30-12cc1b6777a1",
+      "AmplifyAppId": "dmldzgi2s23m7"
+    }
+  }
+}
