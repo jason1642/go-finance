@@ -14,8 +14,6 @@ jobs:
     runs-on: windows-latest
 
     steps:
-
-      DEPLOYMENT_TARGET-"C:\home\site\wwwroot\net-finance-api"
       - uses: actions/checkout@v2
 
       - name: Set up .NET Core
@@ -44,8 +42,6 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      DEPLOYMENT_TARGET-"C:\home\site\wwwroot\net-finance-api"
-
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
