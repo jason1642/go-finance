@@ -23,7 +23,7 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build myrepo/net-finance-api/net-finance-api --configuration Release
+        run: dotnet build net-finance-api/net-finance-api/net-finance-api.csproj --configuration Release
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/net-finance-api/net-finance-api
