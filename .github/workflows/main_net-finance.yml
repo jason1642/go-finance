@@ -23,10 +23,10 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build myrepo\net-finance-api\net-finance-api\net-finance-api.csproj --configuration Release
+        run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/net-finance-api/net-finance-api
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -43,7 +43,7 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: net-finance-app/net-finance-app/actions/download-artifact@v2
+        uses: actions/download-artifact@v2
         with:
           name: .net-app
 

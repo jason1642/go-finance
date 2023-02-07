@@ -29,6 +29,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.2" />
     <PackageReference Include="Microsoft.NET.Build.Containers" Version="0.3.2" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Cors" Version="5.2.9" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +43,7 @@
     <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
     <None Remove="context\" />
     <None Remove="Microsoft.NET.Build.Containers" />
+    <None Remove="Microsoft.AspNet.WebApi.Cors" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
