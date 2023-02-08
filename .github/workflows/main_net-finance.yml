@@ -11,16 +11,10 @@ on:
 
 jobs:
   build:
-  
     runs-on: windows-latest
 
     steps:
-   
-     - uses: actions/checkout@v2
-     - task: DotNetCoreCLI@2
-        inputs:
-          command: 'build' 
-          projects: 'net-finance-api/net-finance-api/net-finance-api.csproj'
+      - uses: actions/checkout@v2
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
@@ -29,16 +23,16 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build net-finance-api\net-finance-api\net-finance-api.csproj --configuration Release
+        run: dotnet build net-finance-api/net-finance-api --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}
+        run: dotnet publish net-finance-api/net-finance-api -c Release -o ${{env.DOTNET_ROOT}}/net-finance-api/net-finance-api
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}
+          path: ${{env.DOTNET_ROOT}}/net-finance-app/net-finance-app
 
   deploy:
     runs-on: windows-latest
