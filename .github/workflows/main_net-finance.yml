@@ -20,7 +20,7 @@ jobs:
      - task: DotNetCoreCLI@2
         inputs:
           command: 'build' 
-          projects: 'myrepo/net-finance-api/net-finance-api.csproj'
+          projects: 'net-finance-api/net-finance-api/net-finance-api.csproj'
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
