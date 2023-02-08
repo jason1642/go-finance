@@ -32,7 +32,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/net-finance-app/net-finance-app
+          path: net-finance-app/net-finance-app/${{env.DOTNET_ROOT}}
 
   deploy:
     runs-on: windows-latest
