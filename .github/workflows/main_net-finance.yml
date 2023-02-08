@@ -45,15 +45,11 @@ jobs:
       contents: read
       pages: write
     steps:
-      - name: Sample Azure action
-        with: # Set Azure credentials secret as an input
-          credentials: ${{ secrets.AZURE_CREDENTIALS }}
-        env: # Or as an environment variable
-        credentials: ${{ secrets.AZURE_CREDENTIALS }}
       - name: OIDC Login to Azure Public Cloud with AzPowershell (enableAzPSSession true)
         uses: azure/login@v1
        
         with:
+        credentials: ${{ secrets.AZURE_CREDENTIALS }}
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }} 
