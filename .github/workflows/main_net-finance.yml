@@ -54,6 +54,8 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }} 
           enable-AzPSSession: true
+        env: # Or as an environment variable
+          3credentials: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: 'Get RG with powershell action'
         uses: azure/powershell@v1
@@ -77,4 +79,7 @@ jobs:
           package: .
 
 
-          
+#           export NAMESPACE="default"
+# export SERVICE_ACCOUNT_NAME="jump-pod-sa"
+
+# kubectl create serviceaccount netfinance -n net-finance
