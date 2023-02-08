@@ -56,6 +56,7 @@ jobs:
         uses: azure/login@v1
 
         with:
+          creds: ${{secrets.AZURE_CREDENTIALS}}
           credentials: ${{ secrets.AZURE_CREDENTIALS }}
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
@@ -63,6 +64,8 @@ jobs:
           enable-AzPSSession: true
         env: # Or as an environment variable
           credentials: ${{ secrets.AZURE_CREDENTIALS }}
+          - run: |
+        Get-AzVM -ResourceGroupName "ResourceGroup11"
 
      
 
