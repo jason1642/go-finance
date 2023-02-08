@@ -42,8 +42,8 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write
-      # contents: read
-      # pages: write
+      contents: read
+      pages: write
     steps:
       - name: OIDC Login to Azure Public Cloud with AzPowershell (enableAzPSSession true)
         uses: azure/login@v1
@@ -74,3 +74,6 @@ jobs:
           slot-name: 'production'
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_1970c35a2823457ab76d8d2e3cecb464 }}
           package: .
+
+
+          
