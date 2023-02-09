@@ -62,7 +62,7 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }} 
           enable-AzPSSession: true
       - run: |
-        az webapp list --query "[?state=='Running']"   
+          az webapp list --query "[?state=='Running']"   
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
