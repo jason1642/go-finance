@@ -53,7 +53,6 @@ jobs:
       #     azcliversion: 2.0.72
       #     inlineScript: |
       #       az account list   
-       
       - name: OIDC Login to Azure Public Cloud with AzPowershell (enableAzPSSession true)
         uses: azure/login@v1
         with:
