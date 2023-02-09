@@ -45,6 +45,14 @@ jobs:
       contents: read
       pages: write
     steps:
+      # - uses: azure/login@v1
+    #     with:
+    #       creds: ${{ secrets.AZURE_CREDENTIALS }} 
+      # - uses: azure/CLI@v1
+      #   with:
+      #     azcliversion: 2.0.72
+      #     inlineScript: |
+      #       az account list   
       - name: OIDC Login to Azure Public Cloud with AzPowershell (enableAzPSSession true)
         uses: azure/login@v1
         with:
@@ -54,7 +62,7 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }} 
           enable-AzPSSession: true
       - run: |
-       az webapp list --query "[?state=='Running']"   
+        az webapp list --query "[?state=='Running']"   
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
