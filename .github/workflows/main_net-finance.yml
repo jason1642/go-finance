@@ -50,7 +50,7 @@ jobs:
     #       creds: ${{ secrets.AZURE_CREDENTIALS }} 
       - uses: azure/CLI@v1
         with:
-          azcliversion: 2.0.72
+          azcliversion: 2.33.1
           inlineScript: |
             az account list   
       - name: OIDC Login to Azure Public Cloud with AzPowershell (enableAzPSSession true)
