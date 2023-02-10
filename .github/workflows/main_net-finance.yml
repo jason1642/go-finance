@@ -41,7 +41,7 @@ jobs:
       name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: read
+      id-token: write
       contents: read
       pages: write
     steps:
