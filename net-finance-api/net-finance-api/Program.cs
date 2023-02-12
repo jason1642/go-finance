@@ -31,8 +31,6 @@ builder.Services.AddCors(options =>
 });
 
 
-
-
 builder.Services.AddControllers(); 
 //builder.Services.AddDbContext<UserContext>(opt =>
 //    opt.UseInMemoryDatabase("net_finance_api"));
