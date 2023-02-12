@@ -31,6 +31,8 @@ builder.Services.AddCors(options =>
 });
 
 
+
+
 builder.Services.AddControllers(); 
 //builder.Services.AddDbContext<UserContext>(opt =>
 //    opt.UseInMemoryDatabase("net_finance_api"));
@@ -143,3 +145,31 @@ app.MapControllers();
 
 app.Run();
 
+// version: 1
+// backend:
+//   phases:
+//     preBuild:
+//       commands:
+//         - cd net-finance-api/net-finance-api
+//         - curl -sSL https://dot.net/v1/dotnet-install.sh > dotnet-install.sh
+//         - chmod +x *.sh
+//         - ./dotnet-install.sh -c 7.0 -InstallDir ./dotnet7
+//         - ./dotnet7/dotnet --version
+//     build:
+//       commands:
+//         - ./dotnet7/dotnet publish -c Release -o release
+// frontend:
+//   phases:
+//     preBuild:
+//       commands:
+//          - npm ci
+//     build:
+//       commands:
+//         - npm run build
+//   artifacts:
+//     baseDirectory: build
+//     files:
+//       - '**/*'
+//   cache:
+//     paths:
+//       - node_modules/**/*
