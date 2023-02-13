@@ -39,12 +39,12 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0
  FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
  WORKDIR /src
  COPY ["net-finance-api.csproj", ""]
- RUN dotnet restore "./net-finance-api.csproj"
+ RUN dotnet restore "net-finance-api/net-finance-api/net-finance-api.csproj"
  COPY . .
  WORKDIR "/src/."
- RUN dotnet build "net-finance-api.csproj" -c Release -o /app/build
+ RUN dotnet build "net-finance-api/net-finance-api/net-finance-api.csproj" -c Release -o /app/build
  FROM build AS publish
- RUN dotnet publish "net-finance-api.csproj" -c Release -o /app/publish
+ RUN dotnet publish "net-finance-api/net-finance-api/net-finance-api.csproj" -c Release -o /app/publish
  FROM base AS final
  WORKDIR /app
  COPY --from=publish /app/publish .
