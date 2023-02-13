@@ -56,7 +56,7 @@ jobs:
       - name: OIDC Login to Azure Public Cloud with AzPowershell (enableAzPSSession true)
         uses: azure/login@v1
         with:
-          creds: {
+          creds: ${{
   "clientId": "3ef237da-92af-4ae7-abbc-cf6491097f55",
   "clientSecret": "44X8Q~KmwmMr2H13arXSR_Ny8xJz-BWiwP2kBcNo",
   "subscriptionId": "c31fa376-4244-4168-a731-34178b9d67d1",
@@ -67,7 +67,7 @@ jobs:
   "sqlManagementEndpointUrl": "https://management.core.windows.net:8443/",
   "galleryEndpointUrl": "https://gallery.azure.com/",
   "managementEndpointUrl": "https://management.core.windows.net/"
-}
+}}
           # client-id: ${{ secrets.AZURE_CLIENT_ID }}
           # tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           # subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }} 
