@@ -15,7 +15,7 @@ interface UserLoginSchema {
 export const userApi = createApi({
     reducerPath: 'userApi',
     baseQuery: fetchBaseQuery({  baseUrl: process.env.NODE_ENV === 'production' ?
-    'http://netfinance.azurewebsites.net/api/users' 
+    'https://netfinance.azurewebsites.net/api/users' 
     :'https://localhost:7025/api/users', }),
     tagTypes: ['User'],
     endpoints: (builder) => ({
